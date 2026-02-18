@@ -1,0 +1,13 @@
+# Ignore files from being uploaded to Shopify
+.git/*
+.gitignore
+.shopifyignore
+README.md
+package.json
+package-lock.json
+yarn.lock
+node_modules/*
+.env
+.env.local
+*.md
+.DS_Store

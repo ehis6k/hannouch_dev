@@ -1,0 +1,14 @@
+# Learn more about configuring your theme at https://shopify.dev/themes/tools/cli/configuration-file
+
+[theme]
+# Replace with your actual myshopify.com domain (e.g., hannouch-shop.myshopify.com)
+# You can find this in Shopify Admin → Settings → Domains
+store = "mu4wsw-sx.myshopify.com"
+
+[development]
+# Development theme ID (optional - will be created automatically)
+# theme_id = "123456789"
+
+[build]
+# Build configuration (if you add build steps later)
+# command = "npm run build"

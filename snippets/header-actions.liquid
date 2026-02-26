@@ -17,11 +17,12 @@
   {% else %}
     <a
       href="{{ routes.cart_url }}"
-      class="header-actions__action action__cart"
+      class="header-actions__action action__cart header-actions__cart-trigger"
       aria-label="{{ 'accessibility.cart' | t }}"
       aria-describedby="cart-bubble-text"
     >
       {% render 'cart-icon-component' %}
+      <span class="header-actions__cart-label">{{ 'content.cart_title' | t }} (<span class="header-actions__cart-count">{{ cart.item_count }}</span>)</span>
     </a>
   {% endif %}
 </header-actions>

@@ -27,7 +27,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # Dependencies
-node_modules/*
+node_modules/
 package-lock.json
 yarn.lock
 
@@ -45,3 +45,20 @@ dist/
 build/
 *.min.js
 *.min.css
+
+dev_assets/
+logs/
+dev-debug.log
+
+# Cursor IDE (project config, MCP env references)
+.cursor/
+
+# Taskmaster (local state only; docs/tasks/config are committed)
+.taskmaster/state.json
+
+# IDE / project files
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

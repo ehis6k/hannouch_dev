@@ -44,6 +44,14 @@
       on:click="/toggleSelector"
       style="{{ localization_font }} {{ localization_font_size }}"
     >
+      {%- if show_language -%}
+        <span class="localization-button__language" data-testid="localization-language-code">
+          {{ localization.language.iso_code | upcase }}
+        </span>
+      {%- endif -%}
+      {%- if show_country and show_language -%}
+        <span aria-hidden="true"> / </span>
+      {%- endif -%}
       {% if show_country %}
         {% if country_style == true %}
           <span
@@ -68,16 +76,6 @@
       >
         {{- 'accessibility.localization_region_and_language' | t -}}
       </span>
-
-      {%- if show_country and show_language -%}
-        <span>/</span>
-      {%- endif -%}
-
-      {%- if show_language -%}
-        <span>
-          {{ localization.language.iso_code | upcase }}
-        </span>
-      {%- endif -%}
       <span class="svg-wrapper icon-caret">
         {{- 'icon-caret.svg' | inline_asset_content -}}
       </span>

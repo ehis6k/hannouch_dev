@@ -1,0 +1,213 @@
+/* ==============================================================================
+   Hannouch – Product Detail Page
+   component-product.css  |  Task 13
+   Aesthetic overrides on top of Atelier's product-information block system
+   ============================================================================== */
+
+/* ── Product info panel typography ──────────────────────────────────────────── */
+
+/* Title — rendered inside a text block as <h1> */
+.product-details h1,
+.product-details .h1 {
+  font-family: var(--font-heading, sans-serif);
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* Price */
+.product-details .price {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.875rem;
+  letter-spacing: 0.04em;
+}
+
+.product-details .compare-at-price {
+  font-size: 0.8125rem;
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+/* ── Variant picker ──────────────────────────────────────────────────────────── */
+
+/* Option label (e.g. "Size", "Color") */
+.variant-picker .variant-option__label,
+.variant-picker .variant-option-label {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Button-style variant chips */
+.variant-picker .variant-option--buttons label {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 0;
+  border-width: 1px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Selected state */
+.variant-picker .variant-option--buttons input:checked + label,
+.variant-picker .variant-option--buttons label[aria-selected='true'] {
+  background-color: var(--color-base-text, #1a1a1a);
+  color: var(--color-base-bg, #fafaf9);
+  border-color: var(--color-base-text, #1a1a1a);
+}
+
+/* Unavailable state */
+.variant-picker .variant-option--buttons label.variant-option--unavailable {
+  opacity: 0.3;
+  text-decoration: line-through;
+}
+
+/* ── Add to cart button ──────────────────────────────────────────────────────── */
+.add-to-cart-button.button,
+.product-form-buttons .add-to-cart-button {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 0;
+  transition: opacity 0.2s ease;
+}
+
+.add-to-cart-button.button:hover {
+  opacity: 0.85;
+}
+
+.add-to-cart-button.button:disabled,
+.add-to-cart-button.button[disabled] {
+  opacity: 0.35;
+}
+
+/* ── Accordion (product details — description, care, shipping) ───────────────── */
+
+/* Accordion summary / trigger button */
+accordion-custom summary,
+accordion-custom .accordion__trigger,
+accordion-custom [slot='trigger'] {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+/* Accordion body text */
+accordion-custom .accordion__body,
+accordion-custom [slot='content'],
+accordion-custom .rte {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  opacity: 0.75;
+}
+
+/* Divider between accordion rows — 1px, minimal */
+accordion-custom + accordion-custom,
+.accordion__row + .accordion__row {
+  border-top: 1px solid var(--color-border, rgb(26 26 26 / 0.12));
+}
+
+/* ── Gallery ─────────────────────────────────────────────────────────────────── */
+
+/* Thumbnail strip — thin border on active */
+.dialog-thumbnails-list__thumbnail {
+  border-radius: 0;
+  opacity: 0.45;
+  transition: opacity 0.2s ease;
+}
+
+.dialog-thumbnails-list__thumbnail:hover,
+.dialog-thumbnails-list__thumbnail[aria-selected='true'],
+.dialog-thumbnails-list__thumbnail.is-active {
+  opacity: 1;
+  outline: 1px solid var(--color-base-text, #1a1a1a);
+  outline-offset: 2px;
+}
+
+/* ── Product media gallery aspect ratio refinement ───────────────────────────── */
+
+/* The template sets aspect-ratio 1/1.25 (4:5 portrait) — reinforce */
+.product-media-gallery {
+  --media-aspect-ratio: 4 / 5;
+}
+
+/* ── Sticky add to cart bar — Hannouch overrides ─────────────────────────────── */
+.sticky-add-to-cart__bar {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border-top: 1px solid var(--color-border, rgb(26 26 26 / 0.12));
+  background-color: var(--color-base-bg, #fafaf9) !important;
+}
+
+/* Remove the glossy pseudo-element backdrop */
+.sticky-add-to-cart__bar::before {
+  display: none !important;
+}
+
+.sticky-add-to-cart__title {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sticky-add-to-cart__variant {
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  opacity: 0.55;
+}
+
+.sticky-add-to-cart__button {
+  border-radius: 0;
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ── Product recommendations section ────────────────────────────────────────── */
+.section-product-recommendations h3,
+.section-product-recommendations .h3,
+.product-recommendations h3 {
+  font-family: var(--font-heading, sans-serif);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ── Sticky Product Details ────────────────────────────────────────── */
+@media screen and (min-width: 750px) {
+  .product-details {
+    position: sticky;
+    top: calc(var(--header-height, 60px) + 20px);
+    align-self: start;
+  }
+}
+
+/* ── Mobile refinements ──────────────────────────────────────────────────────── */
+@media screen and (max-width: 749px) {
+  .product-details h1,
+  .product-details .h1 {
+    font-size: clamp(1.125rem, 5vw, 1.5rem);
+  }
+
+  .sticky-add-to-cart__bar {
+    bottom: 0 !important;
+  }
+}

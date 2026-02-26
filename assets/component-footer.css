@@ -1,0 +1,234 @@
+/* ==============================================================================
+   Hannouch – Global Footer
+   component-footer.css  |  Task 9
+   Aesthetic overrides on top of Atelier's block-based footer system
+   ============================================================================== */
+
+/* ── One container: same background for entire footer (main content + bottom bar) ── */
+footer[role="contentinfo"] {
+  background-color: var(--color-base-bg, #fafaf9);
+  border-top: 1px solid var(--color-border, rgb(26 26 26 / 0.12));
+}
+
+footer[role="contentinfo"] .section-background,
+footer[role="contentinfo"] .section {
+  background: transparent !important;
+}
+
+/* ── Footer content band: align columns for a single cohesive block ───────────── */
+.footer-content > * {
+  min-width: 0;
+}
+
+/* Two main divs: left = Newsletter (narrower), right = Shop | Help | Legal (side by side) */
+@media screen and (min-width: 990px) {
+  .footer-content[style*='--grid-columns: 2'] {
+    gap: 96px; /* clear separation between newsletter div and right side */
+  }
+
+  .footer-content > *:first-child {
+    margin-inline-end: 0;
+  }
+
+  /* Right div: Shop, Help, Legal next to each other (override mobile-column) */
+  .footer-content .group-block-content.layout-panel-flex--row {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    gap: 32px;
+  }
+
+  .footer-content .group-block-content.layout-panel-flex--row > * {
+    min-width: 0;
+    flex: 0 1 auto;
+  }
+}
+
+/* ── Column headings: [ NEWSLETTER ], [ SHOP ], [ HELP ], [ LEGAL ] ─────────────── */
+footer h2,
+footer h3,
+footer h4,
+footer .h3,
+footer .menu__heading__default {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;   /* 11px */
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 var(--spacing-sm, 16px);
+  color: var(--color-base-text, #1a1a1a);
+}
+
+/* ── Footer nav links ────────────────────────────────────────────────────────── */
+footer .menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs, 8px);
+}
+
+footer .menu-list__link {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.75rem;     /* 12px */
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: none;   /* footer links are sentence case, not all caps */
+  color: var(--color-base-text, #1a1a1a);
+  text-decoration: none;
+  opacity: 0.65;
+  transition: opacity 0.2s ease;
+}
+
+footer .menu-list__link:hover {
+  opacity: 1;
+}
+
+/* ── Newsletter email signup ─────────────────────────────────────────────────── */
+.email-signup__input-group {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--color-base-text, #1a1a1a);
+  background: transparent;
+}
+
+.email-signup__input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 10px 0;
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: var(--color-base-text, #1a1a1a);
+  outline: none;
+}
+
+.email-signup__input::placeholder {
+  opacity: 0.45;
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Arrow submit button */
+.email-signup__button--integrated {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 0 8px 12px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+  color: var(--color-base-text, #1a1a1a);
+  transition: opacity 0.2s ease;
+}
+
+.email-signup__button--integrated:hover {
+  opacity: 0.6;
+}
+
+.email-signup__button--integrated svg {
+  width: var(--icon-size-md, 20px);
+  height: var(--icon-size-md, 20px);
+  stroke-width: var(--icon-stroke-width, 1.25);
+}
+
+/* Success / error state messages */
+.email-signup__success-message,
+.email-signup__error-message {
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  margin-top: var(--spacing-xs, 8px);
+}
+
+/* ── Social links ────────────────────────────────────────────────────────────── */
+footer .social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm, 16px);
+}
+
+footer .social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-base-text, #1a1a1a);
+  opacity: 0.65;
+  transition: opacity 0.2s ease;
+}
+
+footer .social-links a:hover {
+  opacity: 1;
+}
+
+footer .social-links svg {
+  width: var(--icon-size-md, 20px);
+  height: var(--icon-size-md, 20px);
+}
+
+/* ── Payment icons ───────────────────────────────────────────────────────────── */
+footer .payment-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs, 8px);
+  align-items: center;
+}
+
+footer .payment-icon {
+  opacity: 0.5;
+  height: 22px;
+  width: auto;
+}
+
+/* ── Bottom bar: no divider so it reads as one container ───────────────────────── */
+footer [data-testid="footer-utilities"].utilities {
+  border-top-width: 0;
+}
+
+.utilities {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;   /* 11px */
+  letter-spacing: 0.06em;
+  color: var(--color-base-text, #1a1a1a);
+  opacity: 0.55;
+}
+
+.utilities a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.utilities a:hover {
+  opacity: 0.85;
+}
+
+/* Copyright text */
+.footer-copyright__text {
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+}
+
+/* Localization / policy links in bottom bar */
+.footer-policy-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm, 16px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Responsive: mobile accordion collapsed links ────────────────────────────── */
+@media screen and (max-width: 749px) {
+  footer .menu-list {
+    gap: var(--spacing-xs, 8px);
+  }
+
+  .utilities {
+    opacity: 0.5;
+  }
+}

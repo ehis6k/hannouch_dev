@@ -21,11 +21,18 @@
     >
 
     {%- render 'meta-tags' -%}
+
+    {%- comment -%} Preconnect to Shopify CDN domains for faster font/asset loading {%- endcomment -%}
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.shopify.com">
+
     {%- render 'stylesheets' -%}
     {%- render 'fonts' -%}
     {%- render 'scripts' -%}
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-schemes' -%}
+    {%- render 'hannouch-design-tokens' -%}
 
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}
@@ -34,11 +41,11 @@
     {{ content_for_header }}
   </head>
 
-  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
+  <body class="hannouch page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
     {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
-    <div id="header-group">
+    <header id="header-group" role="banner">
       {% sections 'header-group' %}
-    </div>
+    </header>
 
     <script>
       // Inline header height calculation to prevent layout shift
@@ -102,7 +109,9 @@
       {{ content_for_layout }}
     </main>
 
-    {% sections 'footer-group' %}
+    <footer role="contentinfo">
+      {% sections 'footer-group' %}
+    </footer>
 
     {% render 'search-modal' %}
 

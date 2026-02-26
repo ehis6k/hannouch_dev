@@ -3,6 +3,7 @@
   @param {string} [class] - The class that is applied on the overflow-list element.
   @param {string} [attributes] - The attributes that are applied on the overflow-list element.
   @param {number} [minimum-items] - The minimum number of items to show in the overflow list.
+  @param {number} [maximum-items] - The maximum number of items to show before moving the rest to overflow (e.g. 4 for header nav).
   @param {string} [ref] - The ref that is set on the overflow-list element.
   @param {string} [data-testid] - The data-testid attribute that is set on the overflow-list element.
   @param {string} [more-attributes] - The attributes that are applied on the more button.
@@ -17,6 +18,9 @@
   {% endif %}
   {% if minimum-items %}
     minimum-items="{{ minimum-items }}"
+  {% endif %}
+  {% if maximum-items %}
+    maximum-items="{{ maximum-items }}"
   {% endif %}
   {% if data-testid %}
     data-testid="{{ data-testid }}"

@@ -1,0 +1,20 @@
+{% comment %}
+  Hannouch Redesign – Theme Editor mapping to CSS custom properties
+  Task 1.2: Exposes Hannouch typography and color settings to :root
+{% endcomment %}
+{% style %}
+  {{ settings.hannouch_heading_font | font_face: font_display: 'swap' }}
+  {{ settings.hannouch_body_font | font_face: font_display: 'swap' }}
+
+  :root {
+    --font-heading: {{ settings.hannouch_heading_font.family }}, {{ settings.hannouch_heading_font.fallback_families }};
+    --font-body: {{ settings.hannouch_body_font.family }}, {{ settings.hannouch_body_font.fallback_families }};
+    --color-base-bg: {{ settings.hannouch_color_base_bg }};
+    --color-base-text: {{ settings.hannouch_color_base_text }};
+    --color-border: {{ settings.hannouch_color_border }};
+    /* Map theme typography to Hannouch tokens */
+    --font-heading--family: var(--font-heading);
+    --font-paragraph--family: var(--font-body);
+    --font-body--family: var(--font-body);
+  }
+{% endstyle %}

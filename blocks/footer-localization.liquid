@@ -1,0 +1,62 @@
+<div
+  class="footer-utilities__localization footer-utilities__text"
+  {{ block.shopify_attributes }}
+>
+  {% render 'footer-localization' %}
+</div>
+
+{% stylesheet %}
+  .footer-utilities__localization {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-localization-form {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .footer-localization-form__select {
+    font: inherit;
+    color: inherit;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    appearance: none;
+    padding-inline-end: 1rem;
+  }
+
+  .footer-localization-form__select:hover {
+    opacity: 0.85;
+  }
+
+  .footer-localization-form__select:focus {
+    outline: none;
+  }
+
+  .footer-localization-form__sep {
+    opacity: 0.7;
+  }
+
+  .footer-localization-form__currency {
+    font-weight: 500;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Language & currency",
+  "tag": null,
+  "settings": [],
+  "presets": [
+    {
+      "name": "Language & currency",
+      "category": "t:categories.footer"
+    }
+  ]
+}
+{% endschema %}

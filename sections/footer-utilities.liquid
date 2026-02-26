@@ -1,5 +1,7 @@
 
 
+{{- 'component-footer.css' | asset_url | stylesheet_tag -}}
+
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
   class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
@@ -168,6 +170,9 @@
   "blocks": [
     {
       "type": "footer-copyright"
+    },
+    {
+      "type": "footer-localization"
     },
     {
       "type": "footer-policy-list"

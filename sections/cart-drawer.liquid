@@ -1,0 +1,26 @@
+{%- comment -%}
+  Hannouch – Cart Drawer Section
+  Task 8: sections/cart-drawer.liquid
+
+  Thin section wrapper around snippets/cart-drawer.liquid.
+  Add to header-group.json to render on every page alongside the header.
+  The actual drawer UI, Web Component JS, and AJAX logic live in:
+    - snippets/cart-drawer.liquid
+    - assets/cart-drawer.js  (Atelier CartDrawerComponent)
+    - assets/component-drawer.css  (Hannouch styling)
+    - assets/cart-api.js  (Hannouch CartAPI utility)
+{%- endcomment -%}
+
+{%- if settings.cart_type == 'drawer' -%}
+  {%- render 'cart-drawer' -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Cart Drawer",
+  "tag": "aside",
+  "class": "hannouch-cart-drawer-section",
+  "limit": 1,
+  "settings": []
+}
+{% endschema %}

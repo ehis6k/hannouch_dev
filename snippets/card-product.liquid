@@ -1,0 +1,130 @@
+{%- comment -%}
+  Hannouch – Editorial Product Card
+  Task 4: card-product.liquid
+
+  Parameters:
+    card_product  (required) A Shopify product object.
+    lazy_load     (optional) Boolean. Defaults true. Pass false for above-the-fold cards.
+    show_badge    (optional) Boolean. Defaults true. Show sale/new badges.
+    section_id    (optional) String. Used to scope card ID for accessibility.
+{%- endcomment -%}
+
+{%- liquid
+  assign lazy_load  = lazy_load  | default: true
+  assign show_badge = show_badge | default: true
+
+  assign loading_attr = 'lazy'
+  if lazy_load == false
+    assign loading_attr = 'eager'
+  endif
+
+  assign product_url  = card_product.url
+  assign primary_img  = card_product.featured_image
+  assign secondary_img = card_product.media[1].preview_image
+
+  assign is_sale = false
+  if card_product.compare_at_price > card_product.price and card_product.available
+    assign is_sale = true
+  endif
+
+  assign is_new = false
+  if card_product.tags contains 'new' or card_product.tags contains 'New'
+    assign is_new = true
+  endif
+-%}
+
+{{- 'component-card.css' | asset_url | stylesheet_tag -}}
+
+<div class="card-product{% if secondary_img %} card-product--has-hover{% endif %}">
+  <a href="{{ product_url }}" class="card-product__link" aria-label="{{ card_product.title | escape }}">
+
+    {%- comment -%} ── Media container (3:4 aspect ratio) ── {%- endcomment -%}
+    <div class="card-product__media">
+      {%- if primary_img != blank -%}
+        <img
+          src="{{ primary_img | image_url: width: 600, format: 'avif' }}"
+          srcset="
+            {{ primary_img | image_url: width: 300, format: 'avif' }} 300w,
+            {{ primary_img | image_url: width: 600, format: 'avif' }} 600w,
+            {{ primary_img | image_url: width: 900, format: 'avif' }} 900w
+          "
+          sizes="(min-width: 1200px) 300px, (min-width: 768px) 45vw, 90vw"
+          alt="{{ primary_img.alt | default: card_product.title | escape }}"
+          width="{{ primary_img.width }}"
+          height="{{ primary_img.height }}"
+          loading="{{ loading_attr }}"
+          class="card-product__image card-product__image--primary"
+        >
+
+        {%- if secondary_img != blank -%}
+          <img
+            src="{{ secondary_img | image_url: width: 600, format: 'avif' }}"
+            srcset="
+              {{ secondary_img | image_url: width: 300, format: 'avif' }} 300w,
+              {{ secondary_img | image_url: width: 600, format: 'avif' }} 600w,
+              {{ secondary_img | image_url: width: 900, format: 'avif' }} 900w
+            "
+            sizes="(min-width: 1200px) 300px, (min-width: 768px) 45vw, 90vw"
+            alt="{{ secondary_img.alt | default: card_product.title | escape }}"
+            width="{{ secondary_img.width }}"
+            height="{{ secondary_img.height }}"
+            loading="lazy"
+            class="card-product__image card-product__image--secondary"
+            aria-hidden="true"
+          >
+        {%- endif -%}
+      {%- else -%}
+        <div class="card-product__image card-product__image--placeholder">
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} ── Badges ── {%- endcomment -%}
+      {%- if show_badge -%}
+        {%- if is_sale -%}
+          <span class="card-product__badge card-product__badge--sale">
+            {{- 'products.product.on_sale' | t | default: 'Sale' -}}
+          </span>
+        {%- elsif is_new -%}
+          <span class="card-product__badge card-product__badge--new">
+            {{- 'products.product.new' | t | default: 'New' -}}
+          </span>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} ── Info section ── {%- endcomment -%}
+    <div class="card-product__info">
+      <h3 class="card-product__title">{{ card_product.title }}</h3>
+
+      <div class="card-product__price">
+        {%- render 'price', product_resource: card_product -%}
+      </div>
+
+      {%- comment -%} ── Color swatches (placeholder – populated by Task 12/metafields) ── {%- endcomment -%}
+      {%- assign color_options = card_product.options_with_values | where: 'name', 'Color' -%}
+      {%- if color_options.size > 0 -%}
+        {%- assign color_option = color_options.first -%}
+        {%- if color_option.values.size > 1 -%}
+          <ul class="card-product__swatches" aria-label="{{ 'products.product.color' | t | default: 'Color' }}" role="list">
+            {%- for value in color_option.values limit: 4 -%}
+              <li class="card-product__swatch" title="{{ value | escape }}">
+                <span
+                  class="card-product__swatch-dot"
+                  style="background-color: {{ value | handle | replace: '-', '' }};"
+                  aria-hidden="true"
+                ></span>
+              </li>
+            {%- endfor -%}
+            {%- if color_option.values.size > 4 -%}
+              <li class="card-product__swatch card-product__swatch--more" aria-hidden="true">
+                +{{ color_option.values.size | minus: 4 }}
+              </li>
+            {%- endif -%}
+          </ul>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+
+  </a>
+</div>

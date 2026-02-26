@@ -1,0 +1,214 @@
+/* ==============================================================================
+   Hannouch – Hero Video Section
+   component-hero.css  |  Task 10
+   ============================================================================== */
+
+/* ── Section container ───────────────────────────────────────────────────────── */
+.hero-video {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  /* Default: full viewport */
+  height: 100svh;
+  min-height: 480px;
+}
+
+.hero-video-section:has(.hero-video--height-large)  .hero-video,
+.hero-video--height-large  { height: 80vh; }
+
+.hero-video-section:has(.hero-video--height-medium) .hero-video,
+.hero-video--height-medium { height: 60vh; }
+
+/* ── Media wrapper ───────────────────────────────────────────────────────────── */
+.hero-video__media-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Shared styles for all media types */
+.hero-video__media,
+.hero-video__video,
+.hero-video__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* ── Placeholder (theme editor, no media set) ────────────────────────────────── */
+.hero-video__placeholder {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-border, #f0ede8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-video__placeholder .placeholder-svg {
+  width: 40%;
+  height: 40%;
+  opacity: 0.2;
+}
+
+/* ── Overlay ─────────────────────────────────────────────────────────────────── */
+.hero-video__overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgb(0 0 0 / var(--overlay-opacity, 0.35));
+  z-index: 1;
+}
+
+/* ── Content block ───────────────────────────────────────────────────────────── */
+.hero-video__content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md, 24px);
+  padding: var(--spacing-xl, 48px) var(--spacing-md, 24px);
+  max-width: 720px;
+  width: 100%;
+  /* Default: center */
+  align-items: center;
+  text-align: center;
+}
+
+/* Alignment modifiers */
+.hero-video--align-left  .hero-video__content {
+  align-items: flex-start;
+  text-align: left;
+  margin-right: auto;
+  margin-left: 0;
+  padding-left: var(--spacing-xl, 48px);
+}
+
+.hero-video--align-right .hero-video__content {
+  align-items: flex-end;
+  text-align: right;
+  margin-left: auto;
+  margin-right: 0;
+  padding-right: var(--spacing-xl, 48px);
+}
+
+/* Text color utilities */
+.hero-video__eyebrow,
+.hero-video__heading,
+.hero-video__subheading {
+  color: #fff; /* default light on dark overlay */
+}
+
+/* Dark text variant */
+.hero-video--text-dark .hero-video__eyebrow,
+.hero-video--text-dark .hero-video__heading,
+.hero-video--text-dark .hero-video__subheading {
+  color: var(--color-base-text, #1a1a1a);
+}
+
+/* ── Eyebrow ─────────────────────────────────────────────────────────────────── */
+.hero-video__eyebrow {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0;
+  opacity: 0.75;
+}
+
+/* ── Heading ─────────────────────────────────────────────────────────────────── */
+.hero-video__heading {
+  font-family: var(--font-heading, sans-serif);
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.1;
+  margin: 0;
+}
+
+/* ── Subheading ──────────────────────────────────────────────────────────────── */
+.hero-video__subheading {
+  font-family: var(--font-body, sans-serif);
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+  margin: 0;
+  opacity: 0.85;
+  max-width: 480px;
+}
+
+/* ── CTA Button ──────────────────────────────────────────────────────────────── */
+.hero-video__cta {
+  display: inline-block;
+  padding: 14px var(--spacing-lg, 32px);
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid #fff;
+  color: #fff;
+  background: transparent;
+  transition: background-color 0.25s ease, color 0.25s ease;
+  cursor: pointer;
+  margin-top: var(--spacing-xs, 8px);
+}
+
+.hero-video__cta:hover {
+  background-color: #fff;
+  color: var(--color-base-text, #1a1a1a);
+}
+
+/* Dark text variant CTA */
+.hero-video--text-dark .hero-video__cta {
+  border-color: var(--color-base-text, #1a1a1a);
+  color: var(--color-base-text, #1a1a1a);
+}
+
+.hero-video--text-dark .hero-video__cta:hover {
+  background-color: var(--color-base-text, #1a1a1a);
+  color: var(--color-base-bg, #fafaf9);
+}
+
+/* ── Mobile: hide video, show image ─────────────────────────────────────────── */
+@media screen and (max-width: 749px) {
+  .hero-video__video {
+    display: none;
+  }
+
+  /* Reduce heading size on small screens */
+  .hero-video__heading {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+  }
+
+  /* Tighten content padding on mobile */
+  .hero-video__content {
+    padding: var(--spacing-lg, 32px) var(--spacing-sm, 16px);
+  }
+
+  .hero-video--align-left  .hero-video__content { padding-left:  var(--spacing-sm, 16px); }
+  .hero-video--align-right .hero-video__content { padding-right: var(--spacing-sm, 16px); }
+}
+
+/* ── Desktop: hide mobile-only image ────────────────────────────────────────── */
+@media screen and (min-width: 750px) {
+  .hero-video__image--mobile {
+    display: none;
+  }
+}
+
+/* ── Accessibility: reduced motion ──────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video__video {
+    display: none;
+  }
+}

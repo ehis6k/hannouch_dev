@@ -307,7 +307,16 @@
       "quantity_increments": "Incréments de {{ increment }}",
       "quantity_minimum": "Minimum de {{ minimum }}",
       "quantity_maximum": "Maximum de {{ maximum }}",
-      "in_cart": "dans le panier"
+      "in_cart": "dans le panier",
+      "default_title": "Titre par défaut",
+      "sticky_add_to_cart": "Barre d'ajout rapide au panier"
+    }
+  },
+  "cart": {
+    "shipping_bar": {
+      "unlocked": "La livraison gratuite est débloquée",
+      "remaining_html": "Plus que {{ remaining }} pour la livraison gratuite",
+      "progress_label": "Progression de la livraison gratuite"
     }
   },
   "fields": {
@@ -333,5 +342,31 @@
       "success_moderated": "Commentaire publié, en attente de modération",
       "success": "Commentaire publié"
     }
+  },
+  "footer": {
+    "newsletter": "NEWSLETTER",
+    "subscribe_for_updates": "Inscrivez-vous pour recevoir nos actualités",
+    "headings": {
+      "shop": "BOUTIQUE",
+      "help": "AIDE",
+      "legal": "MENTIONS LÉGALES"
+    },
+    "shop": {
+      "new_arrivals": "Nouveautés",
+      "bestsellers": "Meilleures ventes",
+      "gift_cards": "Cartes cadeaux"
+    },
+    "help": {
+      "contact_us": "Contactez-nous",
+      "shipping": "Livraison",
+      "returns": "Retours"
+    }
+  },
+  "header": {
+    "home": "Accueil"
+  },
+  "home": {
+    "hero_title": "Ramadan 2026",
+    "hero_cta": "Voir la collection"
   }
 }

@@ -1,0 +1,213 @@
+Repository Planning Graph (RPG) - Marachi Design Alignment PRD
+
+This PRD defines the design and structural changes required to align the Hannouch storefront with the Marachi-inspired "Quiet Luxury" reference. The Marachi reference is image-only (no video). The current Hannouch build (Tasks 1–14) provides the foundation: design tokens, header, footer, hero section, editorial-split, product grid, cart drawer, and PDP. This document specifies the deltas—section-by-section and component-by-component—so the theme visually and behaviorally mimics the Marachi inspiration (image-led, no video) while reusing existing Hannouch sections where possible.
+
+<overview>
+## Goal
+Transform the current Hannouch homepage and key pages so they mirror the Marachi reference: image-led hero (minimal or no text overlay), "Shop By Look" portrait swatch strip, full-body product grid with optional quick-add, editorial splits with strong lifestyle imagery, full-width lifestyle blocks, optional architectural/brand section, and a footer with newsletter (bottom-border input + dark button). All within the existing Quiet Luxury token system.
+
+## Current State (Hannouch)
+- Header: Logo left, nav center (SHOP, THE EDIT, ABOUT, CONTACT), SEARCH / ACCOUNT / CART right. White bar, dark text.
+- Hero: Grey placeholder with text overlay "RAMADAN 2026" and "SHOP NOW", plus faint geometric line art in background.
+- Editorial split 1: Left = placeholder (beige + line-art city skyline). Right = "THE CITY EDIT", body copy, "EXPLORE THE COLLECTION".
+- Product grid: "NEW ARRIVALS", 4-column grid, placeholder t-shirt images, title + price (e.g. "TOP OF ORGANIC COTTON", "1200 AED").
+- Editorial split 2: Left = "CRAFTED TO LAST", lorem body, "READ MORE". Right = same placeholder line-art.
+- Newsletter: "NEWSLETTER", "Exclusive offers...", ENTER YOUR EMAIL, SUBSCRIBE button.
+- Footer: SOCIAL, ABOUT, SHOP, HELP, LEGAL columns; copyright; payment icons; currency selector.
+
+## Target State (Marachi Reference)
+- Hero: Full-width lifestyle photograph (e.g. model on sofa, textured wall). No large text overlay; optional subtle logo/wordmark overlay.
+- Shop By Look: Horizontal strip of 4+ portrait-oriented images (e.g. hijab/look close-ups) with small uppercase labels (MOKA, OLIVE, NUDE, ONYX). Clean, minimal, white/off-white background.
+- Product grid: Full-body garment shots (abayas/dresses) on clean studio background. Product title + price below. Optional "Quick Add" or similar below.
+- Editorial split: Left = text (eyebrow, heading, body, CTA with arrow). Right = large lifestyle image (e.g. portrait with dove).
+- Full-width lifestyle blocks: One or more full-bleed image sections (two models on sofa; single model; etc.) with optional logo watermark.
+- Architectural / brand: Two-column image grid (e.g. showroom, staircase) with small uppercase labels and short copy.
+- Footer: Newsletter with bottom-border-only email input and dark "SUBSCRIBE" button; multi-column nav (SHOP, ABOUT, HELP, LEGAL); social icons; bottom bar with copyright, payment icons, currency.
+
+## Success Criteria
+- Homepage structure and visual hierarchy match Marachi reference when using equivalent content (images, copy).
+- Hero can be configured as image-led with no or minimal text overlay.
+- "Shop By Look" (portrait swatch strip) exists as a section or block.
+- Product cards support consistent full-body/lifestyle imagery styling; optional quick-add where desired.
+- Editorial splits and full-width lifestyle sections present strong imagery without overlay controls.
+- Footer newsletter and button styling match reference (underline input, dark button).
+- All changes use existing design tokens (typography, color, spacing) and do not break existing functionality.
+</overview>
+
+<functional-decomposition>
+## Capability Tree (Marachi-Alignment)
+
+Capability: Hero & Above-the-Fold
+
+Feature: Image-Led Hero (Minimal Text)
+Description: Hero section that prioritizes a full-bleed image; text overlay optional and minimal (e.g. small CTA only) or absent.
+Inputs: Background image, optional heading/eyebrow/CTA, overlay opacity.
+Outputs: Full-viewport media block; optional centered or corner text; optional logo/wordmark overlay.
+Behavior: Use existing hero section with image only. Add theme setting or section setting to "hide" or "minimize" text block so hero can be image-only. Optional logo overlay (image or text) in a corner. No video; image only for Marachi alignment.
+
+Capability: Discovery & Merchandising (Homepage)
+
+Feature: Shop By Look / Portrait Swatch Strip
+Description: Horizontal row of portrait-oriented images (e.g. 4–6) with a small uppercase label under each (e.g. look name or color name). Used for "shop by looks" or "shop by color" on the homepage.
+Inputs: List of blocks (image + label + optional link); section setting for columns or horizontal scroll on mobile.
+Outputs: A single row (desktop) or horizontally scrollable row (mobile) of portrait cards with labels.
+Behavior: Each item can link to a collection or product. Minimal styling: white/off-white background, consistent aspect ratio (e.g. portrait 3:4 or square), labels in Hannouch uppercase tracking.
+
+Feature: Product Grid (Marachi Style)
+Description: Existing collection/product grid with styling that supports full-body product imagery and optional quick-add.
+Inputs: Collection or product list; section settings for columns; optional "show quick add".
+Outputs: Grid of product cards (existing card-product or theme card) with optional quick-add control.
+Behavior: Quick add (if enabled) uses existing cart API. No change to core grid logic; only styling and optional quick-add.
+
+Feature: Editorial Split (Marachi Style)
+Description: Existing editorial-split section with CTA with arrow; image panel shows strong lifestyle imagery only.
+Inputs: Image, text (eyebrow, heading, body, caption), CTA (text + link), reverse layout.
+Outputs: 50/50 split (stacked on mobile).
+Behavior: Already implemented; ensure CTA uses arrow icon. No overlay controls on image.
+
+Feature: Full-Width Lifestyle Section
+Description: A section that displays a single full-bleed image with optional logo overlay. No text required.
+Inputs: Image (required), optional logo overlay.
+Outputs: Full-width media block, same height behavior as hero (e.g. 100vh or configurable).
+Behavior: Can reuse hero section with "no text" mode (image only), or a dedicated "lifestyle-fullwidth" section that only renders image + optional logo overlay.
+
+Feature: Architectural / Brand Space Section
+Description: Two-column image grid with optional small uppercase titles and short copy under each image (e.g. "OUR SHOWROOM", "THE SPACE").
+Inputs: Two (or more) blocks: image, optional heading, optional body/caption; section layout (2-col default).
+Outputs: Side-by-side images with optional text below or overlay.
+Behavior: New section or reuse image-with-text blocks. Minimal styling; emphasis on imagery and subtle typography.
+
+Capability: Global Footer (Marachi Alignment)
+
+Feature: Newsletter Block (Reference Style)
+Description: Email signup with bottom-border-only input (no full box) and a dark (primary) "SUBSCRIBE" button beside or below the field.
+Inputs: Heading, subheading/description, placeholder, button label; form action (Shopify customer form or app).
+Outputs: Single-row or stacked form: input + button.
+Behavior: Already supported by footer blocks; ensure CSS in component-footer.css uses border-bottom-only input and dark button per reference.
+
+Feature: Footer Column Structure
+Description: Multiple columns (e.g. SOCIAL, ABOUT, SHOP, HELP, LEGAL) with uppercase headings and sentence-case links; bottom bar with copyright, payment icons, currency.
+Inputs: Menu and block configuration (existing footer).
+Outputs: Rendered columns and bottom utilities bar.
+Behavior: Already implemented in Task 9; verify heading/link typography and opacity match reference (uppercase small headings, subtle link opacity, hover to full opacity).
+</functional-decomposition>
+
+<structural-decomposition>
+## Repository Structure (Additions / Changes)
+
+theme-root/
+├── assets/
+│   ├── component-hero.css         # (existing) Optional logo overlay styles
+│   ├── component-editorial-split.css  # (existing) No overlay additions
+│   ├── component-collection.css  # (existing) Optional quick-add on card if desired
+│   └── component-footer.css      # (existing) Newsletter: bottom-border input, dark button
+├── sections/
+│   ├── hero (e.g. hero-video.liquid) # (existing) Add settings: minimal_text_mode, logo_overlay; use image only for Marachi
+│   ├── editorial-split.liquid    # (existing) No new overlay settings
+│   ├── shop-by-look.liquid       # (new) Portrait swatch strip section
+│   ├── lifestyle-fullwidth.liquid # (new, optional) Full-bleed image only; or reuse hero with no text
+│   └── architectural-grid.liquid # (new, optional) Two-column image + optional captions
+├── snippets/
+│   └── (existing icon-*, card-product, etc.)
+└── templates/
+    └── index.json                # (existing) Update section order and add Shop By Look; optionally Lifestyle Fullwidth, Architectural
+
+## Module Definitions (New or Updated)
+
+Module: Shop By Look Section
+Responsibility: Horizontal strip of portrait images with labels; links to collections or products.
+File: sections/shop-by-look.liquid, optional component-shop-by-look.css if needed.
+Inputs: Section blocks (image, label, link). Section settings: columns on desktop, scroll on mobile.
+Behavior: Responsive: row on desktop, horizontal scroll on mobile. Uses design tokens for typography.
+
+Module: Lifestyle Fullwidth Section (Optional)
+Responsibility: Full-bleed image with optional logo overlay; no text block.
+File: sections/lifestyle-fullwidth.liquid or hero section with "image only" preset.
+Behavior: Same as hero but without heading/CTA; image only; optional logo overlay.
+
+Module: Architectural Grid Section (Optional)
+Responsibility: Two-column image grid with optional uppercase title and caption per image.
+File: sections/architectural-grid.liquid.
+Behavior: Two blocks (or repeatable blocks); each has image, optional heading, optional body. Simple grid layout.
+</structural-decomposition>
+
+<dependency-graph>
+## Dependency Chain (Marachi Alignment)
+
+Foundation (already done)
+- Design tokens, icons, header, footer: No new dependencies.
+
+Component Layer
+- Newsletter footer styling: Depends on: component-footer.css (existing). Only CSS changes.
+
+Section Layer
+- Hero refinements (minimal text, logo overlay): Depends on: hero section (e.g. hero-video.liquid used image-only), design tokens.
+- Shop By Look section: Depends on: Design tokens, optional component CSS. No product logic required for static blocks.
+- Lifestyle fullwidth: Depends on: Same as hero (media + optional logo overlay); can be same section type with different preset.
+- Architectural grid: Depends on: Design tokens only (images + text blocks).
+- Product grid quick-add (optional): Depends on: card-product or theme card, existing cart API.
+
+Template Layer
+- index.json: Depends on: All sections above. Order: Hero → Shop By Look → Product Grid → Editorial Split → (optional) Lifestyle Fullwidth → (optional) Editorial Split 2 → (optional) Architectural → Newsletter/Footer.
+</dependency-graph>
+
+<implementation-roadmap>
+## Development Phases (Marachi Alignment)
+
+Phase 1: Hero & Image-Led Mode
+Goal: Hero can be image-led with no or minimal text overlay; optional logo overlay.
+Entry: Current Hannouch theme (Tasks 1–14) in place.
+Tasks:
+- Hero section: Add section settings (e.g. "Minimal text" or "Hide heading/CTA", "Logo overlay" image or text). When minimal text, do not render or hide heading/eyebrow/CTA. For Marachi alignment, use image only (no video).
+- Optionally support logo/wordmark overlay on hero (image or text) in a corner (e.g. bottom-left or center).
+- component-hero.css: Add styles for optional logo overlay if needed.
+Exit: Hero can be configured to show only image + optional logo; no large text overlay. No video.
+
+Phase 2: Shop By Look Section
+Goal: Homepage has a "Shop By Look" portrait swatch strip section.
+Entry: Phase 1 complete.
+Tasks:
+- Create sections/shop-by-look.liquid with schema: blocks (image, label text, link URL); section settings (heading optional, columns desktop, scroll on mobile).
+- Markup: Horizontal flex or grid of blocks; each block = image (portrait aspect) + label below. Use design tokens for label typography (uppercase, letter-spacing).
+- Add to templates/index.json between hero and product grid (or per merchant preference).
+Exit: Shop By Look section renders on homepage with at least 4 blocks; responsive (scroll on small screens if needed).
+
+Phase 3: Editorial & Full-Width Lifestyle
+Goal: Editorial split and full-width lifestyle sections are image-focused; optional dedicated fullwidth section.
+Entry: Phase 2 complete.
+Tasks:
+- Add optional section lifestyle-fullwidth.liquid (or document use of hero with no text): full-bleed image only, optional logo overlay. No text content.
+- Ensure CTA in editorial-split uses arrow icon (already done in Task 11; verify).
+Exit: At least one way to add full-width lifestyle-only blocks (hero with no text or dedicated section); editorial split CTA has arrow.
+
+Phase 4: Product Grid & Footer Polish
+Goal: Product cards support optional quick-add where desired; footer newsletter and button match reference.
+Entry: Phase 3 complete.
+Tasks:
+- Product grid/card: If desired, add or expose optional quick-add (e.g. in card-product or via section setting) using existing cart API.
+- component-footer.css: Newsletter input — ensure bottom-border-only style; subscribe button — solid dark background, white text, uppercase. Match reference.
+- Verify footer column headings (uppercase, small) and link opacity/hover.
+Exit: Footer newsletter looks like reference; product grid optionally supports quick-add.
+
+Phase 5: Architectural Section & Template Assembly
+Goal: Optional two-column brand/architectural section; homepage template ordered to match Marachi flow.
+Entry: Phase 4 complete.
+Tasks:
+- Create sections/architectural-grid.liquid: two (or more) blocks with image, optional heading, optional caption; 2-col layout; minimal styling.
+- Update templates/index.json: section order and default sections to mirror reference (Hero → Shop By Look → Product Grid → Editorial → Lifestyle? → Editorial 2? → Architectural? → Footer). Use placeholder or merchant content.
+- Smoke test: All sections render; no layout breaks; links and CTAs work.
+Exit: Homepage structure matches Marachi reference; optional architectural section available. Documentation or LAUNCH_CHECKLIST updated for Marachi-alignment options.
+</implementation-roadmap>
+
+<constraints-and-notes>
+## Constraints
+- Reuse existing Hannouch design tokens (--font-heading, --font-body, --color-base-text, --color-base-bg, --spacing-*, etc.). No new color system.
+- Do not remove or break existing hero, editorial-split, main-collection, or product-information behavior; only add settings and optional UI (e.g. minimal text mode, logo overlay). Marachi alignment uses image-only hero (no video).
+- Shop By Look is block-based (image + label + link per block); no dependency on dynamic "looks" or metaobjects unless later specified.
+
+## Out of Scope (for this PRD)
+- Video on hero or lifestyle sections (Marachi reference is image-only).
+- Dynamic "looks" from metaobjects (Shop By Look uses static blocks only).
+- Changing collection or PDP logic beyond optional overlay styling.
+- Translation of all new strings (can be added to locales in a follow-up).
+</constraints-and-notes>

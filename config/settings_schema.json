@@ -1,9 +1,9 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "Atelier",
-    "theme_version": "3.2.0",
-    "theme_author": "Shopify",
+    "theme_name": "Hannouch",
+    "theme_version": "1.0.0",
+    "theme_author": "gabrieluwaila.com",
     "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
     "theme_support_url": "https://support.shopify.com/"
   },
@@ -341,6 +341,63 @@
           "on_secondary_button": "secondary_button_text",
           "secondary_button_border": "secondary_button_border"
         }
+      }
+    ]
+  },
+  {
+    "name": "Hannouch (Quiet Luxury)",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Typography"
+      },
+      {
+        "type": "font_picker",
+        "id": "hannouch_heading_font",
+        "default": "assistant_n4",
+        "label": "Heading font"
+      },
+      {
+        "type": "font_picker",
+        "id": "hannouch_body_font",
+        "default": "work_sans_n4",
+        "label": "Body font"
+      },
+      {
+        "type": "header",
+        "content": "Colors"
+      },
+      {
+        "type": "color",
+        "id": "hannouch_color_base_bg",
+        "label": "Base background",
+        "default": "#FAFAF9",
+        "alpha": true
+      },
+      {
+        "type": "color",
+        "id": "hannouch_color_base_text",
+        "label": "Base text",
+        "default": "#1A1A1A",
+        "alpha": true
+      },
+      {
+        "type": "color",
+        "id": "hannouch_color_border",
+        "label": "Borders",
+        "default": "#E5E5E5",
+        "alpha": true
+      },
+      {
+        "type": "header",
+        "content": "Cart"
+      },
+      {
+        "type": "number",
+        "id": "hannouch_free_shipping_threshold",
+        "label": "Free shipping threshold (cents)",
+        "info": "Set to 0 to hide the progress bar. E.g. 10000 = $100.00",
+        "default": 10000
       }
     ]
   },

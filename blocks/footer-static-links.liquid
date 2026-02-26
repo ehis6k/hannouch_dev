@@ -1,0 +1,180 @@
+{% liquid
+  assign preset = block.settings.preset
+  assign heading = block.settings.heading
+  assign show_as_accordion = block.settings.show_as_accordion
+  assign color_scheme = block.settings.color_scheme
+%}
+
+<accordion-custom
+  class="
+    menu
+    {% if show_as_accordion %} menu--accordion menu--{{ block.settings.accordion_icon }}{% endif %}
+  "
+  data-disable-on-desktop="true"
+  open-by-default-on-desktop
+  {% if show_as_accordion == false %}
+    data-disable-on-mobile="true"
+    open-by-default-on-mobile
+  {% endif %}
+>
+  <details
+    class="
+      menu__details
+      spacing-style
+      {% if block.settings.inherit_color_scheme == false %} color-{{ color_scheme }}{% endif %}
+    "
+    style="--spacing--size: {{ block.settings.menu_spacing }}px; {% render 'spacing-style', settings: block.settings %}"
+    {% if show_as_accordion == false %}open{% endif %}
+    {{ block.shopify_attributes }}
+  >
+    <summary class="menu__heading {{ block.settings.heading_preset }}">
+      <span class="menu__heading__default">{{ heading }}</span>
+      <span class="menu__heading__accordion">
+        {{ heading }}
+        <span class="menu__heading__toggle svg-wrapper icon-caret icon-animated">
+          {{- 'icon-caret.svg' | inline_asset_content -}}
+        </span>
+        <span class="menu__heading__toggle svg-wrapper icon-plus">
+          {{- 'icon-plus.svg' | inline_asset_content -}}
+        </span>
+      </span>
+    </summary>
+
+    <div class="details-content">
+      <ul class="list-unstyled footer-static-links__list">
+        {% if preset == 'shop' %}
+          <li class="menu__item {{ block.settings.link_preset }}"><a href="{{ routes.collections_url }}/all">{{ 'footer.shop.new_arrivals' | t | default: 'New Arrivals' }}</a></li>
+          <li class="menu__item {{ block.settings.link_preset }}"><a href="{{ routes.collections_url }}/bestsellers">{{ 'footer.shop.bestsellers' | t | default: 'Bestsellers' }}</a></li>
+          <li class="menu__item {{ block.settings.link_preset }}"><a href="/products/gift-card">{{ 'footer.shop.gift_cards' | t | default: 'Gift Cards' }}</a></li>
+        {% elsif preset == 'help' %}
+          <li class="menu__item {{ block.settings.link_preset }}"><a href="/pages/contact">{{ 'footer.help.contact_us' | t | default: 'Contact Us' }}</a></li>
+          <li class="menu__item {{ block.settings.link_preset }}">{% if shop.shipping_policy.url != blank %}<a href="{{ shop.shipping_policy.url }}">{% endif %}{{ 'footer.help.shipping' | t | default: 'Shipping' }}{% if shop.shipping_policy.url != blank %}</a>{% endif %}</li>
+          <li class="menu__item {{ block.settings.link_preset }}">{% if shop.refund_policy.url != blank %}<a href="{{ shop.refund_policy.url }}">{% endif %}{{ 'footer.help.returns' | t | default: 'Returns' }}{% if shop.refund_policy.url != blank %}</a>{% endif %}</li>
+        {% endif %}
+      </ul>
+    </div>
+  </details>
+</accordion-custom>
+
+{% stylesheet %}
+  .footer-static-links__list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .menu:not(:has(.menu__heading--empty)) .details-content {
+    margin-block-start: var(--spacing--size);
+  }
+
+  .menu__item + .menu__item {
+    margin-block-start: var(--spacing--size);
+  }
+
+  .menu__heading__default { display: contents; }
+  .menu__heading__accordion { display: none; }
+
+  @media screen and (max-width: 749px) {
+    .menu--accordion .menu__heading__default { display: none; }
+    .menu--accordion .menu__heading__accordion { display: contents; }
+    .menu--accordion .details-content { margin-block-start: var(--spacing--size); }
+  }
+
+  .menu--caret .icon-plus,
+  .menu--plus .icon-caret { display: none; }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Footer links (Shop/Help)",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "preset",
+      "label": "Preset",
+      "options": [
+        { "value": "shop", "label": "Shop (New Arrivals, Bestsellers, Gift Cards)" },
+        { "value": "help", "label": "Help (Contact Us, Shipping, Returns)" }
+      ],
+      "default": "shop"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:settings.heading",
+      "default": "SHOP"
+    },
+    {
+      "type": "range",
+      "id": "menu_spacing",
+      "label": "t:settings.vertical_gap",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "unit": "px",
+      "default": 12
+    },
+    {
+      "type": "checkbox",
+      "id": "show_as_accordion",
+      "label": "t:settings.show_as_accordion",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "accordion_icon",
+      "label": "t:settings.icon",
+      "options": [
+        { "value": "caret", "label": "t:options.caret" },
+        { "value": "plus", "label": "t:options.plus" }
+      ],
+      "default": "caret",
+      "visible_if": "{{ block.settings.show_as_accordion == true }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "inherit_color_scheme",
+      "label": "t:settings.inherit_color_scheme",
+      "default": true
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1",
+      "visible_if": "{{ block.settings.inherit_color_scheme == false }}"
+    },
+    {
+      "type": "select",
+      "id": "heading_preset",
+      "label": "t:settings.heading_preset",
+      "options": [
+        { "value": "", "label": "t:options.default" },
+        { "value": "paragraph", "label": "t:options.paragraph" },
+        { "value": "h1", "label": "t:options.h1" },
+        { "value": "h2", "label": "t:options.h2" },
+        { "value": "h3", "label": "t:options.h3" },
+        { "value": "h4", "label": "t:options.h4" },
+        { "value": "h5", "label": "t:options.h5" },
+        { "value": "h6", "label": "t:options.h6" }
+      ],
+      "default": "h5"
+    },
+    {
+      "type": "select",
+      "id": "link_preset",
+      "label": "t:settings.link_preset",
+      "options": [
+        { "value": "", "label": "t:options.default" },
+        { "value": "paragraph", "label": "t:options.paragraph" },
+        { "value": "h6", "label": "t:options.h6" }
+      ],
+      "default": "paragraph"
+    }
+  ],
+  "presets": [
+    { "name": "Footer links (Shop/Help)", "category": "t:categories.footer" }
+  ]
+}
+{% endschema %}

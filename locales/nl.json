@@ -324,7 +324,42 @@
       "quantity_increments": "Stappen van {{ increment }}",
       "quantity_minimum": "Minimum van {{ minimum }}",
       "quantity_maximum": "Maximum van {{ maximum }}",
-      "in_cart": "in winkelwagen"
+      "in_cart": "in winkelwagen",
+      "default_title": "Standaardtitel",
+      "sticky_add_to_cart": "Snelle toevoegen aan winkelwagen balk"
     }
+  },
+  "cart": {
+    "shipping_bar": {
+      "unlocked": "Je hebt gratis verzending ontgrendeld",
+      "remaining_html": "Nog {{ remaining }} voor gratis verzending",
+      "progress_label": "Voortgang gratis verzending"
+    }
+  },
+  "footer": {
+    "newsletter": "NIEUWSBRIEF",
+    "subscribe_for_updates": "Schrijf je in voor updates",
+    "headings": {
+      "shop": "WINKEL",
+      "help": "HELP",
+      "legal": "LEGAL"
+    },
+    "shop": {
+      "new_arrivals": "Nieuw binnen",
+      "bestsellers": "Bestsellers",
+      "gift_cards": "Cadeaukaarten"
+    },
+    "help": {
+      "contact_us": "Contact",
+      "shipping": "Verzending",
+      "returns": "Retourneren"
+    }
+  },
+  "header": {
+    "home": "Home"
+  },
+  "home": {
+    "hero_title": "Ramadan 2026",
+    "hero_cta": "Collectie bekijken"
   }
 }

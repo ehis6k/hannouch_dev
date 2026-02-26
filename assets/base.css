@@ -1,17 +1,41 @@
+/* ------------------------------------------------------------------------------
+   Hannouch Redesign – Design tokens (Quiet Luxury)
+   Task 1.1: CSS custom properties for typography, colors, spacing, grid
+   ------------------------------------------------------------------------------ */
+:root {
+  /* Typography */
+  --font-heading: 'Geometric Sans', sans-serif;
+  --font-body: 'Clean Sans', system-ui, sans-serif;
+
+  /* Colors */
+  --color-base-bg: #fafaf9;
+  --color-base-text: #1a1a1a;
+  --color-border: rgb(26 26 26 / 0.12);
+
+  /* Spacing scale (base unit 8px) */
+  --spacing-unit: 8px;
+  --spacing-xs: calc(var(--spacing-unit) * 1);   /* 8px */
+  --spacing-sm: calc(var(--spacing-unit) * 2);   /* 16px */
+  --spacing-md: calc(var(--spacing-unit) * 3);    /* 24px */
+  --spacing-lg: calc(var(--spacing-unit) * 4);    /* 32px */
+  --spacing-xl: calc(var(--spacing-unit) * 6);    /* 48px */
+  --spacing-xxl: calc(var(--spacing-unit) * 8);   /* 64px */
+
+  /* Grid */
+  --grid-max-width: 1440px;
+  --grid-columns-desktop: 12;
+  --grid-columns-mobile: 4;
+}
+
+/* ------------------------------------------------------------------------------ */
+
 * {
   box-sizing: border-box;
 }
 
-body {
-  color: var(--color-foreground);
-  background: var(--color-background);
-  display: flex;
-  flex-direction: column;
-  margin: 0;
-  min-height: 100svh;
-  font-variation-settings: 'slnt' 0;
-}
+/* Removed Atelier body defaults (Task 1.5) - now managed by Hannouch tokens at EOF */
 
+/* Atelier :root hover/transition defaults retained for theme compatibility */
 :root {
   --hover-lift-amount: 4px;
   --hover-scale-amount: 1.03;
@@ -4035,3 +4059,106 @@ text-component {
     font-size: max(1rem, 100%);
   }
 }
+
+/* ------------------------------------------------------------------------------
+   Hannouch Redesign – Typography overrides (Task 1.3 + 1.4)
+   Fluid clamp() and editorial headers; applies after theme defaults
+   ------------------------------------------------------------------------------ */
+body {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  color: var(--color-base-text);
+  background-color: var(--color-base-bg);
+  /* Retain Atelier layout properties for compatibility */
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  min-height: 100svh;
+}
+
+h1,
+.h1.h1,
+.text-block.h1 > *,
+h2,
+.h2.h2,
+.text-block.h2 > *,
+h3,
+.h3.h3,
+.text-block.h3 > * {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+h1,
+.h1.h1,
+.text-block.h1 > * {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+}
+
+h2,
+.h2.h2,
+.text-block.h2 > * {
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+h3,
+.h3.h3,
+.text-block.h3 > * {
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+/* ------------------------------------------------------------------------------
+   Hannouch Redesign – Base resets (Task 1.4)
+   ------------------------------------------------------------------------------ */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 var(--spacing-sm);
+  line-height: 1.25;
+}
+
+p {
+  margin: 0 0 var(--spacing-sm);
+}
+
+ul, ol {
+  margin: 0 0 var(--spacing-sm);
+  padding-left: var(--spacing-md);
+}
+
+/* ------------------------------------------------------------------------------
+   Hannouch Redesign – Icon system (Task 3)
+   ------------------------------------------------------------------------------ */
+:root {
+  --icon-size-sm: 14px;
+  --icon-size-md: 20px;
+  --icon-size-lg: 24px;
+  --icon-stroke-width: 1.25;
+}
+
+.hannouch-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.hannouch-icon svg {
+  width: var(--icon-size-sm);
+  height: var(--icon-size-sm);
+  display: block;
+}
+
+/* When size is passed as inline style the svg should fill the wrapper */
+.hannouch-icon[style] svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* Directional utilities for chevron */
+.hannouch-icon--chevron-up  svg { transform: rotate(180deg); }
+.hannouch-icon--chevron-left svg { transform: rotate(90deg);  }
+.hannouch-icon--chevron-right svg { transform: rotate(-90deg); }
+
+/* Directional utility for arrow */
+.hannouch-icon--arrow-left svg { transform: rotate(180deg); }

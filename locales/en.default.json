@@ -338,6 +338,13 @@
     "blog_post_date": "Date",
     "blog_post_description": "An excerpt of your blog post's content"
   },
+  "cart": {
+    "shipping_bar": {
+      "unlocked": "You've unlocked free shipping",
+      "remaining_html": "{{ remaining }} away from free shipping",
+      "progress_label": "Free shipping progress"
+    }
+  },
   "products": {
     "product": {
       "add_to_cart": "Add to cart",
@@ -355,5 +362,31 @@
       "default_title": "Default Title",
       "sticky_add_to_cart": "Quick add to cart bar"
     }
+  },
+  "footer": {
+    "newsletter": "NEWSLETTER",
+    "subscribe_for_updates": "Subscribe for updates",
+    "headings": {
+      "shop": "SHOP",
+      "help": "HELP",
+      "legal": "LEGAL"
+    },
+    "shop": {
+      "new_arrivals": "New Arrivals",
+      "bestsellers": "Bestsellers",
+      "gift_cards": "Gift Cards"
+    },
+    "help": {
+      "contact_us": "Contact Us",
+      "shipping": "Shipping",
+      "returns": "Returns"
+    }
+  },
+  "header": {
+    "home": "Home"
+  },
+  "home": {
+    "hero_title": "Ramadan 2026",
+    "hero_cta": "Shop collection"
   }
 }

@@ -1,0 +1,26 @@
+{%- comment -%}
+  Hannouch icon – chevron / caret (used for accordions, dropdowns)
+  Uses icon-caret.svg (points downward by default).
+  Rotate via CSS transform for other directions.
+
+  Parameters:
+    size      (optional) CSS length. Inherits --icon-size-sm when omitted.
+    class     (optional) Extra CSS classes (e.g. 'icon-caret--forward' to rotate 90°).
+    title     (optional) Accessible label; omit for decorative use.
+    direction (optional) 'up' | 'down' (default) | 'left' | 'right' — applies a
+              utility class that rotates the icon via CSS.
+{%- endcomment -%}
+{%- assign chevron_class = 'hannouch-icon hannouch-icon--chevron' -%}
+{%- if direction == 'up' -%}{%- assign chevron_class = chevron_class | append: ' hannouch-icon--chevron-up' -%}{%- endif -%}
+{%- if direction == 'left' -%}{%- assign chevron_class = chevron_class | append: ' hannouch-icon--chevron-left' -%}{%- endif -%}
+{%- if direction == 'right' -%}{%- assign chevron_class = chevron_class | append: ' hannouch-icon--chevron-right' -%}{%- endif -%}
+{%- if class != blank -%}{%- assign chevron_class = chevron_class | append: ' ' | append: class -%}{%- endif -%}
+<span
+  class="svg-wrapper {{ chevron_class }}"
+  {%- if size != blank %}style="width: {{ size }}; height: {{ size }};"{% endif %}
+  {%- if title != blank %} role="img" aria-label="{{ title | escape }}"
+  {%- else %} aria-hidden="true"
+  {%- endif %}
+>
+  {{- 'icon-caret.svg' | inline_asset_content -}}
+</span>

@@ -1,0 +1,221 @@
+/* ==============================================================================
+   Hannouch – Collection Grid + Filters
+   component-collection.css  |  Task 12
+   Aesthetic overrides on top of Atelier's results-list / product-grid system
+   ============================================================================== */
+
+/* ── Collection page header ──────────────────────────────────────────────────── */
+.collection-header__title,
+.collection-header h1 {
+  font-family: var(--font-heading, sans-serif);
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: var(--spacing-xs, 8px);
+}
+
+.collection-header__description {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.875rem;
+  text-align: center;
+  opacity: 0.65;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* ── Facets / filter bar ─────────────────────────────────────────────────────── */
+
+/* Horizontal pill-style filter bar */
+.facets__form,
+.facets--horizontal {
+  font-family: var(--font-body, sans-serif);
+}
+
+/* Filter labels */
+.facets__label,
+.facets__heading {
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Filter option pills */
+.facets__pill-label,
+.facets__item label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Active filter badge */
+.facets__pill--active {
+  background-color: var(--color-base-text, #1a1a1a);
+  color: var(--color-base-bg, #fafaf9);
+}
+
+/* Clear all filters link */
+.facets__reset-button,
+.facets__clear-all {
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  opacity: 0.55;
+}
+
+.facets__reset-button:hover,
+.facets__clear-all:hover {
+  opacity: 1;
+}
+
+/* ── Sort dropdown ───────────────────────────────────────────────────────────── */
+.sort-by__label,
+.facets__sort-label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.65;
+}
+
+.sort-by select,
+.facets__sort select {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  border-bottom: 1px solid var(--color-base-text, #1a1a1a);
+  background: transparent;
+  padding: 4px 20px 4px 0;
+  appearance: none;
+  cursor: pointer;
+}
+
+/* ── Product grid ────────────────────────────────────────────────────────────── */
+
+/* Hannouch: 4-up desktop default — controlled by Atelier card size 'small'
+   These CSS custom properties reinforce 4-column desktop, 2-column mobile */
+.product-grid-container {
+  --hannouch-grid-columns-desktop: 4;
+  --hannouch-grid-columns-mobile: 2;
+}
+
+/* Card title within Atelier's _product-card block system */
+:is(.product-card, .product-grid__card) h4,
+:is(.product-card, .product-grid__card) .h4 {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Card price */
+:is(.product-card, .product-grid__card) .price {
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+}
+
+:is(.product-card, .product-grid__card) .compare-at-price {
+  font-size: 0.6875rem;
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+/* Quick-add button — keep minimal */
+:is(.product-card, .product-grid__card) .quick-add {
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── Lifestyle break ─────────────────────────────────────────────────────────── */
+.product-grid__item--lifestyle-break {
+  /* Span full grid width */
+  grid-column: 1 / -1;
+  position: relative;
+  overflow: hidden;
+  max-height: 70vh;
+}
+
+@media screen and (max-width: 749px) {
+  .product-grid__item--lifestyle-break {
+    max-height: 50vh;
+  }
+}
+
+.lifestyle-break__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  max-height: inherit;
+}
+
+.lifestyle-break__caption {
+  position: absolute;
+  bottom: var(--spacing-sm, 16px);
+  left: var(--spacing-md, 24px);
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff;
+  opacity: 0.8;
+  margin: 0;
+}
+
+/* ── Empty state ─────────────────────────────────────────────────────────────── */
+.collection-empty,
+.product-grid--empty {
+  text-align: center;
+  padding: var(--spacing-xxl, 64px) var(--spacing-md, 24px);
+}
+
+.collection-empty__title {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: var(--spacing-md, 24px);
+}
+
+/* ── Load more / Pagination ──────────────────────────────────────────────────── */
+.pagination__list {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-xs, 8px);
+  list-style: none;
+  padding: 0;
+  margin: var(--spacing-xl, 48px) 0;
+}
+
+.pagination__item a,
+.pagination__item span {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  padding: 8px 12px;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.pagination__item--active a,
+.pagination__item--active span {
+  border-bottom-color: var(--color-base-text, #1a1a1a);
+}
+
+/* Product count */
+.product-count,
+.facets__product-count {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  opacity: 0.5;
+}

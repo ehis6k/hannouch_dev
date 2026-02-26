@@ -1,0 +1,16 @@
+{%- comment -%}
+  Hannouch icon – search (magnifying glass)
+  Parameters:
+    size  (optional) CSS length. Inherits --icon-size-sm when omitted.
+    class (optional) Extra CSS classes.
+    title (optional) Accessible label; omit for decorative use.
+{%- endcomment -%}
+<span
+  class="svg-wrapper hannouch-icon hannouch-icon--search{% if class != blank %} {{ class }}{% endif %}"
+  {%- if size != blank %}style="width: {{ size }}; height: {{ size }};"{% endif %}
+  {%- if title != blank %} role="img" aria-label="{{ title | escape }}"
+  {%- else %} aria-hidden="true"
+  {%- endif %}
+>
+  {{- 'icon-search.svg' | inline_asset_content -}}
+</span>

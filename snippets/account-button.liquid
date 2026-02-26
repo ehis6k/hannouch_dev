@@ -9,7 +9,7 @@
 
 {%- assign tag = tag | default: 'button' -%}
 <{{ tag }}
-  class="account-button header-actions__action"
+  class="button button-unstyled account-button header-actions__action"
   aria-label="{{ 'accessibility.account' | t }}"
   aria-haspopup="dialog"
   {%- if popover_id -%}
@@ -37,12 +37,13 @@
     </span>
   {%- else -%}
     <span
-      class="account-button__icon"
+      class="account-button__icon svg-wrapper"
       aria-hidden="true"
     >
       {{- 'icon-account.svg' | inline_asset_content -}}
     </span>
   {%- endif -%}
+  <span class="account-button__label">{{ 'accessibility.account' | t }}</span>
 </{{ tag }}>
 
 {% stylesheet %}
@@ -56,6 +57,7 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     align-content: center;
     transition: color var(--animation-speed) var(--animation-easing);
     anchor-name: --account-button-trigger;
@@ -80,9 +82,15 @@
 
   .account-button__icon {
     color: currentColor;
-    display: inline-flex;
+    display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
+  }
+
+  .account-button__icon svg {
+    display: block;
+    vertical-align: middle;
   }
 
   /* The shop avatar doesn't bubble the click event up to our button, so we need to prevent that or the button doesn't work */

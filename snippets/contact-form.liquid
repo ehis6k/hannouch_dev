@@ -149,11 +149,19 @@
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--color-input-text);
-    background-color: var(--color-input-background);
-    padding: var(--padding-lg) var(--padding-xl);
-    border-radius: var(--style-border-radius-inputs);
-    border: var(--style-border-width-inputs) solid var(--color-input-border);
+    background-color: transparent;
+    padding: 12px 0;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--color-input-border);
     -webkit-font-smoothing: antialiased;
+    font-family: var(--font-body-family);
+    font-size: 1rem;
+  }
+
+  .contact-form__input:focus {
+    outline: none;
+    border-bottom-color: var(--color-foreground);
   }
 
   .contact-form__input--textarea {

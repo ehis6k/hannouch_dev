@@ -1,0 +1,238 @@
+/* ==============================================================================
+   Hannouch – Cart Drawer
+   component-drawer.css  |  Task 8
+   Aesthetic overrides on top of Atelier's cart-drawer-component system
+   ============================================================================== */
+
+/* ── Drawer panel ────────────────────────────────────────────────────────────── */
+.cart-drawer__dialog {
+  width: 400px;
+  max-width: 90vw;
+  border-left: 1px solid var(--color-border, rgb(26 26 26 / 0.12));
+  box-shadow: none; /* remove Atelier shadow — flat, editorial feel */
+}
+
+/* ── Header ──────────────────────────────────────────────────────────────────── */
+.cart-drawer__header {
+  border-bottom: 1px solid var(--color-border, rgb(26 26 26 / 0.12));
+}
+
+.cart-drawer__heading {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ── Close button ────────────────────────────────────────────────────────────── */
+.cart-drawer__close-button svg {
+  width: var(--icon-size-sm, 14px);
+  height: var(--icon-size-sm, 14px);
+  stroke-width: var(--icon-stroke-width, 1.25);
+}
+
+/* ── Line items ──────────────────────────────────────────────────────────────── */
+.cart-drawer__items {
+  padding-inline: var(--spacing-md, 24px);
+  padding-block: var(--spacing-sm, 16px);
+}
+
+@media screen and (min-width: 750px) {
+  .cart-drawer__items {
+    padding-inline: var(--spacing-lg, 32px);
+  }
+}
+
+/* ── Individual line item ────────────────────────────────────────────────────── */
+.cart-items__table-row {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: var(--spacing-sm, 16px);
+  padding-block: var(--spacing-sm, 16px);
+  border-bottom: 1px solid var(--color-border, rgb(26 26 26 / 0.12));
+}
+
+.cart-items__table-row:last-child {
+  border-bottom: none;
+}
+
+/* Thumbnail */
+.cart-item__image {
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  width: 80px;
+}
+
+/* Product title */
+.cart-item__name {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 4px;
+}
+
+/* Variant label */
+.cart-item__variant {
+  font-size: 0.6875rem;
+  opacity: 0.6;
+  margin: 0 0 var(--spacing-xs, 8px);
+}
+
+/* Price inside drawer reuses base .price class */
+.cart-items__table-row .price {
+  font-size: 0.75rem;
+}
+
+/* ── Quantity selector ───────────────────────────────────────────────────────── */
+.cart-quantity-selector-component {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  border: 1px solid var(--color-border, rgb(26 26 26 / 0.12));
+  height: 32px;
+}
+
+.cart-quantity-selector-component .quantity-minus,
+.cart-quantity-selector-component .quantity-plus {
+  width: 32px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.cart-quantity-selector-component input[type='number'] {
+  width: 36px;
+  height: 100%;
+  text-align: center;
+  border: none;
+  border-inline: 1px solid var(--color-border, rgb(26 26 26 / 0.12));
+  font-size: 0.75rem;
+  background: transparent;
+  -moz-appearance: textfield;
+}
+
+.cart-quantity-selector-component input[type='number']::-webkit-inner-spin-button,
+.cart-quantity-selector-component input[type='number']::-webkit-outer-spin-button {
+  appearance: none;
+  margin: 0;
+}
+
+/* ── Free shipping progress bar ──────────────────────────────────────────────── */
+.hannouch-shipping-bar {
+  padding: var(--spacing-sm, 16px) var(--spacing-md, 24px);
+  border-bottom: 1px solid var(--color-border, rgb(26 26 26 / 0.12));
+}
+
+@media screen and (min-width: 750px) {
+  .hannouch-shipping-bar {
+    padding-inline: var(--spacing-lg, 32px);
+  }
+}
+
+.hannouch-shipping-bar__message {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+.hannouch-shipping-bar__track {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  height: 1px;
+  border: none;
+  background-color: var(--color-border, rgb(26 26 26 / 0.12));
+  overflow: hidden;
+}
+
+.hannouch-shipping-bar__track::-webkit-progress-bar {
+  background-color: var(--color-border, rgb(26 26 26 / 0.12));
+}
+
+.hannouch-shipping-bar__track::-webkit-progress-value {
+  background-color: var(--color-base-text, #1a1a1a);
+  transition: width 0.4s ease;
+}
+
+.hannouch-shipping-bar__track::-moz-progress-bar {
+  background-color: var(--color-base-text, #1a1a1a);
+  transition: width 0.4s ease;
+}
+
+/* Unlocked state */
+.hannouch-shipping-bar--unlocked .hannouch-shipping-bar__message {
+  opacity: 0.65;
+}
+
+/* ── Summary / footer ────────────────────────────────────────────────────────── */
+.cart-drawer__summary {
+  padding-inline: var(--spacing-md, 24px);
+  padding-block: var(--spacing-md, 24px);
+  border-top: 1px solid var(--color-border, rgb(26 26 26 / 0.12));
+  /* Override Atelier mask-image gradient */
+  mask-image: none;
+}
+
+@media screen and (min-width: 750px) {
+  .cart-drawer__summary {
+    padding-inline: var(--spacing-lg, 32px);
+  }
+}
+
+/* Subtotal row */
+.cart__total {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--spacing-sm, 16px);
+}
+
+.cart__total-value {
+  font-size: 0.875rem;
+}
+
+/* Checkout button */
+.cart__checkout-button {
+  display: block;
+  width: 100%;
+  padding: 14px var(--spacing-md, 24px);
+  background-color: var(--color-base-text, #1a1a1a);
+  color: var(--color-base-bg, #fafaf9);
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.cart__checkout-button:hover {
+  opacity: 0.85;
+}
+
+.cart__checkout-button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* ── Empty state ─────────────────────────────────────────────────────────────── */
+.cart-drawer--empty .cart-drawer__heading {
+  font-size: 0.75rem;
+  opacity: 0.55;
+}

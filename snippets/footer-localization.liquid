@@ -1,0 +1,26 @@
+{%- comment -%}
+  Minimal language + currency for footer bar. Language selector and current currency (e.g. EN / FR / NL | EUR).
+{%- endcomment -%}
+{%- form 'localization', id: 'FooterLocalizationForm', class: 'footer-localization-form', return_to: request.path, aria-label: 'Language and region' -%}
+  <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
+  <label class="visually-hidden" for="FooterLanguageSelect">{{ 'content.language' | t }}</label>
+  <select
+    id="FooterLanguageSelect"
+    class="footer-localization-form__select"
+    name="language_code"
+    aria-label="{{ 'content.language' | t }}"
+    onchange="this.form.submit()"
+  >
+    {%- for language in localization.available_languages -%}
+      <option
+        value="{{ language.iso_code }}"
+        lang="{{ language.iso_code }}"
+        {% if language.iso_code == localization.language.iso_code %}selected{% endif %}
+      >
+        {{ language.endonym_name | capitalize }}
+      </option>
+    {%- endfor -%}
+  </select>
+{%- endform -%}
+<span class="footer-localization-form__sep" aria-hidden="true">|</span>
+<span class="footer-localization-form__currency">{{ localization.country.currency.iso_code }}</span>

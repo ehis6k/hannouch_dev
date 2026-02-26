@@ -22,6 +22,7 @@ export class OverflowMinimumEvent extends Event {
  * A custom element that wraps a list of items and moves them to an overflow slot when they don't fit.
  * This component is used in the header section and other areas.
  * @attr {string | null} minimum-items When set, the element enters a 'minimum-reached' state when visible items are at or below this number.
+ * @attr {string | null} maximum-items When set, at most this many items stay visible; the rest are moved to overflow (e.g. for a capped header nav).
  * @example
  * <overflow-list minimum-items="2">
  *   <!-- list items -->
@@ -29,7 +30,7 @@ export class OverflowMinimumEvent extends Event {
  */
 export class OverflowList extends DeclarativeShadowElement {
   static get observedAttributes() {
-    return ['disabled', 'minimum-items'];
+    return ['disabled', 'minimum-items', 'maximum-items'];
   }
 
   /**
@@ -150,6 +151,15 @@ export class OverflowList extends DeclarativeShadowElement {
    */
   get minimumItems() {
     const value = this.getAttribute('minimum-items');
+    return value ? parseInt(value, 10) : null;
+  }
+
+  /**
+   * Get the maximum number of items to show in the list (excess move to overflow)
+   * @returns {number | null}
+   */
+  get maximumItems() {
+    const value = this.getAttribute('maximum-items');
     return value ? parseInt(value, 10) : null;
   }
 
@@ -307,6 +317,18 @@ export class OverflowList extends DeclarativeShadowElement {
         visibleElements.push(element);
       }
     });
+
+    // Cap visible items when maximum-items is set (e.g. header: 4 main nav + Plus)
+    if (this.maximumItems != null && visibleElements.length > this.maximumItems) {
+      const toOverflow = visibleElements.splice(this.maximumItems);
+      overflowingElements.push(...toOverflow);
+      if (!hasOverflow) {
+        hasOverflow = true;
+        if (toOverflow.length && !placeholderWidth) {
+          placeholderWidth = toOverflow[0].getBoundingClientRect().width;
+        }
+      }
+    }
 
     if (hasOverflow) {
       moreSlot.style.removeProperty('order');

@@ -1,0 +1,17 @@
+{%- comment -%} Footer newsletter heading – locale-aware (e.g. NEWSLETTER / NL / EN). {%- endcomment -%}
+<h3
+  class="spacing-style text-block text-block--{{ block.id }} h3"
+  style="width: 100%; --text-align: left; {% render 'spacing-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
+  {{ 'footer.newsletter' | t }}
+</h3>
+
+{% schema %}
+{
+  "name": "Newsletter heading",
+  "tag": null,
+  "settings": [],
+  "presets": [{ "name": "Newsletter heading", "category": "t:categories.footer" }]
+}
+{% endschema %}

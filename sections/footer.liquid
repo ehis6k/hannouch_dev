@@ -1,5 +1,7 @@
 
 
+{{- 'component-footer.css' | asset_url | stylesheet_tag -}}
+
 <div class="section-background color-{{ section.settings.color_scheme }}"></div>
 <div
   class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
@@ -73,6 +75,16 @@
   @media screen and (min-width: 990px) {
     .footer-content {
       grid-template-columns: repeat(var(--grid-columns), 1fr);
+      gap: min(var(--footer-gap), 16px);
+    }
+
+    /* Two main divs: left = Newsletter (smaller), right = Shop + Help + Legal */
+    .footer-content[style*='--grid-columns: 2'] {
+      grid-template-columns: 0.65fr 1.35fr;
+    }
+
+    .footer-content[style*='--grid-columns: 4'] {
+      grid-template-columns: 1.5fr 0.85fr 0.85fr 0.85fr;
     }
 
     /* Single item centered */
@@ -103,6 +115,18 @@
     },
     {
       "type": "follow-on-shop"
+    },
+    {
+      "type": "footer-policy-links"
+    },
+    {
+      "type": "footer-static-links"
+    },
+    {
+      "type": "footer-newsletter-heading"
+    },
+    {
+      "type": "footer-newsletter-subtext"
     },
     {
       "type": "group"

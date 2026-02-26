@@ -51,7 +51,47 @@
     return_to: back,
     aria-label: localization_label
   -%}
-    {% if show_country %}
+    {% if show_language %}
+      <div class="language-selector{% if show_country %} top-shadow{% else %} language-selector--collapse-space{% endif %}{% if show_country == false and localization_style == 'drawer' %} h5{% endif %}">
+        <h2
+          class="visually-hidden"
+          id="{{ localization_style }}-LanguageLabel"
+        >
+          {{ 'content.language' | t }}
+        </h2>
+        {% if show_country == true %}
+          <span class="language-selector__label">{{ 'content.language' | t }}</span>
+        {% endif %}
+        <select
+          id="{{ localization_style }}Select"
+          class="localization-form__select"
+          name="language_code"
+          aria-label="{{ 'content.language' | t }}"
+          ref="languageInput"
+          on:change="/changeLanguage"
+        >
+          {%- for language in localization.available_languages -%}
+            <option
+              value="{{ language.iso_code }}"
+              lang="{{ language.iso_code }}"
+              {% if language.iso_code == localization.language.iso_code %}
+                selected
+              {% endif %}
+            >
+              {{ language.endonym_name | capitalize }}
+            </option>
+          {%- endfor -%}
+        </select>
+        <span class="svg-wrapper icon-caret">
+          {{- 'icon-caret.svg' | inline_asset_content -}}
+        </span>
+      </div>
+    {% endif %}
+    {% comment %} In header dropdown, show only language (no country search/list). Keep country in form so it's not lost on language change. {% endcomment %}
+    {% if show_country and localization_style == 'dropdown' %}
+      <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}" ref="countryInput">
+    {% endif %}
+    {% if show_country and localization_style != 'dropdown' %}
       {% if show_country_filter %}
         <div class="country-filter">
           <div class="field">
@@ -233,43 +273,6 @@
           value="{{ localization.country.iso_code }}"
           ref="countryInput"
         >
-      </div>
-    {% endif %}
-
-    {% if show_language %}
-      <div class="language-selector{% if show_country %} top-shadow{% else %} language-selector--collapse-space{% endif %}{% if show_country == false and localization_style == 'drawer' %} h5{% endif %}">
-        <h2
-          class="visually-hidden"
-          id="{{ localization_style }}-LanguageLabel"
-        >
-          {{ 'content.language' | t }}
-        </h2>
-        {% if show_country == true %}
-          <span class="language-selector__label">{{ 'content.language' | t }}</span>
-        {% endif %}
-        <select
-          id="{{ localization_style }}Select"
-          class="localization-form__select"
-          name="language_code"
-          aria-label="{{ 'content.language' | t }}"
-          ref="languageInput"
-          on:change="/changeLanguage"
-        >
-          {%- for language in localization.available_languages -%}
-            <option
-              value="{{ language.iso_code }}"
-              lang="{{ language.iso_code }}"
-              {% if language.iso_code == localization.language.iso_code %}
-                selected
-              {% endif %}
-            >
-              {{ language.endonym_name | capitalize }}
-            </option>
-          {%- endfor -%}
-        </select>
-        <span class="svg-wrapper icon-caret">
-          {{- 'icon-caret.svg' | inline_asset_content -}}
-        </span>
       </div>
     {% endif %}
   {%- endform -%}

@@ -8,6 +8,8 @@
   @param {string} [settings.drawer_color_scheme] - The color scheme for the drawer.
 {%- enddoc -%}
 
+{{- 'component-drawer.css' | asset_url | stylesheet_tag -}}
+
 <script
   src="{{ 'cart-drawer.js' | asset_url }}"
   type="module"
@@ -22,7 +24,7 @@
   {% endif %}
 >
   <button
-    class="button header-actions__action button-unstyled"
+    class="button header-actions__action button-unstyled header-actions__cart-trigger"
     on:click="/open"
     aria-haspopup="dialog"
     aria-label="{{ 'accessibility.cart' | t }}"
@@ -30,6 +32,7 @@
     data-testid="cart-drawer-trigger"
   >
     {% render 'cart-icon-component' %}
+    <span class="header-actions__cart-label">{{ 'content.cart_title' | t }} (<span class="header-actions__cart-count" ref="cartCount">{{ cart.item_count }}</span>)</span>
   </button>
 
   <dialog
@@ -108,9 +111,8 @@
               {% render 'cart-products', drawer_context: 'drawer' %}
             </scroll-hint>
 
-            <div
-              class="cart-drawer__summary"
-            >
+            <div class="cart-drawer__summary">
+              {%- render 'hannouch-shipping-bar' -%}
               {% render 'cart-summary' %}
             </div>
           </div>

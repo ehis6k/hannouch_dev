@@ -500,6 +500,21 @@ class ProductFormComponent extends Component {
 
     // Update the variant ID
     variantId.value = event.detail.resource?.id ?? '';
+    // Update product title with variant name (e.g. "Product Name - Variant Option")
+    const productInformation = this.closest('product-information');
+    const currentTitle = productInformation?.querySelector('.product-details h1');
+    const newTitle = event.detail.data.html.querySelector('product-information .product-details h1');
+    if (currentTitle && newTitle) {
+      morph(currentTitle, newTitle);
+      // Append variant option when present (template uses only product.title to avoid invalid dynamic source in theme editor)
+      const variant = event.detail.resource;
+      if (variant?.option1) {
+        const base = currentTitle.textContent?.trim() ?? '';
+        if (!base.endsWith(variant.option1)) {
+          currentTitle.textContent = `${base} - ${variant.option1}`;
+        }
+      }
+    }
     const { addToCartButtonContainer: currentAddToCartButtonContainer, acceleratedCheckoutButtonContainer } = this.refs;
     const currentAddToCartButton = currentAddToCartButtonContainer?.refs.addToCartButton;
 

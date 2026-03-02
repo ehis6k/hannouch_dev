@@ -78,7 +78,7 @@
 
 <div class="section-background color-{{ settings.color_scheme }}"></div>
 <div
-  class="product-information section section--{{ content_width }} spacing-style color-{{ settings.color_scheme }} relative"
+  class="product-information section section--{{ content_width }} spacing-style color-{{ settings.color_scheme }} relative{% if request.page_type == 'product' %} disable-section-top-offset product-information--hero-overlay{% endif %}"
   style="{% render 'spacing-style', settings: settings %} --gap: {{ settings.gap }}px;"
   data-testid="product-information"
 >

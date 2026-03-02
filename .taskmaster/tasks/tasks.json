@@ -2,14 +2,14 @@
   "single-product": {
     "tasks": [
       {
-        "id": 1,
+        "id": "1",
         "title": "Configure Product Template Block Order and Layout",
         "description": "Reorder blocks in product.json to match Merrachi reference: title → price → variant picker → buy buttons → description → accordions",
         "details": "Update templates/product.json to set block_order in _product-details section: ['title', 'price', 'variant-picker', 'buy-buttons', 'product-description', 'accordion']. Configure product-information section with desktop_media_position: 'left', content_width: 'large', equal_columns: false. Remove or reposition any divider blocks that break the reference flow. Use Shopify's latest section group schema format for optimal performance.",
         "testStrategy": "Manual verification: Load product page and confirm right column shows elements in correct order (title, price, variants, add-to-cart, description, accordions). Test on multiple products with different variant configurations.",
         "priority": "high",
         "dependencies": [],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -17,8 +17,10 @@
             "description": "Modify the templates/product.json file to set the correct block order in the _product-details section",
             "dependencies": [],
             "details": "Open templates/product.json and locate the _product-details section. Update the block_order array to: ['title', 'price', 'variant-picker', 'buy-buttons', 'product-description', 'accordion']. Ensure all block IDs match existing blocks in the template.",
-            "status": "pending",
-            "testStrategy": "Verify the product page displays blocks in the correct order by loading a product page and checking the right column sequence"
+            "status": "done",
+            "testStrategy": "Verify the product page displays blocks in the correct order by loading a product page and checking the right column sequence",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T15:49:37.576Z"
           },
           {
             "id": 2,
@@ -28,8 +30,10 @@
               1
             ],
             "details": "In the product-information section of product.json, set desktop_media_position to 'left', content_width to 'large', and equal_columns to false. Use Shopify's latest section group schema format for optimal performance.",
-            "status": "pending",
-            "testStrategy": "Test on desktop to confirm media gallery appears on left side with large content width and unequal column layout"
+            "status": "done",
+            "testStrategy": "Test on desktop to confirm media gallery appears on left side with large content width and unequal column layout",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T15:49:37.579Z"
           },
           {
             "id": 3,
@@ -39,8 +43,10 @@
               1
             ],
             "details": "Scan through the product.json template to locate any divider blocks that break the intended flow (title → price → variant picker → buy buttons → description → accordions). Either remove these blocks entirely or move them to appropriate positions that don't disrupt the main content flow.",
-            "status": "pending",
-            "testStrategy": "Manual verification to ensure no unwanted dividers appear between the main product detail blocks and the flow matches the reference"
+            "status": "done",
+            "testStrategy": "Manual verification to ensure no unwanted dividers appear between the main product detail blocks and the flow matches the reference",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T15:49:37.579Z"
           },
           {
             "id": 4,
@@ -52,45 +58,56 @@
               3
             ],
             "details": "Test the complete implementation on multiple products with different variant configurations. Verify the entire sequence works correctly: title → price → variant picker → buy buttons → description → accordions. Check responsive behavior and ensure all elements display properly.",
-            "status": "pending",
-            "testStrategy": "Load multiple product pages with different variant configurations and confirm the right column shows all elements in the correct order. Test on both desktop and mobile devices."
+            "status": "done",
+            "testStrategy": "Load multiple product pages with different variant configurations and confirm the right column shows all elements in the correct order. Test on both desktop and mobile devices.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T15:49:37.581Z"
           }
-        ]
+        ],
+        "complexity": 4,
+        "recommendedSubtasks": 4,
+        "updatedAt": "2026-03-02T15:49:37.581Z"
       },
       {
-        "id": 2,
+        "id": "2",
         "title": "Configure Media Gallery for Vertical Portrait Layout",
         "description": "Set up product media gallery for vertical scrollable layout with portrait aspect ratio and right-side navigation",
         "details": "In product.json _product-media-gallery block, configure: media_presentation: 'grid' or 'list', aspect_ratio: '1/1.25' (portrait), thumbnail_position: 'right' if supported by theme. Set media_fit: 'contain' or 'cover' based on image quality. Configure slideshow_controls_style for dots navigation. If thumbnail_position 'right' not available, document for CSS override in task 6.",
         "testStrategy": "Visual verification: Gallery displays portrait images vertically, thumbnails or dots appear on right side of gallery. Test with products having multiple images. Verify navigation works correctly.",
         "priority": "high",
         "dependencies": [],
-        "status": "pending",
-        "subtasks": []
+        "status": "done",
+        "subtasks": [],
+        "complexity": 5,
+        "recommendedSubtasks": 4,
+        "updatedAt": "2026-03-02T16:21:06.657Z"
       },
       {
-        "id": 3,
+        "id": "3",
         "title": "Implement Dynamic Title with Variant Name",
         "description": "Update product title to include selected variant name (e.g., 'Premium Jersey Prayer Skirt - Dark Cherry')",
         "details": "Modify title block in product.json to use Liquid: `{{ product.title }}{% if product.selected_or_first_available_variant.option1 and product.variants.size > 1 %} - {{ product.selected_or_first_available_variant.option1 }}{% endif %}`. Handle single-variant products gracefully. Ensure theme's variant change JavaScript updates the title dynamically using product-form.js event listeners and DOM manipulation.",
         "testStrategy": "Functional testing: Verify title shows product name with variant on page load. Change variants and confirm title updates dynamically. Test with single-variant products (no suffix should appear).",
         "priority": "high",
         "dependencies": [],
-        "status": "pending",
-        "subtasks": []
+        "status": "done",
+        "subtasks": [],
+        "complexity": 5,
+        "recommendedSubtasks": 4,
+        "updatedAt": "2026-03-02T16:33:43.332Z"
       },
       {
-        "id": 4,
+        "id": "4",
         "title": "Style Product Details Typography and Layout",
         "description": "Update component-product.css to match Merrachi typography hierarchy for title, price, and labels",
         "details": "In assets/component-product.css, add/update rules: .product__title (h1: font-weight: 600, font-size: 1.8rem, line-height: 1.2), .product__price (font-weight: 600, font-size: 1.2rem, margin-top: 0.5rem), .product__option-label (font-size: 0.875rem, text-transform: uppercase, letter-spacing: 0.05em, margin-bottom: 0.5rem). Use CSS custom properties for consistent spacing and ensure mobile responsiveness with clamp() functions.",
         "testStrategy": "Visual regression testing: Compare typography with Merrachi reference screenshots. Test on desktop and mobile viewports. Verify text hierarchy is clear and readable.",
         "priority": "medium",
         "dependencies": [
-          1,
-          3
+          "1",
+          "3"
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -98,8 +115,10 @@
             "description": "Create CSS custom properties (variables) for consistent spacing values used across product typography elements",
             "dependencies": [],
             "details": "In assets/component-product.css, define CSS custom properties at the root level for spacing values: --product-title-margin, --product-price-margin, --product-label-margin. Set values based on the 0.5rem spacing requirements and create a scalable system for future typography updates.",
-            "status": "pending",
-            "testStrategy": "Verify custom properties are properly defined and can be referenced by other CSS rules. Test that changing a custom property value updates all dependent elements."
+            "status": "done",
+            "testStrategy": "Verify custom properties are properly defined and can be referenced by other CSS rules. Test that changing a custom property value updates all dependent elements.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T16:42:38.904Z"
           },
           {
             "id": 2,
@@ -109,8 +128,10 @@
               1
             ],
             "details": "Update .product__title CSS rule with font-weight: 600, base font-size: 1.8rem, line-height: 1.2. Implement responsive typography using clamp() function for mobile-first approach (e.g., clamp(1.4rem, 4vw, 1.8rem)). Ensure proper heading hierarchy and accessibility.",
-            "status": "pending",
-            "testStrategy": "Visual testing on desktop and mobile viewports. Verify font scaling works smoothly across different screen sizes. Test with long product titles to ensure proper line wrapping."
+            "status": "done",
+            "testStrategy": "Visual testing on desktop and mobile viewports. Verify font scaling works smoothly across different screen sizes. Test with long product titles to ensure proper line wrapping.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T16:42:38.907Z"
           },
           {
             "id": 3,
@@ -120,8 +141,10 @@
               1
             ],
             "details": "Update .product__price CSS rule with font-weight: 600, font-size: 1.2rem, margin-top: 0.5rem (using custom property). Add responsive sizing with clamp() function for mobile optimization. Ensure price formatting and currency symbols display correctly.",
-            "status": "pending",
-            "testStrategy": "Test price display across different product types (sale prices, compare-at prices). Verify spacing and alignment with title element. Test responsive behavior on mobile devices."
+            "status": "done",
+            "testStrategy": "Test price display across different product types (sale prices, compare-at prices). Verify spacing and alignment with title element. Test responsive behavior on mobile devices.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T16:42:38.908Z"
           },
           {
             "id": 4,
@@ -131,37 +154,45 @@
               1
             ],
             "details": "Update .product__option-label CSS rule with font-size: 0.875rem, text-transform: uppercase, letter-spacing: 0.05em, margin-bottom: 0.5rem (using custom property). Add responsive considerations using clamp() for font-size. Ensure labels work with variant picker components.",
-            "status": "pending",
-            "testStrategy": "Test with products having multiple variant options (size, color, etc.). Verify uppercase transformation and letter spacing render correctly. Test label spacing and alignment with form elements."
+            "status": "done",
+            "testStrategy": "Test with products having multiple variant options (size, color, etc.). Verify uppercase transformation and letter spacing render correctly. Test label spacing and alignment with form elements.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T16:42:38.912Z"
           }
-        ]
+        ],
+        "complexity": 4,
+        "recommendedSubtasks": 4,
+        "updatedAt": "2026-03-02T16:42:38.912Z"
       },
       {
-        "id": 5,
+        "id": "5",
         "title": "Style Variant Picker Components",
         "description": "Implement color swatches and size button styling to match Merrachi reference design",
         "details": "Update component-product.css for variant picker: Color swatches (.variant-input--swatch): 24px squares, border-radius: 2px, selected state with 2px border. Size buttons (.variant-input--button): horizontal layout, padding: 8px 16px, selected state with background: #000, color: #fff. Add hover states with opacity: 0.8. Use CSS Grid for consistent spacing: gap: 8px for swatches, gap: 12px for size buttons.",
         "testStrategy": "Interactive testing: Click color swatches and size buttons, verify visual feedback for selected/hover states. Test with products having different numbers of variants. Ensure accessibility with focus indicators.",
         "priority": "medium",
         "dependencies": [
-          1,
-          4
+          "1",
+          "4"
         ],
-        "status": "pending",
-        "subtasks": []
+        "status": "done",
+        "subtasks": [],
+        "complexity": 5,
+        "recommendedSubtasks": 4,
+        "updatedAt": "2026-03-02T17:05:06.235Z"
       },
       {
-        "id": 6,
+        "id": "6",
         "title": "Style Add to Cart Button and Gallery Navigation",
         "description": "Implement full-width black add-to-cart button and position gallery dots/thumbnails on the right",
         "details": "CSS for add-to-cart button (.product-form__cart-submit): width: 100%, background: #000, color: #fff, text-transform: uppercase, font-weight: 600, padding: 16px, border: none, border-radius: 0. For gallery navigation, if thumbnail_position 'right' not supported, add CSS: .product__media-gallery .thumbnails { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); } or similar positioning for dots navigation.",
         "testStrategy": "Visual and functional testing: Verify button spans full width and has correct styling. Test add-to-cart functionality. Confirm gallery navigation appears on right side and functions correctly.",
         "priority": "medium",
         "dependencies": [
-          2,
-          5
+          "2",
+          "5"
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -169,8 +200,10 @@
             "description": "Implement the full-width black styling for the add-to-cart button with uppercase text and proper padding",
             "dependencies": [],
             "details": "Apply CSS styles to .product-form__cart-submit selector: width: 100%, background: #000, color: #fff, text-transform: uppercase, font-weight: 600, padding: 16px, border: none, border-radius: 0. Ensure the button spans the full width of its container and maintains consistent styling across different screen sizes.",
-            "status": "pending",
-            "testStrategy": "Visual verification that button spans full width, has black background with white text, and maintains proper styling. Test add-to-cart functionality to ensure styling doesn't break button behavior."
+            "status": "done",
+            "testStrategy": "Visual verification that button spans full width, has black background with white text, and maintains proper styling. Test add-to-cart functionality to ensure styling doesn't break button behavior.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T17:05:08.116Z"
           },
           {
             "id": 2,
@@ -178,8 +211,10 @@
             "description": "Determine if theme supports thumbnail_position 'right' or if CSS override is needed for gallery navigation",
             "dependencies": [],
             "details": "Check the current theme's gallery component to see if thumbnail_position: 'right' is supported natively. If not supported, document the need for CSS positioning override. Identify the correct selectors for thumbnails or dots navigation elements in the gallery.",
-            "status": "pending",
-            "testStrategy": "Review theme documentation and test thumbnail_position setting. Inspect gallery HTML structure to identify navigation elements and their current positioning."
+            "status": "done",
+            "testStrategy": "Review theme documentation and test thumbnail_position setting. Inspect gallery HTML structure to identify navigation elements and their current positioning.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T17:05:08.117Z"
           },
           {
             "id": 3,
@@ -189,8 +224,10 @@
               2
             ],
             "details": "Add CSS to position gallery navigation on the right side: .product__media-gallery .thumbnails { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); }. If using dots navigation instead of thumbnails, apply similar positioning to the appropriate selector. Ensure navigation doesn't overlap with gallery images and remains accessible.",
-            "status": "pending",
-            "testStrategy": "Visual verification that gallery navigation appears on the right side of the gallery. Test navigation functionality to ensure thumbnails/dots still work correctly. Verify positioning works with different numbers of images."
+            "status": "done",
+            "testStrategy": "Visual verification that gallery navigation appears on the right side of the gallery. Test navigation functionality to ensure thumbnails/dots still work correctly. Verify positioning works with different numbers of images.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T17:05:08.118Z"
           },
           {
             "id": 4,
@@ -201,61 +238,75 @@
               3
             ],
             "details": "Test the gallery navigation with products containing different numbers of images. Ensure the right-side positioning works correctly across different screen sizes. Make adjustments to spacing, alignment, or z-index if needed. Verify that the navigation doesn't interfere with other gallery functionality like zoom or lightbox features.",
-            "status": "pending",
-            "testStrategy": "Functional testing with multiple products having varying numbers of images. Test gallery navigation on different devices and screen sizes. Verify all gallery features work correctly with the new positioning."
+            "status": "done",
+            "testStrategy": "Functional testing with multiple products having varying numbers of images. Test gallery navigation on different devices and screen sizes. Verify all gallery features work correctly with the new positioning.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T17:05:08.119Z"
           }
-        ]
+        ],
+        "complexity": 4,
+        "recommendedSubtasks": 4,
+        "updatedAt": "2026-03-02T17:05:08.119Z"
       },
       {
-        "id": 7,
+        "id": "7",
         "title": "Implement Accordion Styling with Plus Icons",
         "description": "Style product detail accordions to match Merrachi design with plus icons and minimal borders",
         "details": "Update accordion styles in component-product.css: .accordion__trigger with border-bottom: 1px solid #e5e5e5, padding: 16px 0, position: relative. Add plus icon using ::after pseudo-element: content: '+', position: absolute, right: 0, font-size: 1.2rem. Expanded state changes plus to minus. .accordion__content with padding: 16px 0 0, max-height transitions for smooth animation. Use CSS transforms for icon rotation.",
         "testStrategy": "Interactive testing: Click accordion triggers to expand/collapse content. Verify plus/minus icon changes and smooth animations. Test with different content lengths in accordions.",
         "priority": "medium",
         "dependencies": [
-          4
+          "4"
         ],
-        "status": "pending",
-        "subtasks": []
+        "status": "done",
+        "subtasks": [],
+        "complexity": 4,
+        "recommendedSubtasks": 3,
+        "updatedAt": "2026-03-02T16:45:30.804Z"
       },
       {
-        "id": 8,
+        "id": "8",
         "title": "Add Optional Breadcrumb Navigation",
         "description": "Implement breadcrumb navigation at the top of the product page (Home / Products / Product Title)",
         "details": "Create snippets/breadcrumb.liquid with structured data markup: Home link ({{ routes.root_url }}), Products link ({{ routes.collections_url }}/all or collection if available), current product title (no link). Add to product-information.liquid before main content. Style with small font-size: 0.875rem, color: #666, separated by ' / '. Include JSON-LD structured data for SEO benefits.",
         "testStrategy": "Navigation testing: Verify breadcrumb links work correctly. Test from different entry points (home, collection, search). Validate structured data with Google's Rich Results Test.",
         "priority": "low",
         "dependencies": [
-          1
+          "1"
         ],
-        "status": "pending",
-        "subtasks": []
+        "status": "done",
+        "subtasks": [],
+        "complexity": 3,
+        "recommendedSubtasks": 3,
+        "updatedAt": "2026-03-02T17:21:24.344Z"
       },
       {
-        "id": 9,
+        "id": "9",
         "title": "Add Size Guide Link Integration",
         "description": "Implement size guide link below size selector with proper styling and functionality",
         "details": "Add size guide link in variant-picker block or create new link block. Use section setting for URL (size_guide_url) or product metafield. Style as subtle link: font-size: 0.875rem, text-decoration: underline, color: #666, hover: color: #000. Position below size buttons with margin-top: 8px. Support multiple languages with locale keys ({{ 'products.size_guide' | t }}).",
         "testStrategy": "Functional testing: Verify link appears below size options and opens correct page. Test with products that have/don't have size guides. Verify localization works correctly.",
         "priority": "low",
         "dependencies": [
-          5
+          "5"
         ],
-        "status": "pending",
-        "subtasks": []
+        "status": "in-progress",
+        "subtasks": [],
+        "complexity": 3,
+        "recommendedSubtasks": 3,
+        "updatedAt": "2026-03-02T18:14:33.735Z"
       },
       {
-        "id": 10,
+        "id": "10",
         "title": "Configure Product Recommendations Section",
         "description": "Set up 'You may also like' section with horizontal product cards and carousel functionality",
         "details": "Configure sections/product-recommendations.liquid with heading: 'You may also like' (localized), max_products: 4, layout: 'carousel' or 'grid'. Ensure product cards match collection-card styling: image aspect ratio 1/1.25, title, price. Add carousel dots below if using carousel layout. Use Shopify's product recommendations API with proper fallbacks. Implement lazy loading for images using loading='lazy' attribute.",
         "testStrategy": "Content and interaction testing: Verify 4 related products display correctly. Test carousel navigation if applicable. Verify product cards link to correct pages and match design reference.",
         "priority": "medium",
         "dependencies": [
-          6
+          "6"
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -264,7 +315,8 @@
             "dependencies": [],
             "details": "Create sections/product-recommendations.liquid with section schema including settings for heading text (localized), max_products (default 4), and layout options ('carousel' or 'grid'). Include proper section presets and blocks configuration. Set up basic HTML structure with section wrapper and container classes.",
             "status": "pending",
-            "testStrategy": "Verify section appears in theme customizer with correct settings options and can be added to product templates"
+            "testStrategy": "Verify section appears in theme customizer with correct settings options and can be added to product templates",
+            "parentId": "undefined"
           },
           {
             "id": 2,
@@ -275,7 +327,8 @@
             ],
             "details": "Use Shopify's recommendations object to fetch related products with limit based on max_products setting. Implement fallback logic to show products from same collection or vendor if recommendations API returns insufficient results. Handle cases where no recommendations are available with graceful degradation.",
             "status": "pending",
-            "testStrategy": "Test with various products to ensure 4 related products display, verify fallback logic works when recommendations are limited"
+            "testStrategy": "Test with various products to ensure 4 related products display, verify fallback logic works when recommendations are limited",
+            "parentId": "undefined"
           },
           {
             "id": 3,
@@ -286,7 +339,8 @@
             ],
             "details": "Build product cards with 1/1.25 aspect ratio images, product title, and price display. Ensure cards match collection-card styling for consistency. Implement lazy loading with loading='lazy' attribute on images. Add proper linking to product pages and ensure cards are responsive across devices.",
             "status": "pending",
-            "testStrategy": "Verify product cards match design reference, test image lazy loading, confirm links work correctly and styling is consistent with collection cards"
+            "testStrategy": "Verify product cards match design reference, test image lazy loading, confirm links work correctly and styling is consistent with collection cards",
+            "parentId": "undefined"
           },
           {
             "id": 4,
@@ -297,47 +351,59 @@
             ],
             "details": "Implement carousel functionality when layout is set to 'carousel' with horizontal scrolling of product cards. Add navigation dots below the carousel for manual navigation. Ensure carousel is touch-friendly on mobile devices and includes proper accessibility attributes. Handle grid layout as alternative display option.",
             "status": "pending",
-            "testStrategy": "Test carousel navigation with dots, verify touch scrolling on mobile, test grid layout option, ensure accessibility compliance for navigation elements"
+            "testStrategy": "Test carousel navigation with dots, verify touch scrolling on mobile, test grid layout option, ensure accessibility compliance for navigation elements",
+            "parentId": "undefined"
           }
-        ]
+        ],
+        "complexity": 4,
+        "recommendedSubtasks": 4,
+        "updatedAt": "2026-03-02T17:09:56.958Z"
       },
       {
-        "id": 11,
+        "id": "11",
         "title": "Implement Mobile Responsive Optimizations",
         "description": "Ensure all PDP components are properly responsive and match mobile reference design",
         "details": "Add mobile-specific CSS using media queries (@media (max-width: 768px)): Stack layout (media above, details below), adjust typography scales using clamp(), ensure touch targets are minimum 44px, optimize gallery for swipe gestures. Adjust spacing and padding for mobile: reduce margins, ensure add-to-cart button remains prominent. Test with iOS Safari and Chrome mobile for compatibility.",
         "testStrategy": "Cross-device testing: Test on various mobile devices and screen sizes. Verify touch interactions work correctly. Check performance with Lighthouse mobile audit. Ensure no horizontal scrolling occurs.",
         "priority": "medium",
         "dependencies": [
-          4,
-          5,
-          6,
-          7
+          "4",
+          "5",
+          "6",
+          "7"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 5,
+        "recommendedSubtasks": 4
       },
       {
-        "id": 12,
+        "id": "12",
         "title": "Perform Cross-Browser Testing and Performance Optimization",
         "description": "Conduct comprehensive testing across browsers and optimize performance for production deployment",
         "details": "Test in Chrome, Firefox, Safari, and Edge. Verify CSS Grid/Flexbox compatibility, JavaScript functionality, and image loading. Optimize CSS with critical path extraction, compress images using Shopify's image transformation API (e.g., &width=800&height=1000), implement preload hints for above-the-fold images. Run Lighthouse audit targeting 90+ performance score. Test with slow 3G network simulation.",
         "testStrategy": "Comprehensive testing: Browser compatibility matrix testing, performance benchmarking with WebPageTest, accessibility audit with axe-core, visual regression testing comparing before/after screenshots across different browsers and devices.",
         "priority": "medium",
         "dependencies": [
-          8,
-          9,
-          10,
-          11
+          "8",
+          "9",
+          "10",
+          "11"
         ],
         "status": "pending",
-        "subtasks": []
+        "subtasks": [],
+        "complexity": 4,
+        "recommendedSubtasks": 4
       }
     ],
     "metadata": {
-      "created": "2026-03-02T15:24:09.932Z",
-      "updated": "2026-03-02T15:24:09.932Z",
-      "description": "Tasks for single-product context"
+      "version": "1.0.0",
+      "lastModified": "2026-03-02T18:14:33.735Z",
+      "taskCount": 12,
+      "completedCount": 9,
+      "tags": [
+        "single-product"
+      ]
     }
   }
 }

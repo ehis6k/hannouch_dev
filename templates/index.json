@@ -173,6 +173,7 @@
     "editorial_split_1": {
       "type": "editorial-split",
       "settings": {
+        "translation_namespace": "home.editorial_1",
         "heading": "THE CITY EDIT",
         "body": "<p>Designed for the woman in motion. Pieces that move through your day with the same quiet confidence you carry.<\/p>",
         "cta_text": "Explore the Collection",
@@ -196,6 +197,7 @@
     "editorial_split_2": {
       "type": "editorial-split",
       "settings": {
+        "translation_namespace": "home.editorial_2",
         "heading": "CRAFTED TO LAST",
         "body": "<p>Each piece is sourced from artisan studios across Europe. Quality without compromise, designed to become the quiet anchor of your wardrobe.<\/p>",
         "cta_text": "Our Story",
@@ -204,14 +206,6 @@
         "content_alignment": "left",
         "min_height": "medium",
         "color_scheme": "scheme-1"
-      }
-    },
-    "our_story": {
-      "type": "our-story",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "padding_block_start": 64,
-        "padding_block_end": 64
       }
     },
     "architectural_grid": {
@@ -229,7 +223,6 @@
     "editorial_split_1",
     "lifestyle_fullwidth",
     "editorial_split_2",
-    "our_story",
     "architectural_grid"
   ]
 }

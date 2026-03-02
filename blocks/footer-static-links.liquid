@@ -3,6 +3,13 @@
   assign heading = block.settings.heading
   assign show_as_accordion = block.settings.show_as_accordion
   assign color_scheme = block.settings.color_scheme
+  assign _heading_key = 'footer.headings.' | append: preset
+  assign _heading_t = _heading_key | t
+  if _heading_t contains 'translation missing'
+    assign display_heading = heading
+  else
+    assign display_heading = _heading_t
+  endif
 %}
 
 <accordion-custom
@@ -28,9 +35,9 @@
     {{ block.shopify_attributes }}
   >
     <summary class="menu__heading {{ block.settings.heading_preset }}">
-      <span class="menu__heading__default">{{ heading }}</span>
+      <span class="menu__heading__default">{{ display_heading }}</span>
       <span class="menu__heading__accordion">
-        {{ heading }}
+        {{ display_heading }}
         <span class="menu__heading__toggle svg-wrapper icon-caret icon-animated">
           {{- 'icon-caret.svg' | inline_asset_content -}}
         </span>

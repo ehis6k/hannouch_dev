@@ -1,35 +1,36 @@
 {%- comment -%}
   Footer language selector (inline links, no dropdown, no currency).
   Renders: Language  English  Français  Nederlands
-  Clicking a language posts the localization form with that language_code.
+  Uses direct links to the same page in each language (no POST to /localization).
 {%- endcomment -%}
+{%- assign path_without_locale = request.path -%}
+{%- if localization.language.root_url != '/' -%}
+  {%- assign path_without_locale = request.path | remove_first: localization.language.root_url -%}
+{%- endif -%}
 <span class="footer-utilities__label">{{ 'content.language' | t | default: 'Language' }}</span>
-{%- form 'localization', id: 'FooterLocalizationForm', class: 'footer-localization-form', return_to: request.path, aria-label: 'Language and region' -%}
-  <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
-  <div class="footer-localization-form__languages" role="list">
-    {%- for language in localization.available_languages -%}
-      {%- assign language_label = language.endonym_name -%}
-      {%- if language.iso_code == 'en' -%}
-        {%- assign language_label = 'English' -%}
-      {%- elsif language.iso_code == 'fr' -%}
-        {%- assign language_label = 'Français' -%}
-      {%- elsif language.iso_code == 'nl' -%}
-        {%- assign language_label = 'Nederlands' -%}
-      {%- endif -%}
-      {%- assign is_active = false -%}
-      {%- if language.iso_code == localization.language.iso_code -%}
-        {%- assign is_active = true -%}
-      {%- endif -%}
-      <button
-        type="submit"
-        name="language_code"
-        value="{{ language.iso_code }}"
-        class="footer-localization-form__language{% if is_active %} footer-localization-form__language--active{% endif %}"
-        role="listitem"
-        {% if is_active %}aria-current="true"{% endif %}
-      >
-        {{ language_label }}
-      </button>
-    {%- endfor -%}
-  </div>
-{%- endform -%}
+<div class="footer-localization-form footer-localization-form--links" role="list" aria-label="{{ 'content.language' | t | default: 'Language' }}">
+  {%- for language in localization.available_languages -%}
+    {%- assign language_label = language.endonym_name -%}
+    {%- if language.iso_code == 'en' -%}
+      {%- assign language_label = 'English' -%}
+    {%- elsif language.iso_code == 'fr' -%}
+      {%- assign language_label = 'Français' -%}
+    {%- elsif language.iso_code == 'nl' -%}
+      {%- assign language_label = 'Nederlands' -%}
+    {%- endif -%}
+    {%- assign is_active = false -%}
+    {%- if language.iso_code == localization.language.iso_code -%}
+      {%- assign is_active = true -%}
+    {%- endif -%}
+    {%- assign language_url = language.root_url | append: path_without_locale -%}
+    <a
+      href="{{ language_url }}"
+      class="footer-localization-form__language footer-localization-form__language--link{% if is_active %} footer-localization-form__language--active{% endif %}"
+      role="listitem"
+      {% if is_active %}aria-current="true"{% endif %}
+      hreflang="{{ language.iso_code }}"
+    >
+      {{ language_label }}
+    </a>
+  {%- endfor -%}
+</div>

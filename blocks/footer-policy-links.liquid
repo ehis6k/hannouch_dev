@@ -1,7 +1,12 @@
 {% liquid
-  assign heading = block.settings.heading | default: 'LEGAL'
   assign show_as_accordion = block.settings.show_as_accordion
   assign color_scheme = block.settings.color_scheme
+  assign _legal_t = 'footer.headings.legal' | t
+  if _legal_t contains 'translation missing'
+    assign heading = block.settings.heading | default: 'LEGAL'
+  else
+    assign heading = _legal_t
+  endif
 %}
 
 {% if shop.policies.size > 0 %}

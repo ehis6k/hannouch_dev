@@ -154,6 +154,19 @@
   border-color: #000;
 }
 
+/* Size guide link (Task 9) */
+.product-details .size-guide-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.875rem;
+  color: #666;
+  text-decoration: underline;
+}
+
+.product-details .size-guide-link:hover {
+  color: #000;
+}
+
 /* Button-style variant chips (global fallback) */
 .variant-picker .variant-option--buttons label {
   font-family: var(--font-body, sans-serif);
@@ -438,9 +451,32 @@ accordion-custom + accordion-custom,
   line-height: 1.4;
 }
 
-/* ── Mobile refinements ──────────────────────────────────────────────────────── */
+/* ── Mobile refinements (Task 11 — responsive optimizations) ────────────────── */
 @media screen and (max-width: 749px) {
+  /* Keep sticky bar pinned to viewport bottom on mobile */
   .sticky-add-to-cart__bar {
     bottom: 0 !important;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+  }
+
+  /* Prevent accidental horizontal scrolling on PDP */
+  .product-information,
+  .product-information__grid {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Ensure stacked layout feels comfortable on small screens */
+  .product-information__grid {
+    row-gap: 24px;
+  }
+
+  /* Touch targets: variant buttons and primary CTA at least 44px tall */
+  .product-details .variant-option--buttons label,
+  .product-details .add-to-cart-button.button,
+  .product-details .product-form-buttons .add-to-cart-button {
+    min-height: 44px;
   }
 }

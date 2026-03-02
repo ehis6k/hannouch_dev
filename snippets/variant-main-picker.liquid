@@ -32,6 +32,19 @@
       data-shopify-visual-preview
     {% endif %}
   >
+    {% comment %}
+      Task 9: Size guide link
+      Detect a size-like option and, if the block has a size_guide_url,
+      render a subtle link below the size selector.
+    {% endcomment %}
+    {%- assign has_size_option = false -%}
+    {%- for option in product_resource.options_with_values -%}
+      {%- assign option_name_downcase = option.name | downcase -%}
+      {%- if option_name_downcase contains 'size' -%}
+        {%- assign has_size_option = true -%}
+      {%- endif -%}
+    {%- endfor -%}
+
     <form class="variant-picker__form">
       {%- for product_option in product_resource.options_with_values -%}
         {%- liquid
@@ -193,6 +206,12 @@
           </div>
         {%- endif -%}
       {%- endfor -%}
+
+      {% if has_size_option and block_settings.size_guide_url != blank %}
+        <a href="{{ block_settings.size_guide_url }}" class="size-guide-link">
+          {{ 'products.size_guide' | t | default: 'Size guide' }}
+        </a>
+      {% endif %}
 
       <script type="application/json">
         {{ product_resource.selected_or_first_available_variant | json }}

@@ -1,0 +1,17 @@
+{%- comment -%}
+  Hannouch icon – cart
+  Parameters:
+    size  (optional) CSS length, e.g. '20px'. Inherits --icon-size-sm when omitted.
+    class (optional) Extra CSS classes appended to the wrapper.
+    title (optional) Non-empty string → accessible icon with role="img" + aria-label.
+                     Omitted / blank  → decorative, aria-hidden="true".
+{%- endcomment -%}
+<span
+  class="svg-wrapper hannouch-icon hannouch-icon--cart{% if class != blank %} {{ class }}{% endif %}"
+  {%- if size != blank %}style="width: {{ size }}; height: {{ size }};"{% endif %}
+  {%- if title != blank %} role="img" aria-label="{{ title | escape }}"
+  {%- else %} aria-hidden="true"
+  {%- endif %}
+>
+  {{- 'icon-cart.svg' | inline_asset_content -}}
+</span>

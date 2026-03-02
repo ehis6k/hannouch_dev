@@ -1,0 +1,262 @@
+/* ==============================================================================
+   Hannouch – Global Header
+   component-header.css  |  Task 6
+   Aesthetic overrides on top of Atelier's header-component system
+   ============================================================================== */
+
+/* ── Height token override ───────────────────────────────────────────────────── */
+body {
+  --header-height: 44px;
+}
+
+/* ── Logo wordmark ───────────────────────────────────────────────────────────── */
+
+/* Text wordmark when no image logo is set */
+.header-logo__text,
+.header-logo a {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.8125rem;     /* 13px */
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ── Navigation links ────────────────────────────────────────────────────────── */
+.menu-list__link,
+.menu-list__link[aria-haspopup] {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;     /* 11px */
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Active / current page indicator */
+.menu-list__link[aria-current='page'],
+.menu-list__link[aria-current='true'] {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+/* Hover underline */
+@media (hover: hover) {
+  .menu-list__link:hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+  }
+}
+
+/* ── Action icons (search, account, cart) ────────────────────────────────────── */
+.header-actions__action {
+  padding: 10px;
+  border-radius: 0;
+  transition: opacity 0.2s ease;
+  align-items: center;
+}
+
+.header-actions__action svg {
+  width: var(--icon-size-md, 20px);
+  height: var(--icon-size-md, 20px);
+  stroke-width: var(--icon-stroke-width, 1.25);
+}
+
+/* Account trigger: anchor for popover positioning */
+.header-actions__account-trigger {
+  anchor-name: --account-button-trigger;
+}
+
+/* Mobile: dialog-component should not affect header layout */
+@media screen and (max-width: 749px) {
+  .account-drawer {
+    display: contents;
+  }
+}
+
+/* ── Cart bubble: smaller, tighter ──────────────────────────────────────────── */
+.header-actions__cart-icon {
+  --cart-bubble-size: 16px;
+  --cart-bubble-top: 6px;
+  --cart-bubble-right: 4px;
+}
+
+/* ── Hamburger button (mobile) ───────────────────────────────────────────────── */
+.header__icon--menu {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs, 8px);
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.header__icon--menu svg {
+  width: var(--icon-size-sm, 14px);
+  height: var(--icon-size-sm, 14px);
+}
+
+/* ── Transparent (before scroll) → solid background (on scroll) ───────────────── */
+
+/*
+  Header is transparent at top of page; on scroll it gets a solid background
+  (Merrachi-style). Text color when transparent comes from home_color_scheme
+  (default = dark text for light hero). Sticky state is set by header-component.
+*/
+.header[transparent] .header__row {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.2s ease;
+}
+
+.header[transparent='not-sticky'][data-sticky-state='active'] .header__row,
+.header[transparent='always'][data-sticky-state='active'] .header__row {
+  background-color: rgb(241 236 230 / 1.0);
+  border-bottom: 1px solid var(--color-border, rgb(26 26 26 / 0.12));
+}
+
+/* Solid state (non-transparent or scrolled) */
+.header:not([transparent]) .header__row,
+.header__row {
+  border-bottom-color: var(--color-border, rgb(26 26 26 / 0.12));
+}
+
+/* ── Mobile drawer ───────────────────────────────────────────────────────────── */
+
+/* Match Hannouch typography inside mobile drawer */
+.header-drawer .menu-list__link {
+  font-size: 0.75rem;      /* 12px */
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* ── Search modal link ───────────────────────────────────────────────────────── */
+.search-action {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-action svg {
+  width: var(--icon-size-md, 20px);
+  height: var(--icon-size-md, 20px);
+  stroke-width: var(--icon-stroke-width, 1.25);
+}
+
+/* ── Right column: text labels + align all on one line ───────────────────────────── */
+@media screen and (min-width: 750px) {
+  .header__column--right header-actions {
+    align-items: center;
+  }
+
+  .header__column--right .cart-drawer {
+    display: flex;
+    align-items: center;
+  }
+
+  .header__column--right .header-actions__cart-trigger {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .header__column--right .search-action__icon {
+    display: none;
+  }
+
+  .header__column--right .search-action__label {
+    display: inline;
+    font-family: var(--font-body, sans-serif);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: inherit;
+  }
+
+  .header__column--right .header-actions__account-trigger .svg-wrapper {
+    display: none;
+  }
+
+  .header__column--right .header-actions__account-label {
+    display: inline;
+    font-family: var(--font-body, sans-serif);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: inherit;
+    transform: translateY(-3px);
+  }
+
+  .header__column--right .header-actions__account-trigger {
+    display: inline-flex;
+    align-items: center;
+    width: auto;
+    min-width: 0;
+  }
+
+  .header__column--right .header-actions__cart-trigger .header-actions__cart-icon {
+    display: none;
+  }
+
+  .header__column--right .header-actions__cart-label {
+    display: inline;
+    font-family: var(--font-body, sans-serif);
+    font-size: 0.6875rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: inherit;
+  }
+}
+
+/* Hide text labels on mobile when we show icons */
+@media screen and (max-width: 749px) {
+  .search-action__label,
+  .account-button__label,
+  .header-actions__account-label,
+  .header-actions__cart-label {
+    display: none;
+  }
+}
+
+/* ── Bottom border on header row ─────────────────────────────────────────────── */
+.header__row--top {
+  --border-bottom-width: 1px;
+  --header-padding: 8px;
+}
+
+/* ── Fixed 90px header row ───────────────────────────────────────────────────── */
+.header__row {
+  height: 90px;
+  min-height: 90px;
+  max-height: 90px;
+  padding-block: 0;
+  display: flex;
+  align-items: center;
+}
+
+.header__row--top .header__columns.spacing-style {
+  align-items: center;
+  padding-block: 0;
+  max-height: 100%;
+  width: 100%;
+}
+
+@media screen and (min-width: 750px) {
+  .header__row--top .header__columns.spacing-style {
+    padding-inline-start: var(--page-margin, var(--padding-md));
+    padding-inline-end: var(--page-margin, var(--padding-md));
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .header-actions__action {
+    padding-block: 6px;
+  }
+}

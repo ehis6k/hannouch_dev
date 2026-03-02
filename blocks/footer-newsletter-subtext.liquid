@@ -1,0 +1,17 @@
+{%- comment -%} Footer newsletter subtext – locale-aware (e.g. Subscribe for updates). {%- endcomment -%}
+<div
+  class="spacing-style text-block text-block--{{ block.id }} rte"
+  style="width: 100%; --text-align: left; {% render 'spacing-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
+  <p>{{ 'footer.subscribe_for_updates' | t }}</p>
+</div>
+
+{% schema %}
+{
+  "name": "Newsletter subtext",
+  "tag": null,
+  "settings": [],
+  "presets": [{ "name": "Newsletter subtext", "category": "t:categories.footer" }]
+}
+{% endschema %}

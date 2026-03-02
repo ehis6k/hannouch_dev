@@ -1,0 +1,172 @@
+
+
+{{- 'component-footer.css' | asset_url | stylesheet_tag -}}
+
+<div class="section-background color-{{ section.settings.color_scheme }}"></div>
+<div
+  class="section section--{{ section.settings.section_width }} color-{{ section.settings.color_scheme }}"
+  {{ section.shopify_attributes }}
+>
+  <div
+    class="utilities utilities--blocks-{{ section.blocks.size }} spacing-style"
+    style="{% render 'spacing-style', settings: section.settings %} --border-width: {{ section.settings.divider_thickness }}px; --gap: {{ section.settings.gap }}px;"
+    data-testid="footer-utilities"
+  >
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% stylesheet %}
+  /* Marachi-style: horizontal bar, left to right: Copyright | Social | Language | Shipping */
+  .utilities {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--gap);
+    flex-wrap: wrap;
+    border-top: var(--border-width) solid var(--color-border);
+    color: var(--color-foreground-muted);
+  }
+
+  .utilities a {
+    color: var(--color-foreground-muted);
+  }
+
+  .utilities > * {
+    text-align: left;
+  }
+
+  @media screen and (min-width: 750px) {
+    .utilities {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--gap);
+    }
+
+    /* Give each utilities block its own horizontal space so content doesn't collide */
+    .utilities--blocks-1 > * ,
+    .utilities--blocks-2 > * ,
+    .utilities--blocks-3 > * ,
+    .utilities--blocks-4 > * {
+      flex: 1 1 0;
+      min-width: 0;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "t:names.policies_and_links",
+  "tag": "div",
+  "class": "footer-utilities",
+  "max_blocks": 4,
+  "enabled_on": {
+    "groups": ["footer"]
+  },
+  "settings": [
+    {
+      "type": "select",
+      "id": "section_width",
+      "label": "t:settings.width",
+      "options": [
+        {
+          "value": "page-width",
+          "label": "t:options.page"
+        },
+        {
+          "value": "full-width",
+          "label": "t:options.full"
+        }
+      ],
+      "default": "page-width"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "label": "t:settings.gap",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "divider_thickness",
+      "label": "t:settings.divider_thickness",
+      "min": 0,
+      "max": 5,
+      "step": 0.5,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:settings.color_scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 20
+    }
+  ],
+  "blocks": [
+    {
+      "type": "footer-copyright"
+    },
+    {
+      "type": "footer-localization"
+    },
+    {
+      "type": "footer-policy-list"
+    },
+    {
+      "type": "social-links"
+    },
+    {
+      "type": "footer-country"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:names.policies_and_links",
+      "category": "t:categories.footer",
+      "blocks": {
+        "copyright": {
+          "type": "footer-copyright"
+        },
+        "social_icons": {
+          "type": "social-links"
+        },
+        "localization": {
+          "type": "footer-localization"
+        }
+      },
+      "block_order": ["copyright", "social_icons", "localization"]
+    }
+  ]
+}
+{% endschema %}

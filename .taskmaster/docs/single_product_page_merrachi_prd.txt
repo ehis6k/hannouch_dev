@@ -1,0 +1,444 @@
+<rpg-method>
+# Repository Planning Graph (RPG) Method – Single Product Page (Merrachi Alignment) PRD
+
+This PRD defines the design and structural changes required to align the Hannouch **single product page (PDP)** with the Merrachi-inspired reference. The reference is the first inspiration screenshot (e.g. "Premium Jersey Prayer Skirt - Dark Cherry"); the current state is the second screenshot (e.g. "Cagoule - Nude Poudré"). The goal is to transform the current PDP so it looks and behaves like the Merrachi reference while reusing the existing product-information section, blocks, and design tokens.
+</rpg-method>
+
+---
+
+<overview>
+<instruction>
+Start with the problem, not the solution. Be specific about:
+- What pain point exists?
+- Who experiences it?
+- Why existing solutions don't work?
+- What success looks like (measurable outcomes)?
+</instruction>
+
+## Problem Statement
+
+The current Hannouch single product page does not match the Merrachi reference in layout, visual hierarchy, or component order. Shoppers expect a clear two-column layout (media left, details right), a visible breadcrumb, a vertical product gallery with clear navigation, and a right-hand panel that presents title (with variant in name), price, color/size selectors, add-to-cart, description, and expandable details in a specific order and style. The current PDP has different ordering (e.g. title/price centered, divider, description before variants), different gallery behavior (e.g. thumbnails left vs vertical scroll with dots), and no breadcrumb. This creates a visual and UX gap versus the reference and reduces perceived quality and trust.
+
+## Target Users
+
+- **Shoppers** browsing a product (e.g. Premium Jersey Prayer Skirt, Cagoule) who expect a clean, high-end PDP: large imagery, clear variant selection (color swatches + size buttons), prominent add-to-cart, and collapsible details (size guide, care, shipping).
+- **Merchants** who want the storefront to align with the Merrachi “quiet luxury” reference for consistency with the rest of the site (homepage, collection pages).
+
+## Success Criteria
+
+- PDP layout matches Merrachi reference: **two-column** (media left, product details right); optional **breadcrumb** at top (e.g. Home / Products / [Product title]).
+- **Left column**: Vertical scrollable product **media gallery** with portrait-oriented images; **dots (or thumbnails) on the right edge** of the page or gallery to indicate/navigate the active image.
+- **Right column**: **Title** including variant in name (e.g. "Premium Jersey Prayer Skirt - Dark Cherry"); **price** (e.g. €110,00) directly below; **Color** selector ("Couleur") with horizontal swatches and optional thumbnail of selected variant; **Size** selector ("Taille") with horizontal buttons (XS, S, M, L, XL) and "Guide des tailles" link; **Add to cart** – full-width, solid black button, uppercase label (e.g. "Ajouter au panier"); **Description** section with heading and body; **Product details** (and optionally care, shipping) as **accordions** with a plus (+) icon.
+- **You may also like**: Section title (e.g. "Vous aimerez aussi" / "You may also like"); horizontal row of product cards with image, title, price; **carousel dots** below for pagination.
+- **Styling**: Light background, dark text, sans-serif, generous spacing; buttons and accordions match reference (black CTA, minimal accordion triggers with + icon).
+- All changes use existing design tokens and do not break existing PDP functionality (e.g. variant switching, add to cart, sticky add-to-cart bar).
+</overview>
+
+---
+
+<functional-decomposition>
+<instruction>
+Think about CAPABILITIES (what the PDP DOES), not code structure yet. Enumerate features with inputs, outputs, and behavior.
+</instruction>
+
+## Capability Tree (Single Product Page – Merrachi Alignment)
+
+### Capability: Page Shell & Navigation
+
+#### Feature: Breadcrumb
+- **Description**: Display a text breadcrumb at the top of the PDP (e.g. Home / Products / [Product title]).
+- **Inputs**: Current product (title, handle), shop URL, optional collection.
+- **Outputs**: Rendered breadcrumb links; last segment as current page (no link).
+- **Behavior**: Optional section or block; links to home and collection (or "Products"); product title as final segment. Uses theme typography (small, subdued).
+
+#### Feature: Two-column layout (media left, details right)
+- **Description**: Main content area is two columns on desktop: left = media gallery, right = product details; stacked on mobile (media first, then details).
+- **Inputs**: Section settings (content_width, desktop_media_position, equal_columns, limit_details_width, gap).
+- **Outputs**: CSS Grid or Flex layout; left column for media, right for product-details block.
+- **Behavior**: Existing product-information section already supports desktop_media_position (left/right) and content_width; ensure layout and column proportions match reference (e.g. media dominant, details narrower).
+
+### Capability: Product Media Gallery
+
+#### Feature: Vertical scrollable gallery with portrait images
+- **Description**: Left column shows a vertically scrollable list of product images (and optionally media), portrait aspect ratio (e.g. 1/1.25).
+- **Inputs**: Product media, section/block settings (aspect_ratio, media_fit, thumbnail_position, media_presentation).
+- **Outputs**: Scrollable column of images; one “large” or primary view with optional thumbnails or dots.
+- **Behavior**: Use existing _product-media-gallery block; set media_presentation to vertical list or grid; aspect_ratio portrait; constrain_to_viewport if desired.
+
+#### Feature: Gallery navigation (dots or thumbnails on right)
+- **Description**: Dots (or thumbnails) on the right edge indicate and control which image is in view (e.g. second dot filled = second image active).
+- **Inputs**: Number of media items, current index, section settings (thumbnail_position, icons_style, slideshow_controls_style).
+- **Outputs**: Rendered dots or thumbnails; click updates visible image.
+- **Behavior**: If theme supports thumbnail_position "right", use it; otherwise add or adjust CSS/JS so dots or thumbnails appear on the right of the gallery. Match reference (e.g. circular dots, filled = active).
+
+### Capability: Product Details Panel (Right Column)
+
+#### Feature: Title including variant name
+- **Description**: Product title is displayed with the selected variant option in the name (e.g. "Premium Jersey Prayer Skirt - Dark Cherry").
+- **Inputs**: Product title, selected variant (e.g. option1 for color or full variant title).
+- **Outputs**: Single heading (e.g. h1) with "Title - Variant" or "Title - Option1".
+- **Behavior**: Title block may use Liquid like `{{ product.title }} - {{ product.selected_or_first_available_variant.option1 }}` or variant.title; update product.json block text and/or snippet if needed.
+
+#### Feature: Price display
+- **Description**: Price shown directly below title, bold, same currency format (e.g. €110,00).
+- **Inputs**: Selected variant price, compare_at_price, theme money format.
+- **Outputs**: Rendered price (and optional compare-at).
+- **Behavior**: Existing price block; ensure typography in component-product.css matches reference (bold, readable size).
+
+#### Feature: Color selector (Couleur) with swatches and thumbnail
+- **Description**: "Couleur" (or localized) heading; horizontal row of color swatches; selected variant image shown as small thumbnail below swatches.
+- **Inputs**: Product options (e.g. option1 = Color), variant images, variant picker block settings.
+- **Outputs**: Label, swatch buttons, optional thumbnail image.
+- **Behavior**: Use variant-picker with show_swatches; ensure first option renders as swatches; optionally add block or Liquid for "selected variant thumbnail" below swatches. Label from option name or locale.
+
+#### Feature: Size selector (Taille) with buttons and size guide link
+- **Description**: "Taille" heading; horizontal row of size buttons (XS, S, M, L, XL); "Guide des tailles" link below.
+- **Inputs**: Product option (e.g. option2 = Size), variant picker style "buttons", optional size guide URL.
+- **Outputs**: Label, size buttons, link.
+- **Behavior**: Variant picker with buttons style for size; add optional "Size guide" link block (URL from meta, page, or section setting).
+
+#### Feature: Add to cart (full-width black button)
+- **Description**: Single primary CTA: full-width, solid black background, white uppercase text (e.g. "Ajouter au panier").
+- **Inputs**: Buy-buttons block, add-to-cart block settings, locale for button label.
+- **Outputs**: One prominent button; quantity optionally hidden for simplicity (reference shows single add).
+- **Behavior**: Existing buy-buttons + add-to-cart; ensure quantity selector hidden or minimal; CSS: full width, background black, text white, uppercase, no border-radius (or minimal). Optional: hide dynamic checkout buttons below or style per reference.
+
+#### Feature: Description section
+- **Description**: "Description" heading and product description body below add-to-cart (or per reference order).
+- **Outputs**: Heading + RTE/content block.
+- **Behavior**: product-description block; ensure order in product-details block_order matches reference (e.g. after buy buttons). Typography: readable body, left-aligned.
+
+#### Feature: Accordions (Product details, Care, Shipping)
+- **Description**: Collapsible sections: "Details du produit", "Prendre soin" (care), "Livraison & Retours"; each with a plus (+) icon to expand.
+- **Inputs**: Accordion block, _accordion-row blocks (heading, content), icon setting.
+- **Outputs**: Accordion UI with + icon; expanded state shows content.
+- **Behavior**: Use existing accordion block; set icon to "plus" or equivalent; headings from block settings or locales; content from product metafields, fixed copy, or pages. Styling in component-product.css (minimal border, arrow/plus only).
+
+### Capability: Product Recommendations
+
+#### Feature: "You may also like" section
+- **Description**: Section heading (e.g. "Vous aimerez aussi" / "You may also like"); horizontal row of related product cards; each card: image, title, price.
+- **Inputs**: product-recommendations section, recommendation_type (related), max_products (e.g. 4), layout_type (carousel or grid).
+- **Outputs**: Heading + row of cards; carousel dots below if carousel.
+- **Behavior**: Existing product-recommendations section; ensure layout is horizontal (carousel or 4-column grid), cards match collection-card style (image, title, price). Dots for carousel pagination.
+
+### Capability: Sticky Add-to-Cart (Optional)
+
+#### Feature: Sticky bar on scroll
+- **Description**: On scroll, a compact bar sticks to bottom (or top) with product thumbnail, title/variant, and add-to-cart (or "View cart").
+- **Inputs**: product-information section setting enable_sticky_add_to_cart, current variant, cart state.
+- **Outputs**: Sticky bar component; matches theme styling (e.g. light bg, border-top).
+- **Behavior**: Already implemented; ensure styling matches reference (minimal, no heavy shadow). Can remain as-is or slight CSS tweaks.
+</functional-decomposition>
+
+---
+
+<structural-decomposition>
+<instruction>
+Map capabilities to actual theme files and sections. One capability → module/section; features → blocks or CSS/JS.
+</instruction>
+
+## Repository Structure (PDP – Merrachi Alignment)
+
+```
+theme-root/
+├── templates/
+│   └── product.json                    # Section order, block order, block settings
+├── sections/
+│   ├── product-information.liquid      # Main PDP section (media + details layout)
+│   └── product-recommendations.liquid # You may also like
+├── blocks/
+│   ├── _product-media-gallery.liquid  # Gallery presentation, thumbnails/dots
+│   ├── _product-details.liquid        # Wrapper for right-column blocks
+│   ├── variant-picker.liquid          # Color swatches, size buttons
+│   ├── buy-buttons.liquid             # Add to cart, quantity, dynamic checkout
+│   ├── accordion.liquid               # Accordion with icon (plus)
+│   └── product-description.liquid    # Description block
+├── snippets/
+│   ├── product-information-content.liquid  # Optional: breadcrumb, layout chunks
+│   └── (existing product-media, price, etc.)
+├── assets/
+│   └── component-product.css          # PDP typography, gallery, buttons, accordions
+└── config/
+    └── (settings for breakpoints, etc.)
+```
+
+## Module Definitions
+
+### Module: product.json (PDP template)
+- **Maps to capability**: Page Shell, Product Details Panel, Product Recommendations
+- **Responsibility**: Define section order (main product-information, then product-recommendations) and block order within _product-details (title → price → variant picker → buy buttons → description → accordions). Set media gallery block settings (vertical, portrait, thumbnails/dots right).
+- **Exports**: N/A (JSON config).
+
+### Module: product-information.liquid
+- **Maps to capability**: Two-column layout, Media Gallery, Product Details Panel, Sticky Add-to-Cart
+- **Responsibility**: Render media gallery (left) and product-details (right); support sticky add-to-cart; include component-product.css.
+- **File**: sections/product-information.liquid
+- **Exports**: Section markup, layout classes, sticky-add-to-cart usage.
+
+### Module: _product-media-gallery block
+- **Maps to capability**: Product Media Gallery (vertical scroll, dots/thumbnails right)
+- **Responsibility**: Output product media in chosen presentation (grid/list); thumbnail_position and controls (dots/counter) so that dots or thumbnails appear on the right of the gallery.
+- **Exports**: Rendered gallery DOM; behavior may depend on theme JS (slideshow/gallery).
+
+### Module: _product-details block
+- **Maps to capability**: Product Details Panel
+- **Responsibility**: Container for title, price, variant picker, buy buttons, description, accordions. Order controlled by block_order in product.json.
+- **Exports**: Rendered right-column content.
+
+### Module: component-product.css
+- **Maps to capability**: All PDP visual styling
+- **Responsibility**: Typography (title, price, labels, description, accordion triggers); variant picker (swatches, size buttons, selected state); add-to-cart button (full-width, black, uppercase); accordion (plus icon, minimal border); gallery dots/thumbnails position if needed; sticky bar.
+- **Exports**: CSS only.
+</structural-decomposition>
+
+---
+
+<dependency-graph>
+<instruction>
+List modules in dependency order. Foundation first; then layout and content; then polish.
+</instruction>
+
+## Dependency Chain (PDP Merrachi Alignment)
+
+### Foundation Layer (Phase 0)
+No new dependencies – existing theme provides:
+- Design tokens (typography, color, spacing)
+- product-information section, _product-media-gallery, _product-details, variant-picker, buy-buttons, accordion, product-description blocks
+- product-recommendations section
+- component-product.css (existing Hannouch overrides)
+
+### Layout & Template Layer (Phase 1)
+- **product.json**: Depends on [existing sections and blocks]. Change block order and block/section settings only (no new blocks required for minimum viable alignment).
+- **product-information.liquid**: No structural change required unless breadcrumb is added as a snippet or block; then depends on [snippet or block].
+
+### Styling Layer (Phase 2)
+- **component-product.css**: Depends on [existing HTML structure from product-information, blocks]. Add or adjust rules for: title with variant, price, variant picker (swatches + size buttons + size guide link), add-to-cart (full-width black), description, accordion (plus icon). Optionally: gallery dots/thumbnails position.
+
+### Content & Copy Layer (Phase 3)
+- **Title including variant**: Depends on [product.json text block or product-information block]. Update Liquid in title block to append variant (e.g. option1 or variant.title).
+- **Breadcrumb** (optional): Depends on [product-information or new snippet]. New snippet or block that outputs breadcrumb; product.json adds it if desired.
+- **Size guide link** (optional): Depends on [variant-picker or new link block]. Add block or setting for URL; place below size options.
+
+### Recommendations Layer (Phase 4)
+- **product-recommendations**: Depends on [product-recommendations section]. Ensure layout (carousel/grid), heading, card style (image, title, price), and dots match reference. May only require product.json and CSS.
+</dependency-graph>
+
+---
+
+<implementation-roadmap>
+<instruction>
+Turn dependency graph into development phases. Clear entry/exit criteria; tasks in each phase can be parallelized where possible.
+</instruction>
+
+## Development Phases (PDP Merrachi Alignment)
+
+### Phase 0: Template & block order (foundation)
+**Goal**: PDP structure matches reference order: media left, details right; details = title → price → color → size → add to cart → description → accordions.
+
+**Entry Criteria**: Current product.json and product-information section in place.
+
+**Tasks**:
+- [ ] **Reorder blocks in _product-details** (depends on: none)
+  - Set block_order to: title → price → variant_picker → buy_buttons → description → accordion. Remove or reposition divider so it does not break reference flow.
+  - Acceptance: On product page, right column shows title, then price, then variant picker, then add to cart, then description, then accordions.
+- [ ] **Set media gallery for vertical/portrait** (depends on: none)
+  - In product.json, set _product-media-gallery: media_presentation (e.g. grid or list), aspect_ratio "1/1.25", thumbnail_position "right" if available; thumbnail_width and icons/slideshow style as needed for dots.
+  - Acceptance: Left column shows portrait-oriented product images; thumbnails or dots appear on the right of the gallery (or documented fallback).
+- [ ] **Title includes variant name** (depends on: none)
+  - Update title block text in product.json to `{{ product.title }} - {{ product.selected_or_first_available_variant.option1 }}` (or variant.title). Handle single-variant products (no " - " if no option1).
+  - Acceptance: PDP shows "Product Name - Variant" (e.g. "Premium Jersey Prayer Skirt - Dark Cherry") and updates on variant change if theme supports live updates.
+
+**Exit Criteria**: Layout and block order match reference; title shows variant; gallery is portrait with right-side navigation.
+
+**Delivers**: PDP that looks structurally like Merrachi (order of elements, two columns, gallery behavior).
+
+---
+
+### Phase 1: Styling (visual alignment)
+**Goal**: Typography, buttons, variant picker, and accordions match Merrachi reference.
+
+**Entry Criteria**: Phase 0 complete.
+
+**Tasks**:
+- [ ] **Product details typography** (depends on: Phase 0)
+  - component-product.css: Title (h1) – bold, large, not necessarily uppercase; price – bold, same or next line; labels (Couleur, Taille) – small uppercase, letter-spacing. Description – body text, left-aligned.
+  - Acceptance: Visual match to reference text hierarchy.
+- [ ] **Variant picker styling** (depends on: Phase 0)
+  - Color swatches: small squares, selected state clear (e.g. border or fill). Size buttons: horizontal row, selected = black bg, white text; "Guide des tailles" link below, subtle.
+  - Acceptance: Color and size selectors look like reference.
+- [ ] **Add to cart button** (depends on: Phase 0)
+  - Full width, solid black background, white uppercase text, no border-radius (or minimal). Hide or minimize quantity selector if reference shows single "Add to cart" only.
+  - Acceptance: Single prominent black CTA.
+- [ ] **Accordion styling** (depends on: Phase 0)
+  - Accordion trigger: minimal line, plus (+) icon on right; expand/collapse content below. Match component-product.css accordion rules.
+  - Acceptance: "Details du produit", care, shipping appear as expandable rows with + icon.
+
+**Exit Criteria**: PDP styling (type, buttons, picker, accordions) matches reference.
+
+**Delivers**: Pixel-ready PDP look and feel.
+
+---
+
+### Phase 2: Optional enhancements
+**Goal**: Breadcrumb, size guide link, and "You may also like" polish.
+
+**Entry Criteria**: Phase 1 complete.
+
+**Tasks**:
+- [ ] **Breadcrumb** (depends on: Phase 1)
+  - Add breadcrumb snippet or block (Home / Products / Product title). Include in product-information above main layout or in product.json as first block/section.
+  - Acceptance: Breadcrumb visible at top of PDP; links work.
+- [ ] **Size guide link** (depends on: Phase 1)
+  - Add link block or variant-picker setting for "Guide des tailles" URL (e.g. to size guide page). Place below size buttons.
+  - Acceptance: "Guide des tailles" (or localized) links to correct page.
+- [ ] **You may also like** (depends on: Phase 1)
+  - product-recommendations: Ensure heading "You may also like" (or locale), 4 cards in a row (carousel or grid), dots below if carousel. Card style: image, title, price (match collection card).
+  - Acceptance: Section matches reference layout and styling.
+
+**Exit Criteria**: Breadcrumb, size guide link, and recommendations section match reference.
+
+**Delivers**: Full PDP parity with Merrachi reference.
+</implementation-roadmap>
+
+---
+
+<test-strategy>
+<instruction>
+Define how testing will be integrated. Focus on critical PDP flows.
+</instruction>
+
+## Test Pyramid
+
+```
+        /\
+       /E2E\       ← Manual / visual: Full PDP load, variant switch, add to cart
+      /------\
+     /Integration\ ← Section + blocks render; block order; sticky bar
+    /------------\
+   /  Unit Tests  \ ← Limited (Liquid/JS); mainly manual/visual for theme
+  /----------------\
+```
+
+## Coverage Requirements
+- Theme: No strict line coverage; rely on manual and visual regression.
+- Critical: PDP loads without errors; variant change updates title/price/media; add to cart works; accordions expand/collapse; recommendations section loads.
+
+## Critical Test Scenarios
+
+### PDP layout and content
+**Happy path**: Open a product with multiple variants and images. Right column shows title (with variant), price, color swatches, size buttons, add to cart, description, accordions. Left column shows gallery with dots/thumbnails on right. Change variant: title/price/image update.
+**Edge cases**: Product with one variant (no " - Option"); product with one image (no dots or single dot). Size guide link missing (optional block hidden).
+**Error cases**: Product without media (placeholder or first image); product without description (block hidden or empty).
+
+### Add to cart and sticky bar
+**Happy path**: Click add to cart; cart updates; sticky bar (if enabled) shows correct variant and "View cart" or equivalent.
+**Edge cases**: Out-of-stock variant (button disabled or "Sold out"); quantity 1 vs quantity selector visible/hidden per settings.
+
+### Recommendations
+**Happy path**: "You may also like" shows 4 related products; cards link to correct product pages; carousel dots switch slides if carousel.
+**Edge cases**: Fewer than 4 related products (show available); no related products (section hidden or empty).
+
+## Test Generation Guidelines
+- Prefer manual checks and visual comparison to reference screenshots.
+- If automated: smoke test that product template renders (200, no Liquid errors); optional: variant form submit (add to cart) returns 200/302.
+</test-strategy>
+
+---
+
+<architecture>
+<instruction>
+Technical architecture and key decisions for the PDP.
+</instruction>
+
+## System Components
+
+- **Template**: product.json defines which sections and blocks appear and in what order.
+- **Section product-information**: Renders two-column layout (media + details), includes sticky-add-to-cart when enabled, pulls in component-product.css.
+- **Blocks**: _product-media-gallery (media), _product-details (wrapper), then inner blocks: text (title), price, variant-picker, buy-buttons, product-description, accordion. All use existing Atelier/Hannouch block system.
+- **Section product-recommendations**: Fetches related products; renders header + product cards (carousel or grid).
+
+## Data Models
+
+- Product, Variant, Media: Shopify objects; no schema change.
+- Block settings: Stored in product.json (section.blocks.*.settings). Title text may include Liquid (e.g. `{{ product.title }} - {{ product.selected_or_first_available_variant.option1 }}`). Variant picker and buy-buttons use existing form and cart API.
+
+## Technology Stack
+
+- Liquid (templates, sections, snippets), CSS (component-product.css), existing theme JS (gallery, variant form, sticky bar).
+- No new frameworks. Optional: minimal JS for gallery dots if theme does not support thumbnail_position "right" out of the box.
+
+**Decision: Reuse existing blocks and section**
+- **Rationale**: Merrachi alignment is primarily layout order, styling, and optional breadcrumb/size guide. No new data; existing blocks already support title, price, variants, buy buttons, description, accordions.
+- **Trade-offs**: If gallery "dots on right" is not supported by theme, we add CSS/JS or accept thumbnails-left as fallback.
+- **Alternatives considered**: New "PDP Merrachi" section (rejected to avoid duplication and to keep one product-information section).
+</architecture>
+
+---
+
+<risks>
+<instruction>
+Identify risks and mitigations.
+</instruction>
+
+## Technical Risks
+
+**Risk**: Gallery "dots on right" or vertical scroll not supported by current _product-media-gallery block/schema.
+- **Impact**: Medium – layout may differ from reference.
+- **Likelihood**: Medium (theme-dependent).
+- **Mitigation**: Check block schema for thumbnail_position and media_presentation; use "right" and vertical list/grid. If not available, document and add CSS/JS to reposition dots or use thumbnails on right.
+- **Fallback**: Keep thumbnails left and style to be minimal; or add a small custom snippet for dots-only navigation.
+
+**Risk**: Title "Product - Variant" does not update on variant change without page reload.
+- **Impact**: Low–medium (UX).
+- **Likelihood**: Depends on theme JS (variant form update).
+- **Mitigation**: Ensure theme updates DOM for title/price when variant changes; if title is static Liquid, consider JS that updates title from variant data or use a theme block that reacts to variant change.
+- **Fallback**: Title without variant suffix, or static title.
+
+## Dependency Risks
+
+- **Theme upgrades**: Changes in product.json and component-product.css may be overwritten. Mitigation: Document all edits; use theme app extensions or version control so overrides can be reapplied.
+
+## Scope Risks
+
+- **Scope creep**: Adding product reviews, trust badges, or extra CTAs. Mitigation: PRD scope is Merrachi alignment only; new features go in a separate PRD.
+- **Localization**: "Couleur", "Taille", "Guide des tailles", "Ajouter au panier", "Details du produit" etc. must be translatable. Mitigation: Use locale keys (t:) in blocks/snippets; add keys to locales in follow-up if not present.
+</risks>
+
+---
+
+<appendix>
+## References
+
+- Merrachi inspiration screenshot 1: Premium Jersey Prayer Skirt – Dark Cherry (two-column, gallery left with dots, details right, breadcrumb, color/size, add to cart, description, accordions, You may also like).
+- Current Hannouch PDP screenshot 2: Cagoule – Nude Poudré (baseline to transform).
+- Existing PRD: marachi_index_alignment_prd.txt (homepage/collection alignment).
+- Theme: Hannouch (Atelier-based); sections/product-information.liquid, templates/product.json, assets/component-product.css.
+
+## Glossary
+
+- **PDP**: Product Detail Page (single product page).
+- **Merrachi**: Reference brand/site used for "quiet luxury" design alignment.
+- **_product-details**: Inner block that wraps title, price, variant picker, buy buttons, description, accordions.
+
+## Open Questions
+
+- Use "Product title - Option1" vs "Product title - Full variant title" (e.g. "Dark Cherry / S") for title display?
+- Breadcrumb: always show "Products" as second segment or use collection title when coming from a collection?
+- Size guide: section setting (single URL), block setting (per block), or link to metaobject/page?
+</appendix>
+
+---
+
+<task-master-integration>
+# How Task Master Uses This PRD
+
+When you run `task-master parse-prd single_product_page_merrachi_prd.txt`, the parser can:
+
+1. **Extract capabilities** → Main tasks (Page Shell, Media Gallery, Product Details Panel, Recommendations, Sticky Bar).
+2. **Extract features** → Subtasks (breadcrumb, two-column layout, title with variant, price, color selector, size selector, add to cart, description, accordions, You may also like).
+3. **Parse dependencies** → Phase 0 (template, block order, gallery, title) first; Phase 1 (styling); Phase 2 (breadcrumb, size guide, recommendations).
+4. **Order by phases** → Implement template and order (Phase 0), then CSS and copy (Phase 1–2).
+
+**Result**: A dependency-aware task list to align the single product page with the Merrachi reference.
+</task-master-integration>

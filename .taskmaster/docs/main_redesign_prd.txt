@@ -1,0 +1,403 @@
+Repository Planning Graph (RPG) - Hannouch Redesign PRD
+
+This PRD defines the architectural and functional requirements for the Hannouch Storefront Redesign. It follows the RPG methodology to separate functional capabilities from Shopify structural implementation, ensuring a dependency-aware execution plan.
+
+<overview>
+## Problem Statement
+The current Hannouch storefront ("Atelier" theme v3.2.0) is functionally sound but aesthetically utilitarian. It presents products in a dense, warehouse-style catalog that fails to convey brand value. High-end modest fashion requires an emotional connection, "quiet luxury" signaling, and editorial storytelling. The current UX lacks the spacing, typography hierarchy, and smooth interactions found in competitor sites like Merrachi, leading to lower perceived value and engagement.
+
+Target Users
+
+The Aesthetic Browser (Primary): Visually driven, scrolling for inspiration on Instagram/TikTok. Lands on the site expecting a seamless continuation of the social feed's aesthetic. Needs large imagery and minimal friction.
+
+The Specific Hunter: Knows exactly what they want (e.g., "Premium Bamboo in Beige"). Needs efficient filtering and a fast path to the cart.
+
+The Brand Loyalist: Returning customer who knows the quality but wants a smoother, faster checkout experience.
+
+Success Metrics
+
+Conversion Rate (CVR): Increase by 15% via streamlined PDP-to-Cart flow.
+
+Average Order Value (AOV): Increase by 10% via "Curated Selection" cross-sells and Free Shipping meter in the cart drawer.
+
+Bounce Rate (Mobile): Decrease by 20% on Collection pages via improved mobile grid and faster load times.
+
+Perceived Load Time: Interactions (drawer open, filter apply) must feel instantaneous (<100ms response).
+
+</overview>
+
+<functional-decomposition>
+## Capability Tree
+
+Capability: Brand Foundation (Visual Language)
+
+Feature: Typography System
+
+Description: Implementation of the "Editorial" font stack (Geometric Sans for headers, Clean Sans for body).
+
+Inputs: Font files, CSS variables.
+
+Outputs: Global typography classes.
+
+Behavior: Responsive scaling, uppercase tracking for headers, high readability for body.
+
+Feature: Spacing & Grid System
+
+Description: A 12-column desktop / 4-column mobile grid with generous whitespace.
+
+Inputs: Viewport width.
+
+Outputs: Margins, gutters, container max-widths.
+
+Behavior: Fluid resizing, "breathing room" around products.
+
+Capability: Global Navigation
+
+Feature: Global Header
+
+Description: Minimalist sticky header with split navigation.
+
+Inputs: Menu settings (Shopify Admin).
+
+Outputs: rendered nav elements.
+
+Behavior: Transparent on Hero -> Solid White on Scroll. Desktop: Logo Center. Mobile: Hamburger Left.
+
+Feature: Global Footer
+
+Description: Clean 4-column layout for trust and navigation.
+
+Inputs: Block settings.
+
+Outputs: Newsletter form, links, copyright.
+
+Capability: Merchandising (Product Display)
+
+Feature: Editorial Product Card
+
+Description: The core unit of the site. 3:4 Portrait aspect ratio.
+
+Inputs: Product object (Liquid).
+
+Outputs: Image, Title, Price, Badges.
+
+Behavior: Desktop hover triggers secondary image fade. Entire card is clickable. No visible "Add to Cart" button until PDP (Quiet Luxury).
+
+Feature: Collection Grid
+
+Description: Logic to render product cards with intermittent lifestyle image breaks.
+
+Inputs: Collection object, Metaobjects (for lifestyle breaks).
+
+Outputs: A rhythmic grid (4-up desktop, 2-up mobile).
+
+Capability: Discovery (Homepage)
+
+Feature: Hero Storytelling
+
+Description: Full-viewport media block.
+
+Inputs: Video/Image, Heading, CTA link.
+
+Outputs: Immersive introduction.
+
+Behavior: Autoplay video (muted), text overlay positioning.
+
+Feature: The Edit (Split Layout)
+
+Description: 50/50 split showing lifestyle close-up vs. full body.
+
+Inputs: Two images, caption text.
+
+Outputs: Side-by-side visual narrative.
+
+Capability: Conversion (Shopping)
+
+Feature: Product Detail Interface (PDP)
+
+Description: Sticky details panel paired with vertical gallery.
+
+Inputs: Product media, variant data.
+
+Outputs: Gallery, Selector form, Accordions.
+
+Behavior: Image click opens lightbox (desktop) / swipe (mobile). Variant change updates URL and Price.
+
+Feature: Cart Drawer
+
+Description: Slide-out mini cart.
+
+Inputs: Cart object (Ajax API).
+
+Outputs: Item list, Subtotal, Shipping Bar.
+
+Behavior: Opens on "Add to Cart". Updates via Ajax without page reload.
+
+</functional-decomposition>
+
+<structural-decomposition>
+## Repository Structure (Shopify Theme)
+
+code
+Code
+download
+content_copy
+expand_less
+theme-root/
+├── layout/
+│   └── theme.liquid             # Base shell (Capability: Brand Foundation)
+├── assets/
+│   ├── base.css                 # Global styles & vars
+│   ├── global.js                # Global interactions
+│   ├── component-card.css       # Merchandising styles
+│   └── component-drawer.css     # Cart styles
+├── sections/
+│   ├── header.liquid            # Maps to: Global Header
+│   ├── footer.liquid            # Maps to: Global Footer
+│   ├── hero-video.liquid        # Maps to: Hero Storytelling
+│   ├── editorial-split.liquid   # Maps to: The Edit
+│   ├── main-collection.liquid   # Maps to: Collection Grid
+│   ├── main-product.liquid      # Maps to: PDP
+│   └── cart-drawer.liquid       # Maps to: Cart Drawer
+├── snippets/
+│   ├── card-product.liquid      # Maps to: Editorial Product Card
+│   ├── price.liquid             # Shared pricing logic
+│   └── icon-cart.liquid         # SVG assets
+└── templates/
+    ├── index.json               # Homepage composition
+    ├── collection.json          # Collection composition
+    └── product.json             # Product composition
+Module Definitions
+Module: Base Theme (Foundation)
+
+Maps to: Brand Foundation
+
+Responsibility: Sets CSS variables for colors, typography, spacing, and loads global scripts.
+
+File structure: layout/theme.liquid, assets/base.css, config/settings_schema.json
+
+Exports: HTML Shell, CSS Custom Properties (--font-heading, --color-base-text).
+
+Module: Product Card (Snippet)
+
+Maps to: Editorial Product Card
+
+Responsibility: Reusable UI for displaying a single product in any grid.
+
+File structure: snippets/card-product.liquid, assets/component-card.css
+
+Inputs: card_product (Liquid Object).
+
+Behavior: Handles image aspect ratio (3:4), badges, and hover states.
+
+Module: Cart Drawer (Section)
+
+Maps to: Cart Drawer
+
+Responsibility: Manages cart state via Ajax API and renders the slide-out UI.
+
+File structure: sections/cart-drawer.liquid, assets/cart.js
+
+Behavior: Listens for cart:add events to open automatically. Calculates free shipping threshold in JS.
+
+</structural-decomposition>
+
+<dependency-graph>
+## Dependency Chain
+
+Foundation Layer (Phase 0)
+
+Design Tokens (CSS): Defines --font-family, --color-scheme, --spacing. Depends on: None.
+
+Global Layout (theme.liquid): The HTML shell. Depends on: Design Tokens.
+
+Icon Set: SVG definitions. Depends on: None.
+
+Component Layer (Phase 1)
+
+Product Card (Snippet): The visual atom of the site. Depends on: Design Tokens, Global Layout.
+
+Buttons & Inputs: Standardized UI elements. Depends on: Design Tokens.
+
+AJAX Cart API Wrapper: JS utility to fetch/update cart. Depends on: None.
+
+Section Layer (Phase 2)
+
+Header & Footer: Depends on: Global Layout, Icon Set.
+
+Cart Drawer: Depends on: AJAX Cart API Wrapper, Product Card, Buttons.
+
+Editorial Blocks (Hero, Split): Depends on: Design Tokens, Buttons.
+
+Template Layer (Phase 3)
+
+Collection Template: Depends on: Header, Product Card, Footer.
+
+Product Template: Depends on: Header, Buttons, Cart Drawer, Footer.
+
+Homepage Template: Depends on: Header, Editorial Blocks, Product Card, Footer.
+
+</dependency-graph>
+
+<implementation-roadmap>
+## Development Phases
+
+Phase 0: Foundation & Design System
+
+Goal: Establish the "Quiet Luxury" visual baseline.
+Entry Criteria: Clean Shopify "Atelier" theme duplicate created.
+Tasks:
+
+Setup Typography: Implement Merrachi-style font stack (Geometric headers, Sans body) in settings_schema.json and base.css.
+
+Define Color Palette: Set neutral backgrounds (#FAFAF9), dark text (#1A1A1A), and refined borders in CSS variables.
+
+Grid Layout: Establish CSS Grid system (12-col desktop, 4-col mobile) in base.css.
+Exit Criteria: theme.liquid renders with correct fonts and colors; specific "Atelier" defaults removed.
+
+Phase 1: Core Components
+
+Goal: Build the reusable building blocks.
+Entry Criteria: Phase 0 complete.
+Tasks:
+
+Product Card Snippet: Build card-product.liquid.
+
+3:4 aspect ratio enforcement.
+
+Hover effect (secondary image fade).
+
+Minimal metadata (Name, Price, Color only).
+
+Global Header: Build sections/header.liquid.
+
+Desktop: Logo center, Nav left, Icons right.
+
+Mobile: Hamburger menu.
+
+Sticky behavior (transparent to solid).
+
+Cart Drawer: Build sections/cart-drawer.liquid.
+
+Slide-in interaction.
+
+Free shipping progress bar logic.
+Exit Criteria: Header and Cart Drawer function responsively; Product Card looks correct when hardcoded.
+
+Phase 2: Key Templates (Home & Collection)
+
+Goal: Enable Discovery and Merchandising.
+Entry Criteria: Phase 1 complete.
+Tasks:
+
+Homepage Sections:
+
+hero-video.liquid: Full viewport, text overlay.
+
+editorial-split.liquid: 50/50 text/image block.
+
+curated-carousel.liquid: Horizontal scroll of Product Cards.
+
+Collection Main Section:
+
+main-collection.liquid: Implement grid logic.
+
+Filters: Build sticky filter bar (Desktop horizontal, Mobile drawer).
+
+Lifestyle Breaks: Logic to insert an image block every N rows.
+Exit Criteria: Homepage matches ASCII wireframe; Collection page filters work and grid is rhythmic.
+
+Phase 3: Product Detail & Launch
+
+Goal: High-conversion PDP and polish.
+Entry Criteria: Phase 2 complete.
+Tasks:
+
+PDP Template: Build main-product.liquid.
+
+Desktop: Sticky info panel (right), Vertical gallery (left).
+
+Mobile: Swipeable carousel.
+
+Accordions: Size Guide, Care, Shipping.
+
+Cross-Browser Testing: Ensure transitions are smooth on Safari/iOS.
+
+Accessibility Audit: Check tab index on Nav and Filters.
+Exit Criteria: Full user flow from Home -> Cart -> Checkout (Shopify standard) works flawlessly.
+
+</implementation-roadmap>
+
+<test-strategy>
+## Test Pyramid
+* **Theme Checks (Linting):** 100% (Shopify Theme Check CLI).
+* **Visual Regression:** Manual check of critical breakpoints (375px, 768px, 1440px).
+* **Functional Flows:** Manual walk-through of Checkout flow.
+
+Critical Test Scenarios
+Global Header
+
+Mobile: Hamburger opens smooth drawer; closing works via 'X' and backdrop click.
+
+Scroll: Background transitions from transparent to white smoothly.
+
+Collection Page
+
+Filters: Selecting "Beige" updates grid via AJAX (no full reload).
+
+Grid: Mobile displays 2 columns perfectly (no horizontal scroll).
+
+Empty State: Applying conflicting filters shows friendly "No products found" message.
+
+Cart Drawer
+
+Trigger: Clicking "Add to Cart" on PDP opens drawer immediately.
+
+Logic: Adding item updates "Free Shipping" meter correctly.
+
+Responsiveness: Drawer takes up 90% width on mobile, 400px on desktop.
+
+</test-strategy>
+
+<architecture>
+## System Components
+* **Shopify Storefront (Liquid):** Server-side rendering for initial load.
+* **Vanilla JS (ES6 Modules):** Client-side interactivity (Cart, Filters, Menu). Web Components pattern used for encapsulation (e.g., `<cart-drawer>`, `<predictive-search>`).
+* **CSS Custom Properties:** For theming and design tokens.
+
+Data Models (Shopify Standard)
+
+Product: Standard Shopify schema. product.media used for gallery.
+
+Collection: Standard schema. collection.filters used for facets.
+
+Cart: Standard AJAX API response structure.
+
+Technology Stack
+
+Platform: Shopify (Online Store 2.0).
+
+Language: Liquid, HTML5, CSS3, Vanilla JavaScript.
+
+Tools: Shopify CLI, GitHub Integration.
+
+Decision: No React/Headless.
+
+Rationale: Keeps complexity low, performance high (no hydration), and allows merchant to use Shopify Theme Editor (Sections) easily.
+
+</architecture>
+
+<risks>
+## Technical Risks
+* **Risk:** Performance impact of high-res editorial imagery.
+* *Mitigation:* Use Shopify's `image_url` filter with `width` and `format: 'avif'` parameters. Implement native `loading="lazy"` on all below-fold images.
+* **Risk:** Complexity of "Lifestyle Breaks" in Collection Grid.
+* *Mitigation:* Use Metaobjects or specific "Curated Collection" templates if mixing products/images programmatically proves too rigid in Liquid loops.
+
+Scope Risks
+
+Risk: Animation complexity (parallax, smooth transitions) exceeds timeline.
+
+Mitigation: Phase 1 uses standard CSS transitions. Advanced GSAP/scroll animations moved to Phase 2.
+
+</risks>

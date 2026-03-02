@@ -1,0 +1,238 @@
+{% comment %}
+  HANNOUCH STYLE HOMEPAGE SECTION
+  - Hero
+  - 3 featured collections
+  - Benefits
+  - Newsletter
+{% endcomment %}
+
+<section class="hannouch-home">
+  {%- if section.settings.show_hero -%}
+    <div class="hannouch-hero">
+      <div class="hannouch-hero__image"></div>
+      <div class="hannouch-hero__content">
+        <h1 class="hannouch-hero__heading">{{ section.settings.hero_heading }}</h1>
+        <p class="hannouch-hero__subheading">{{ section.settings.hero_subheading }}</p>
+        {%- if section.settings.hero_button_label != blank and section.settings.hero_button_link != blank -%}
+          <a href="{{ section.settings.hero_button_link }}" class="hannouch-btn">
+            {{ section.settings.hero_button_label }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  {%- endif -%}
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="hannouch-collections">
+      {% for block in section.blocks %}
+        {% if block.type == 'collection_card' and block.settings.collection != blank %}
+          {% assign coll = collections[block.settings.collection] %}
+          <a href="{{ coll.url }}" class="hannouch-collections__card" {{ block.shopify_attributes }}>
+            {% if block.settings.image != blank %}
+              <div class="hannouch-collections__image" style="background-image:url({{ block.settings.image | image_url: width: 800 }});"></div>
+            {% elsif coll.image %}
+              <div class="hannouch-collections__image" style="background-image:url({{ coll.image | image_url: width: 800 }});"></div>
+            {% endif %}
+            <div class="hannouch-collections__body">
+              <h2 class="hannouch-collections__title">
+                {{ block.settings.title | default: coll.title }}
+              </h2>
+              {% if block.settings.subtitle != blank %}
+                <p class="hannouch-collections__subtitle">{{ block.settings.subtitle }}</p>
+              {% endif %}
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_benefits -%}
+    <div class="hannouch-benefits">
+      {% if section.settings.benefit_1_text != blank %}
+        <div class="hannouch-benefits__item">
+          <span class="hannouch-benefits__icon">✓</span>
+          <p>{{ section.settings.benefit_1_text }}</p>
+        </div>
+      {% endif %}
+      {% if section.settings.benefit_2_text != blank %}
+        <div class="hannouch-benefits__item">
+          <span class="hannouch-benefits__icon">✓</span>
+          <p>{{ section.settings.benefit_2_text }}</p>
+        </div>
+      {% endif %}
+      {% if section.settings.benefit_3_text != blank %}
+        <div class="hannouch-benefits__item">
+          <span class="hannouch-benefits__icon">✓</span>
+          <p>{{ section.settings.benefit_3_text }}</p>
+        </div>
+      {% endif %}
+      {% if section.settings.benefit_4_text != blank %}
+        <div class="hannouch-benefits__item">
+          <span class="hannouch-benefits__icon">✓</span>
+          <p>{{ section.settings.benefit_4_text }}</p>
+        </div>
+      {% endif %}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.show_newsletter -%}
+    <div class="hannouch-newsletter">
+      <div class="hannouch-newsletter__inner">
+        <h2 class="hannouch-newsletter__heading">{{ section.settings.news_heading }}</h2>
+        <p class="hannouch-newsletter__text">{{ section.settings.news_text }}</p>
+        {% form 'customer', id: 'hannouch-newsletter-form' %}
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="hannouch-newsletter__form">
+            <input
+              type="email"
+              name="contact[email]"
+              class="hannouch-input"
+              required
+              placeholder="{{ section.settings.news_placeholder | escape }}"
+            >
+            <button type="submit" class="hannouch-btn hannouch-btn--light">
+              {{ section.settings.news_button_label }}
+            </button>
+          </div>
+        {% endform %}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Hannouch style homepage",
+  "tag": "section",
+  "class": "hannouch-home-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_hero",
+      "label": "Toon hero sectie",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "hero_heading",
+      "label": "Hero titel",
+      "default": "Shift the Boundaries"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subheading",
+      "label": "Hero subtitel",
+      "default": "Premium modest fashion by Hannouch."
+    },
+    {
+      "type": "text",
+      "id": "hero_button_label",
+      "label": "Hero knop tekst",
+      "default": "Shop the Collection"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_link",
+      "label": "Hero knop link"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_benefits",
+      "label": "Toon benefits sectie",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "benefit_1_text",
+      "label": "Benefit 1",
+      "default": "Free returns – 14 days"
+    },
+    {
+      "type": "text",
+      "id": "benefit_2_text",
+      "label": "Benefit 2",
+      "default": "Fast shipping – 3–5 business days"
+    },
+    {
+      "type": "text",
+      "id": "benefit_3_text",
+      "label": "Benefit 3",
+      "default": "Premium quality fabrics"
+    },
+    {
+      "type": "text",
+      "id": "benefit_4_text",
+      "label": "Benefit 4",
+      "default": "Secure payments"
+    },
+
+    {
+      "type": "checkbox",
+      "id": "show_newsletter",
+      "label": "Toon nieuwsbrief-sectie",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "news_heading",
+      "label": "Nieuwsbrief titel",
+      "default": "Join the Hannouch community and get 10% off"
+    },
+    {
+      "type": "textarea",
+      "id": "news_text",
+      "label": "Nieuwsbrief tekst",
+      "default": "Be the first to know about new drops and exclusive offers."
+    },
+    {
+      "type": "text",
+      "id": "news_placeholder",
+      "label": "Email placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "news_button_label",
+      "label": "Nieuwsbrief knop tekst",
+      "default": "Subscribe"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "collection_card",
+      "name": "Collection kaart",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collectie"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Afbeelding (optioneel)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titel (optioneel)"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitel (optioneel)"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Hannouch style homepage",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

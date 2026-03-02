@@ -1,0 +1,57 @@
+{%- comment -%}
+  Hannouch – Free Shipping Progress Bar
+  Task 8.5: hannouch-shipping-bar.liquid
+
+  Reads settings.hannouch_free_shipping_threshold (in shop currency cents, e.g. 10000 = $100).
+  Pass threshold = 0 to hide the bar entirely.
+{%- endcomment -%}
+
+{%- liquid
+  assign threshold = settings.hannouch_free_shipping_threshold | default: 10000
+-%}
+
+{%- if threshold > 0 -%}
+  {%- liquid
+    assign remaining   = threshold | minus: cart.total_price
+    assign progress_pct = cart.total_price | times: 100.0 | divided_by: threshold
+    if progress_pct > 100
+      assign progress_pct = 100
+    endif
+
+    if settings.currency_code_enabled_cart_total
+      assign remaining_money = remaining | money_with_currency
+    else
+      assign remaining_money = remaining | money
+    endif
+
+    assign is_unlocked = false
+    if cart.total_price >= threshold
+      assign is_unlocked = true
+    endif
+  -%}
+
+  <div class="hannouch-shipping-bar{% if is_unlocked %} hannouch-shipping-bar--unlocked{% endif %}"
+       data-threshold="{{ threshold }}"
+       data-total="{{ cart.total_price }}">
+
+    <p class="hannouch-shipping-bar__message">
+      {%- if is_unlocked -%}
+        {{- 'cart.shipping_bar.unlocked' | t | default: 'You have unlocked free shipping' -}}
+      {%- else -%}
+        {{- 'cart.shipping_bar.remaining_html' | t: remaining: remaining_money
+            | default: remaining_money | append: ' away from free shipping' -}}
+      {%- endif -%}
+    </p>
+
+    <progress
+      class="hannouch-shipping-bar__track"
+      value="{{ progress_pct | round }}"
+      max="100"
+      aria-valuenow="{{ progress_pct | round }}"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-label="{{ 'cart.shipping_bar.progress_label' | t | default: 'Free shipping progress' }}"
+    ></progress>
+
+  </div>
+{%- endif -%}

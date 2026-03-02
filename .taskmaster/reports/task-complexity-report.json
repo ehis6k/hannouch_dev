@@ -1,0 +1,125 @@
+{
+	"meta": {
+		"generatedAt": "2026-02-25T21:17:58.417Z",
+		"tasksAnalyzed": 14,
+		"totalTasks": 14,
+		"analysisCount": 14,
+		"thresholdScore": 5,
+		"projectName": "Task Master",
+		"usedResearch": true
+	},
+	"complexityAnalysis": [
+		{
+			"taskId": 1,
+			"taskTitle": "Setup Design Tokens and CSS Variables",
+			"complexityScore": 3,
+			"recommendedSubtasks": 0,
+			"expansionPrompt": "Break down into defining CSS variables for typography/colors/spacing/grid, updating settings_schema.json, implementing responsive features, and cleanup steps if more granular steps needed.",
+			"reasoning": "Straightforward CSS custom properties and schema updates following Shopify best practices. Low complexity due to no JS logic, dependencies, or edge cases; standard foundational task with clear pseudo-code."
+		},
+		{
+			"taskId": 2,
+			"taskTitle": "Configure Global Layout Shell (theme.liquid)",
+			"complexityScore": 4,
+			"recommendedSubtasks": 1,
+			"expansionPrompt": "Separate into HTML structure setup, asset loading/preconnect hints, semantic/accessibility features, and Shopify-specific integrations.",
+			"reasoning": "Involves Shopify-specific liquid templating, accessibility (skip-link), and asset optimization. Moderate complexity from ensuring compatibility and removing theme defaults, but well-defined with pseudo-code."
+		},
+		{
+			"taskId": 3,
+			"taskTitle": "Create SVG Icon Set and Snippets",
+			"complexityScore": 3,
+			"recommendedSubtasks": 2,
+			"expansionPrompt": "Create individual subtasks for each icon type (cart, menu, search, etc.) with parameter handling, accessibility attributes, and optimization checks.",
+			"reasoning": "Repetitive SVG snippet creation with parameters and accessibility. Low complexity as it's mechanical with currentColor inheritance and aria-hidden; scales easily but no interdependencies."
+		},
+		{
+			"taskId": 4,
+			"taskTitle": "Build Editorial Product Card Snippet",
+			"complexityScore": 6,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Divide into Liquid template structure, CSS styling/animations, image handling (primary/secondary/hover), info section with price render, and badge logic.",
+			"reasoning": "Involves responsive aspect ratios, hover transitions, lazy loading, AVIF, and reusable price snippet integration. Moderate-high complexity from image logic, hover states, and full-card clickability."
+		},
+		{
+			"taskId": 5,
+			"taskTitle": "Create Shared Price Snippet",
+			"complexityScore": 4,
+			"recommendedSubtasks": 1,
+			"expansionPrompt": "Split into price logic (regular/sale/compare-at), semantic markup/microdata, variant range handling, and currency localization.",
+			"reasoning": "Conditional Liquid logic for pricing states, money filters, and SEO microdata. Moderate due to variant handling and semantic requirements, but straightforward Shopify patterns."
+		},
+		{
+			"taskId": 6,
+			"taskTitle": "Implement Global Header Section",
+			"complexityScore": 7,
+			"recommendedSubtasks": 4,
+			"expansionPrompt": "Break into Liquid schema/template, desktop/mobile layouts, sticky scroll JS Web Component, mobile drawer animation, and cart/search integrations.",
+			"reasoning": "Combines Liquid schema, responsive layouts, JS Web Component for scroll/sticky, drawer animations, and Shopify linklists/cart badge. High complexity from multiple interactions and states."
+		},
+		{
+			"taskId": 7,
+			"taskTitle": "Build AJAX Cart API Wrapper",
+			"complexityScore": 8,
+			"recommendedSubtasks": 3,
+			"expansionPrompt": "Separate into individual API methods (add/update/get/clear), error handling/custom events, debouncing/CSRF, and Promise-based async patterns.",
+			"reasoning": "ES6 module with multiple Shopify AJAX endpoints, Promise handling, custom events, error states, and debouncing. High complexity from async operations, error resilience, and event system."
+		},
+		{
+			"taskId": 8,
+			"taskTitle": "Build Cart Drawer Section",
+			"complexityScore": 9,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Divide into Liquid rendering, CSS animations/styling, JS Web Component (open/close/update), quantity selectors with AJAX, free shipping bar, and empty state.",
+			"reasoning": "Integrates Liquid, CSS animations, JS Web Component, CartAPI dependency, real-time updates, progress bar logic, and responsive drawer. Very high complexity from multiple interdependent systems."
+		},
+		{
+			"taskId": 9,
+			"taskTitle": "Create Global Footer Section",
+			"complexityScore": 5,
+			"recommendedSubtasks": 2,
+			"expansionPrompt": "Split into column layouts/newsletter form, linklist rendering, social/payment icons, and responsive grid/CSS.",
+			"reasoning": "CSS Grid responsive layout, newsletter form, multiple linklists, and schema blocks. Moderate complexity from multi-column responsive design and form handling."
+		},
+		{
+			"taskId": 10,
+			"taskTitle": "Build Hero Video Section for Homepage",
+			"complexityScore": 6,
+			"recommendedSubtasks": 2,
+			"expansionPrompt": "Separate into video/image media handling, schema settings, text overlay/positioning, mobile fallback, and performance optimizations.",
+			"reasoning": "Video autoplay/loop with fallbacks, full-vh responsive, schema, and mobile image swap. Moderate-high from media handling, browser compatibility, and performance considerations."
+		},
+		{
+			"taskId": 11,
+			"taskTitle": "Create Editorial Split Section for Homepage",
+			"complexityScore": 4,
+			"recommendedSubtasks": 1,
+			"expansionPrompt": "Divide into schema/image/text setup, CSS Grid responsive layout, reverse option, and CTA handling.",
+			"reasoning": "Simple CSS Grid 50/50 split with reverse/mobile stack, schema, and lazy loading. Low-moderate complexity as it's mostly layout and conditional rendering."
+		},
+		{
+			"taskId": 12,
+			"taskTitle": "Build Collection Grid with Filters",
+			"complexityScore": 9,
+			"recommendedSubtasks": 6,
+			"expansionPrompt": "Break into grid layout/product rendering, filter UI (desktop/mobile), AJAX Section Rendering API, lifestyle breaks, pagination/sort, and empty states.",
+			"reasoning": "Complex AJAX filtering with Shopify API, responsive filters/drawer, lifestyle inserts, pagination, and URL updates. Very high complexity from dynamic content and no-reload UX."
+		},
+		{
+			"taskId": 13,
+			"taskTitle": "Build Product Detail Page (PDP)",
+			"complexityScore": 9,
+			"recommendedSubtasks": 5,
+			"expansionPrompt": "Split into gallery (thumbnails/lightbox/swipe), sticky info panel, variant selector logic, form/AJAX cart integration, and accordions/metafields.",
+			"reasoning": "Advanced layout (sticky/gallery), variant logic (price/URL/availability), swipe/lightbox, AJAX cart, and responsive carousels. Very high from multiple interactive features and dependencies."
+		},
+		{
+			"taskId": 14,
+			"taskTitle": "Final Integration, Testing, and Launch Preparation",
+			"complexityScore": 10,
+			"recommendedSubtasks": 7,
+			"expansionPrompt": "Create subtasks for template JSON assembly, performance optimizations, cross-browser testing, accessibility audit, user flow testing, visual regression, and deployment prep.",
+			"reasoning": "Orchestrates all prior work with comprehensive testing (Lighthouse, a11y, flows), optimizations, and deployment. Highest complexity due to dependencies, breadth of validation, and integration risks."
+		}
+	]
+}

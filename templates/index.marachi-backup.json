@@ -1,0 +1,207 @@
+{
+  "sections": {
+    "hero_video": {
+      "type": "hero-video",
+      "settings": {
+        "section_height": "full",
+        "overlay_opacity": 35,
+        "heading": "",
+        "text_position": "center",
+        "text_color": "light",
+        "cta_text": "",
+        "cta_link": "shopify:\/\/collections\/all"
+      }
+    },
+    "shop_by_look": {
+      "type": "shop-by-look",
+      "blocks": {
+        "look_1": {
+          "type": "look",
+          "settings": { "label": "MOKA" }
+        },
+        "look_2": {
+          "type": "look",
+          "settings": { "label": "OLIVE" }
+        },
+        "look_3": {
+          "type": "look",
+          "settings": { "label": "NUDE" }
+        },
+        "look_4": {
+          "type": "look",
+          "settings": { "label": "ONYX" }
+        }
+      },
+      "block_order": ["look_1", "look_2", "look_3", "look_4"],
+      "settings": {
+        "heading": "Shop By Look",
+        "columns_desktop": 4,
+        "enable_mobile_scroll": true,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "editorial_split_1": {
+      "type": "editorial-split",
+      "settings": {
+        "heading": "THE CITY EDIT",
+        "body": "<p>Designed for the woman in motion. Pieces that move through your day with the same quiet confidence you carry.<\/p>",
+        "cta_text": "Explore the Collection",
+        "cta_link": "shopify:\/\/collections\/all",
+        "reverse": false,
+        "content_alignment": "left",
+        "min_height": "medium",
+        "color_scheme": "scheme-1"
+      }
+    },
+    "featured_collection": {
+      "type": "product-list",
+      "blocks": {
+        "static-header": {
+          "type": "_product-list-content",
+          "static": true,
+          "settings": {},
+          "blocks": {
+            "heading": {
+              "type": "text",
+              "settings": {
+                "text": "<h2>New Arrivals<\/h2>",
+                "alignment": "center",
+                "type_preset": "h3",
+                "font": "var(--font-heading--family)",
+                "letter_spacing": "0.1em",
+                "case": "uppercase"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": ["heading"]
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 8,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "card-gallery": {
+              "type": "_product-card-gallery",
+              "settings": {
+                "image_ratio": "portrait",
+                "border": "none",
+                "border_radius": 0
+              },
+              "blocks": {}
+            },
+            "group": {
+              "type": "_product-card-group",
+              "settings": {
+                "content_direction": "row",
+                "vertical_on_mobile": false,
+                "horizontal_alignment": "space-between",
+                "vertical_alignment": "flex-start",
+                "gap": 8,
+                "width": "fill",
+                "width_mobile": "fill",
+                "padding-block-start": 8
+              },
+              "blocks": {
+                "title-group": {
+                  "type": "_product-card-group",
+                  "settings": {
+                    "content_direction": "column",
+                    "gap": 2,
+                    "width": "fill",
+                    "width_mobile": "fill"
+                  },
+                  "blocks": {
+                    "title": {
+                      "type": "product-title",
+                      "settings": {
+                        "alignment": "left",
+                        "type_preset": "custom",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.8125rem",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "color": "var(--color-foreground)"
+                      },
+                      "blocks": {}
+                    },
+                    "variant-color": {
+                      "type": "custom-liquid",
+                      "settings": {
+                        "custom_liquid": "<span class=\"product-card__variant-color\">{{ closest.product.selected_or_first_available_variant.option1 }}</span>"
+                      }
+                    }
+                  },
+                  "block_order": ["title", "variant-color"]
+                },
+                "price": {
+                  "type": "price",
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "alignment": "right",
+                    "type_preset": "custom",
+                    "width": "fit-content",
+                    "font": "var(--font-body--family)",
+                    "font_size": "0.8125rem",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "color": "var(--color-foreground)"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["title-group", "price"]
+            }
+          },
+          "block_order": ["card-gallery", "group"]
+        }
+      },
+      "block_order": [],
+      "settings": {
+        "layout_type": "grid",
+        "max_products": 4,
+        "columns": 4,
+        "mobile_columns": "2",
+        "columns_gap": 16,
+        "rows_gap": 24,
+        "section_width": "page-width",
+        "color_scheme": "scheme-1",
+        "padding-block-start": 64,
+        "padding-block-end": 64
+      }
+    },
+    "editorial_split_2": {
+      "type": "editorial-split",
+      "settings": {
+        "heading": "CRAFTED TO LAST",
+        "body": "<p>Each piece is sourced from artisan studios across Europe. Quality without compromise, designed to become the quiet anchor of your wardrobe.<\/p>",
+        "cta_text": "Our Story",
+        "cta_link": "shopify:\/\/pages\/about",
+        "reverse": true,
+        "content_alignment": "left",
+        "min_height": "medium",
+        "color_scheme": "scheme-1"
+      }
+    }
+  },
+  "order": [
+    "hero_video",
+    "shop_by_look",
+    "editorial_split_1",
+    "featured_collection",
+    "editorial_split_2"
+  ]
+}

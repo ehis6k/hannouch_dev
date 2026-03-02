@@ -1,0 +1,18 @@
+{
+  "name": "hannouch-theme",
+  "version": "1.0.0",
+  "description": "Hannouch Shopify Theme",
+  "scripts": {
+    "dev": "shopify theme dev --store=mu4wsw-sx.myshopify.com",
+    "push": "shopify theme push --store=mu4wsw-sx.myshopify.com",
+    "pull": "shopify theme pull --store=mu4wsw-sx.myshopify.com",
+    "check": "shopify theme check",
+    "deploy": "shopify theme push --live --store=mu4wsw-sx.myshopify.com"
+  },
+  "keywords": [
+    "shopify",
+    "theme"
+  ],
+  "author": "",
+  "license": "ISC"
+}

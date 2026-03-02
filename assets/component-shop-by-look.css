@@ -1,0 +1,122 @@
+/* ==============================================================================
+   Hannouch – Shop By Look (Marachi Task 2)
+   component-shop-by-look.css
+   ============================================================================== */
+
+.shop-by-look {
+  padding-top: var(--spacing-xl, 48px);
+  padding-bottom: var(--spacing-xl, 48px);
+}
+
+.shop-by-look__heading {
+  text-align: center;
+  margin: 0 0 var(--spacing-lg, 32px);
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-base-text, #1a1a1a);
+}
+
+.shop-by-look__grid {
+  display: grid;
+  gap: var(--spacing-md, 24px);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Desktop columns */
+.shop-by-look__grid--2-col {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.shop-by-look__grid--3-col {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.shop-by-look__grid--4-col {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.shop-by-look__grid--5-col {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.shop-by-look__grid--6-col {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+/* Mobile: horizontal scroll when enabled */
+.shop-by-look__grid--mobile-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  grid-auto-flow: column;
+  grid-auto-columns: 70%;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media screen and (min-width: 750px) {
+  .shop-by-look__grid--mobile-scroll {
+    overflow-x: visible;
+    overflow-y: visible;
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    scroll-snap-type: none;
+  }
+}
+
+.shop-by-look__item {
+  scroll-snap-align: start;
+}
+
+.shop-by-look__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.shop-by-look__image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center;
+}
+
+.shop-by-look__placeholder {
+  aspect-ratio: 3 / 4;
+  background: var(--color-border, #f0ede8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shop-by-look__placeholder .placeholder-svg {
+  width: 40%;
+  height: 40%;
+  opacity: 0.3;
+}
+
+.shop-by-look__label {
+  margin: var(--spacing-xs, 8px) 0 0;
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--color-base-text, #1a1a1a);
+}
+
+.shop-by-look__link .shop-by-look__label {
+  transition: opacity 0.2s ease;
+}
+
+@media (hover: hover) {
+  .shop-by-look__link:hover .shop-by-look__label {
+    opacity: 0.7;
+  }
+}

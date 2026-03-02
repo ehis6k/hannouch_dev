@@ -1,0 +1,143 @@
+{%- comment -%}
+  Hannouch – Shop By Look (Marachi Task 2)
+  Horizontal strip of portrait images with labels (e.g. MOKA, OLIVE, NUDE, ONYX).
+{%- endcomment -%}
+
+{{- 'component-shop-by-look.css' | asset_url | stylesheet_tag -}}
+
+<div class="shop-by-look page-width" {{ section.shopify_attributes }}>
+  {%- if section.settings.heading != blank -%}
+    <h2 class="shop-by-look__heading">{{ section.settings.heading | escape }}</h2>
+  {%- endif -%}
+
+  <div
+    class="shop-by-look__grid shop-by-look__grid--{{ section.settings.columns_desktop }}-col{% if section.settings.enable_mobile_scroll %} shop-by-look__grid--mobile-scroll{% endif %}"
+    role="list"
+  >
+    {%- for block in section.blocks -%}
+      <div class="shop-by-look__item" {{ block.shopify_attributes }} role="listitem">
+        {%- if block.settings.link != blank -%}
+          <a href="{{ block.settings.link }}" class="shop-by-look__link">
+        {%- endif -%}
+
+        {%- if block.settings.image != blank -%}
+          <img
+            src="{{ block.settings.image | image_url: width: 600, format: 'avif' }}"
+            srcset="
+              {{ block.settings.image | image_url: width: 300, format: 'avif' }} 300w,
+              {{ block.settings.image | image_url: width: 600, format: 'avif' }} 600w
+            "
+            sizes="(min-width: 750px) {{ 100 | divided_by: section.settings.columns_desktop }}vw, 70vw"
+            alt="{{ block.settings.image.alt | default: block.settings.label | escape }}"
+            width="{{ block.settings.image.width }}"
+            height="{{ block.settings.image.height }}"
+            loading="lazy"
+            class="shop-by-look__image"
+          >
+        {%- else -%}
+          <div class="shop-by-look__placeholder" aria-hidden="true">
+            {{- 'product-1' | placeholder_svg_tag: 'placeholder-svg' -}}
+          </div>
+        {%- endif -%}
+
+        {%- if block.settings.label != blank -%}
+          <p class="shop-by-look__label">{{ block.settings.label | escape | upcase }}</p>
+        {%- endif -%}
+
+        {%- if block.settings.link != blank -%}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endfor -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Shop By Look",
+  "tag": "section",
+  "class": "shop-by-look-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Shop By Look"
+    },
+    {
+      "type": "range",
+      "id": "columns_desktop",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 4,
+      "label": "Columns (desktop)"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_mobile_scroll",
+      "label": "Enable horizontal scroll on mobile",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Section layout"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Top padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Bottom padding",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "look",
+      "name": "Look",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "LOOK NAME"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop By Look",
+      "blocks": [
+        { "type": "look", "settings": { "label": "MOKA" } },
+        { "type": "look", "settings": { "label": "OLIVE" } },
+        { "type": "look", "settings": { "label": "NUDE" } },
+        { "type": "look", "settings": { "label": "ONYX" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

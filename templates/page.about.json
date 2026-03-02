@@ -1,0 +1,13 @@
+{
+  "sections": {
+    "our_story": {
+      "type": "our-story",
+      "settings": {
+        "color_scheme": "scheme-1",
+        "padding_block_start": 64,
+        "padding_block_end": 64
+      }
+    }
+  },
+  "order": ["our_story"]
+}

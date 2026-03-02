@@ -1,0 +1,482 @@
+/* ==============================================================================
+   Hannouch – Product Detail Page
+   component-product.css  |  Task 13
+   Aesthetic overrides on top of Atelier's product-information block system
+   Merrachi typography hierarchy (Task 4)
+   Task 8: Breadcrumb navigation
+   ============================================================================== */
+
+/* ── Breadcrumb (Task 8) ───────────────────────────────────────────────────── */
+.product-information .breadcrumb {
+  font-size: 0.875rem;
+  color: #666;
+  margin: 0 0 var(--product-title-margin, 0.5rem);
+}
+
+.product-information .breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 0 0.375rem;
+}
+
+.product-information .breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.product-information .breadcrumb__item[aria-hidden="true"] {
+  color: #666;
+  user-select: none;
+  padding: 0;
+}
+
+.product-information .breadcrumb__link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-information .breadcrumb__link:hover {
+  color: #000;
+  text-decoration: underline;
+}
+
+.product-information .breadcrumb__item--current .breadcrumb__text {
+  color: inherit;
+}
+
+/* ── CSS custom properties for typography spacing ───────────────────────────── */
+.product-information,
+.product-details {
+  --product-title-margin: 0;
+  --product-price-margin: 0.5rem;
+  --product-label-margin: 0.5rem;
+}
+
+/* ── Product info panel typography (Merrachi hierarchy) ──────────────────────── */
+
+/* Title — .product__title equivalent: product-details h1 */
+.product-details h1,
+.product-details .h1,
+.product__title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: clamp(1.4rem, 4vw, 1.8rem);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 var(--product-title-margin);
+}
+
+/* Price — .product__price equivalent */
+.product-details .price,
+.product__price {
+  font-family: var(--font-body, sans-serif);
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  margin-top: var(--product-price-margin);
+}
+
+.product-details .compare-at-price {
+  font-size: 0.8125rem;
+  opacity: 0.4;
+  text-decoration: line-through;
+}
+
+/* ── Variant picker (Task 5 — Merrachi: swatches + size buttons) ─────────────── */
+
+/* Option label — .product__option-label equivalent (e.g. "Size", "Color") */
+.variant-picker .variant-option__label,
+.variant-picker .variant-option-label,
+.product__option-label {
+  font-family: var(--font-body, sans-serif);
+  font-size: clamp(0.8125rem, 1.5vw, 0.875rem);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: var(--product-label-margin);
+}
+
+/* Color swatches: 24px squares, 2px radius, 8px gap, selected 2px border */
+.product-details .variant-picker .variant-option--swatches overflow-list,
+.product-details .variant-picker .variant-option--swatches .overflow-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(24px, max-content));
+  gap: 8px;
+}
+
+.product-details .variant-picker .variant-option--swatches .swatch,
+.product-details .variant-picker .variant-option__button-label--has-swatch .swatch {
+  --swatch-width: 24px;
+  --swatch-height: 24px;
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  min-height: 24px !important;
+  border-radius: 2px;
+  border-width: 1px;
+}
+
+.product-details .variant-picker .variant-option--swatches .variant-option__button-label:has(:checked) .swatch,
+.product-details .variant-picker .variant-option--swatches .variant-option__button-label--has-swatch:has(:checked) .swatch {
+  border-width: 2px;
+  border-color: var(--color-base-text, #1a1a1a);
+}
+
+/* Size / text buttons: padding 8px 16px, gap 12px, selected #000/#fff, hover 0.8 */
+.product-details .variant-picker .variant-option--buttons:not(.variant-option--swatches) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.product-details .variant-picker .variant-option--buttons:not(.variant-option--swatches) label {
+  padding: 8px 16px;
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 0;
+  border-width: 1px;
+  transition: background-color 0.2s ease, color 0.2s ease, opacity 0.2s ease;
+}
+
+.product-details .variant-picker .variant-option--buttons:not(.variant-option--swatches) label:hover {
+  opacity: 0.8;
+}
+
+.product-details .variant-picker .variant-option--buttons:not(.variant-option--swatches) input:checked + label,
+.product-details .variant-picker .variant-option--buttons:not(.variant-option--swatches) label[aria-selected='true'] {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
+}
+
+/* Size guide link (Task 9) */
+.product-details .size-guide-link {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.875rem;
+  color: #666;
+  text-decoration: underline;
+}
+
+.product-details .size-guide-link:hover {
+  color: #000;
+}
+
+/* Button-style variant chips (global fallback) */
+.variant-picker .variant-option--buttons label {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-radius: 0;
+  border-width: 1px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Selected state */
+.variant-picker .variant-option--buttons input:checked + label,
+.variant-picker .variant-option--buttons label[aria-selected='true'] {
+  background-color: var(--color-base-text, #1a1a1a);
+  color: var(--color-base-bg, #fafaf9);
+  border-color: var(--color-base-text, #1a1a1a);
+}
+
+/* Unavailable state */
+.variant-picker .variant-option--buttons label.variant-option--unavailable {
+  opacity: 0.3;
+  text-decoration: line-through;
+}
+
+/* ── Add to cart button (Task 6 — Merrachi: full-width black button) ────────── */
+.product-details .add-to-cart-button.button,
+.product-details .product-form-buttons .add-to-cart-button,
+.product-form__cart-submit {
+  width: 100%;
+  max-width: 100%;
+  padding: 16px;
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 0;
+  transition: opacity 0.2s ease;
+}
+
+.product-details .add-to-cart-button.button:hover,
+.product-details .product-form-buttons .add-to-cart-button:hover {
+  opacity: 0.85;
+}
+
+.product-details .add-to-cart-button.button:disabled,
+.product-details .add-to-cart-button.button[disabled],
+.product-details .product-form-buttons .add-to-cart-button:disabled {
+  opacity: 0.35;
+}
+
+/* Global add-to-cart (quick-add, cards) — keep existing */
+.add-to-cart-button.button,
+.product-form-buttons .add-to-cart-button {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 0;
+  transition: opacity 0.2s ease;
+}
+
+.add-to-cart-button.button:hover {
+  opacity: 0.85;
+}
+
+.add-to-cart-button.button:disabled,
+.add-to-cart-button.button[disabled] {
+  opacity: 0.35;
+}
+
+/* ── Accordion (product details — description, care, shipping) ───────────────── */
+/* Merrachi: plus/minus icons, minimal borders, smooth expand/collapse */
+
+/* Trigger: border, padding, plus icon via ::after */
+.product-details .accordion accordion-custom summary,
+.product-details .accordion .accordion__trigger,
+.product-details .accordion .details__header {
+  position: relative;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--color-accordion-border, #e5e5e5);
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  list-style: none;
+}
+
+.product-details .accordion accordion-custom summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Hide default theme icons; we use ::after for plus/minus */
+.product-details .accordion .details__icon,
+.product-details .accordion .icon-caret,
+.product-details .accordion .icon-plus {
+  display: none;
+}
+
+/* Plus icon when closed */
+.product-details .accordion accordion-custom details:not([open]) summary::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Minus icon when expanded */
+.product-details .accordion accordion-custom details[open] summary::after {
+  content: '−';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+/* Content: padding and smooth max-height transition */
+.product-details .accordion accordion-custom .details-content {
+  padding: 16px 0 0;
+}
+
+/* Fallback for accordion body / slot content (typography) */
+.product-details .accordion accordion-custom .accordion__body,
+.product-details .accordion accordion-custom [slot='content'],
+.product-details .accordion accordion-custom .rte {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  opacity: 0.75;
+}
+
+/* Global accordion trigger/body (menus, etc.) — keep existing */
+accordion-custom summary,
+accordion-custom .accordion__trigger,
+accordion-custom [slot='trigger'] {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+accordion-custom .accordion__body,
+accordion-custom [slot='content'],
+accordion-custom .rte {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+  opacity: 0.75;
+}
+
+/* Divider between accordion rows — 1px, minimal */
+accordion-custom + accordion-custom,
+.accordion__row + .accordion__row {
+  border-top: 1px solid var(--color-border, rgb(26 26 26 / 0.12));
+}
+
+/* ── Gallery ─────────────────────────────────────────────────────────────────── */
+
+/* Thumbnail strip — thin border on active */
+.dialog-thumbnails-list__thumbnail {
+  border-radius: 0;
+  opacity: 0.45;
+  transition: opacity 0.2s ease;
+}
+
+.dialog-thumbnails-list__thumbnail:hover,
+.dialog-thumbnails-list__thumbnail[aria-selected='true'],
+.dialog-thumbnails-list__thumbnail.is-active {
+  opacity: 1;
+  outline: 1px solid var(--color-base-text, #1a1a1a);
+  outline-offset: 2px;
+}
+
+/* ── Product media gallery aspect ratio refinement ───────────────────────────── */
+
+/* The template sets aspect-ratio 1/1.25 (4:5 portrait) — reinforce */
+.product-media-gallery {
+  --media-aspect-ratio: 4 / 5;
+}
+
+/* ── Sticky add to cart bar — Hannouch overrides ─────────────────────────────── */
+.sticky-add-to-cart__bar {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  border-top: 1px solid var(--color-border, rgb(26 26 26 / 0.12));
+  background-color: var(--color-base-bg, #fafaf9) !important;
+}
+
+/* Remove the glossy pseudo-element backdrop */
+.sticky-add-to-cart__bar::before {
+  display: none !important;
+}
+
+.sticky-add-to-cart__title {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.sticky-add-to-cart__variant {
+  font-size: 0.6875rem;
+  letter-spacing: 0.04em;
+  opacity: 0.55;
+}
+
+.sticky-add-to-cart__button {
+  border-radius: 0;
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ── Product recommendations section ────────────────────────────────────────── */
+.section-product-recommendations h3,
+.section-product-recommendations .h3,
+.product-recommendations h3 {
+  font-family: var(--font-heading, sans-serif);
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ── Sticky Product Details ────────────────────────────────────────── */
+@media screen and (min-width: 750px) {
+  .product-details {
+    position: sticky;
+    top: calc(var(--header-height, 60px) + 20px);
+    align-self: start;
+  }
+}
+
+/* ── Hero overlay: image under header (product page) ──────────────── */
+@media screen and (min-width: 750px) {
+  /* Product details column starts below the header when image overlays it */
+  .product-information--hero-overlay .product-details {
+    padding-block-start: calc(var(--header-height, 60px) + 2rem);
+  }
+
+  /* Media column fills the full viewport height */
+  .product-information--hero-overlay .product-information__media {
+    min-height: 100vh;
+  }
+
+  /* Image within the media container fills the full column */
+  .product-information--hero-overlay .product-information__media media-gallery,
+  .product-information--hero-overlay .product-information__media .media-gallery,
+  .product-information--hero-overlay .product-information__media .product-media-container {
+    height: 100%;
+    min-height: 100vh;
+  }
+}
+
+/* ── Product card variant color label (collection grid / homepage) ──────────── */
+.product-card__variant-color {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.55);
+  line-height: 1.4;
+}
+
+/* ── Mobile refinements (Task 11 — responsive optimizations) ────────────────── */
+@media screen and (max-width: 749px) {
+  /* Keep sticky bar pinned to viewport bottom on mobile */
+  .sticky-add-to-cart__bar {
+    bottom: 0 !important;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+  }
+
+  /* Prevent accidental horizontal scrolling on PDP */
+  .product-information,
+  .product-information__grid {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Ensure stacked layout feels comfortable on small screens */
+  .product-information__grid {
+    row-gap: 24px;
+  }
+
+  /* Touch targets: variant buttons and primary CTA at least 44px tall */
+  .product-details .variant-option--buttons label,
+  .product-details .add-to-cart-button.button,
+  .product-details .product-form-buttons .add-to-cart-button {
+    min-height: 44px;
+  }
+}

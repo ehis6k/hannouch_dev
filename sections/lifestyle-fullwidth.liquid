@@ -5,31 +5,38 @@
 
 {{- 'component-lifestyle-fullwidth.css' | asset_url | stylesheet_tag -}}
 
-<div
-  class="lifestyle-fullwidth"
-  style="--height-desktop: {{ section.settings.height_desktop }}vh; --height-mobile: {{ section.settings.height_mobile }}vh;"
-  {{ section.shopify_attributes }}
->
-  {%- if section.settings.image != blank -%}
-    <div class="lifestyle-fullwidth__media">
-      {{
-        section.settings.image
-        | image_url: width: 2400
-        | image_tag: class: 'lifestyle-fullwidth__image', loading: 'lazy'
-      }}
-    </div>
-  {%- endif -%}
+{%- liquid
+  assign has_image = section.settings.image | default: false
+  assign has_logo = section.settings.logo_overlay | default: false
+  assign has_content = has_image | or: has_logo
+-%}
+{%- if has_content -%}
+  <div
+    class="lifestyle-fullwidth"
+    style="--height-desktop: {{ section.settings.height_desktop }}vh; --height-mobile: {{ section.settings.height_mobile }}vh;"
+    {{ section.shopify_attributes }}
+  >
+    {%- if section.settings.image != blank -%}
+      <div class="lifestyle-fullwidth__media">
+        {{
+          section.settings.image
+          | image_url: width: 2400
+          | image_tag: class: 'lifestyle-fullwidth__image', loading: 'lazy'
+        }}
+      </div>
+    {%- endif -%}
 
-  {%- if section.settings.logo_overlay != blank -%}
-    <div class="lifestyle-fullwidth__logo lifestyle-fullwidth__logo--{{ section.settings.logo_position }}">
-      {{
-        section.settings.logo_overlay
-        | image_url: width: 200
-        | image_tag: class: 'lifestyle-fullwidth__logo-image', alt: ''
-      }}
-    </div>
-  {%- endif -%}
-</div>
+    {%- if section.settings.logo_overlay != blank -%}
+      <div class="lifestyle-fullwidth__logo lifestyle-fullwidth__logo--{{ section.settings.logo_position }}">
+        {{
+          section.settings.logo_overlay
+          | image_url: width: 200
+          | image_tag: class: 'lifestyle-fullwidth__logo-image', alt: ''
+        }}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
 
 {% schema %}
 {

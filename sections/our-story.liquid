@@ -1,0 +1,76 @@
+{%- comment -%}
+  Hannouch – OUR story
+  Long-form brand story section. Content is localized via our_story.title and our_story.content.
+{%- endcomment -%}
+
+{{- 'component-our-story.css' | asset_url | stylesheet_tag -}}
+
+{%- assign title = 'our_story.title' | t -%}
+{%- assign content = 'our_story.content' | t -%}
+{%- if title == 'our_story.title' -%}
+  {%- assign title = 'OUR story' -%}
+{%- endif -%}
+{%- if content == 'our_story.content' or content == blank -%}
+  {%- assign content = '' -%}
+{%- endif -%}
+
+{%- if content != blank or title != blank -%}
+  <section
+    class="our-story color-scheme-{{ section.settings.color_scheme }}"
+    style="
+      padding-block-start: {{ section.settings.padding_block_start }}px;
+      padding-block-end: {{ section.settings.padding_block_end }}px;
+    "
+    {{ section.shopify_attributes }}
+  >
+    <div class="our-story__inner page-width">
+      {%- if title != blank -%}
+        <h2 class="our-story__title">{{ title }}</h2>
+      {%- endif -%}
+      {%- if content != blank -%}
+        <div class="our-story__body rte">{{ content }}</div>
+      {%- endif -%}
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "OUR story",
+  "tag": "section",
+  "class": "our-story-section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_block_start",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64,
+      "label": "Top padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_block_end",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 64,
+      "label": "Bottom padding"
+    }
+  ],
+  "presets": [
+    {
+      "name": "OUR story"
+    }
+  ]
+}
+{% endschema %}

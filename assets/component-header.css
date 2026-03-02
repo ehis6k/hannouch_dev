@@ -6,7 +6,7 @@
 
 /* ── Height token override ───────────────────────────────────────────────────── */
 body {
-  --header-height: 64px;
+  --header-height: 44px;
 }
 
 /* ── Logo wordmark ───────────────────────────────────────────────────────────── */
@@ -66,15 +66,16 @@ body {
   stroke-width: var(--icon-stroke-width, 1.25);
 }
 
-/* Match account icon wrapper to search/cart so all header icons align */
-.account-button .account-button__icon.svg-wrapper {
-  width: var(--button-size);
-  height: var(--button-size);
+/* Account trigger: anchor for popover positioning */
+.header-actions__account-trigger {
+  anchor-name: --account-button-trigger;
 }
 
-/* Optically align person icon with search/cart (account SVG art sits lower in viewBox) */
-.account-button .account-button__icon svg {
-  transform: translateY(-2px);
+/* Mobile: dialog-component should not affect header layout */
+@media screen and (max-width: 749px) {
+  .account-drawer {
+    display: contents;
+  }
 }
 
 /* ── Cart bubble: smaller, tighter ──────────────────────────────────────────── */
@@ -114,7 +115,7 @@ body {
 
 .header[transparent='not-sticky'][data-sticky-state='active'] .header__row,
 .header[transparent='always'][data-sticky-state='active'] .header__row {
-  background-color: var(--color-base-bg, #fafaf9);
+  background-color: rgb(241 236 230 / 1.0);
   border-bottom: 1px solid var(--color-border, rgb(26 26 26 / 0.12));
 }
 
@@ -177,12 +178,11 @@ body {
     color: inherit;
   }
 
-  .header__column--right .account-button__icon,
-  .header__column--right .account-button__avatar {
+  .header__column--right .header-actions__account-trigger .svg-wrapper {
     display: none;
   }
 
-  .header__column--right .account-button__label {
+  .header__column--right .header-actions__account-label {
     display: inline;
     font-family: var(--font-body, sans-serif);
     font-size: 0.6875rem;
@@ -190,9 +190,12 @@ body {
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: inherit;
+    transform: translateY(-3px);
   }
 
-  .header__column--right .account-button {
+  .header__column--right .header-actions__account-trigger {
+    display: inline-flex;
+    align-items: center;
     width: auto;
     min-width: 0;
   }
@@ -212,10 +215,11 @@ body {
   }
 }
 
-/* Hide text labels on desktop when we show icons (mobile: keep icons) */
+/* Hide text labels on mobile when we show icons */
 @media screen and (max-width: 749px) {
   .search-action__label,
   .account-button__label,
+  .header-actions__account-label,
   .header-actions__cart-label {
     display: none;
   }
@@ -224,4 +228,35 @@ body {
 /* ── Bottom border on header row ─────────────────────────────────────────────── */
 .header__row--top {
   --border-bottom-width: 1px;
+  --header-padding: 8px;
+}
+
+/* ── Fixed 90px header row ───────────────────────────────────────────────────── */
+.header__row {
+  height: 90px;
+  min-height: 90px;
+  max-height: 90px;
+  padding-block: 0;
+  display: flex;
+  align-items: center;
+}
+
+.header__row--top .header__columns.spacing-style {
+  align-items: center;
+  padding-block: 0;
+  max-height: 100%;
+  width: 100%;
+}
+
+@media screen and (min-width: 750px) {
+  .header__row--top .header__columns.spacing-style {
+    padding-inline-start: var(--page-margin, var(--padding-md));
+    padding-inline-end: var(--page-margin, var(--padding-md));
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .header-actions__action {
+    padding-block: 6px;
+  }
 }

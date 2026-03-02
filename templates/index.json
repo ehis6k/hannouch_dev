@@ -12,6 +12,35 @@
         "cta_link": "shopify:\/\/collections\/all"
       }
     },
+    "shop_by_look": {
+      "type": "shop-by-look",
+      "blocks": {
+        "look_1": {
+          "type": "look",
+          "settings": { "label": "MOKA" }
+        },
+        "look_2": {
+          "type": "look",
+          "settings": { "label": "OLIVE" }
+        },
+        "look_3": {
+          "type": "look",
+          "settings": { "label": "NUDE" }
+        },
+        "look_4": {
+          "type": "look",
+          "settings": { "label": "ONYX" }
+        }
+      },
+      "block_order": ["look_1", "look_2", "look_3", "look_4"],
+      "settings": {
+        "heading": "Shop By Look",
+        "columns_desktop": 4,
+        "enable_mobile_scroll": true,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
     "editorial_split_1": {
       "type": "editorial-split",
       "settings": {
@@ -52,7 +81,7 @@
           "type": "_product-card",
           "static": true,
           "settings": {
-            "product_card_gap": 16,
+            "product_card_gap": 8,
             "inherit_color_scheme": true,
             "color_scheme": "",
             "border": "none",
@@ -77,34 +106,64 @@
             "group": {
               "type": "_product-card-group",
               "settings": {
-                "content_direction": "column",
-                "gap": 4,
+                "content_direction": "row",
+                "vertical_on_mobile": false,
+                "horizontal_alignment": "space-between",
+                "vertical_alignment": "flex-start",
+                "gap": 8,
+                "width": "fill",
+                "width_mobile": "fill",
                 "padding-block-start": 8
               },
               "blocks": {
-                "title": {
-                  "type": "product-title",
+                "title-group": {
+                  "type": "_product-card-group",
                   "settings": {
-                    "alignment": "left",
-                    "type_preset": "h5",
-                    "font": "var(--font-body--family)",
-                    "letter_spacing": "0.05em",
-                    "case": "uppercase"
+                    "content_direction": "column",
+                    "gap": 2,
+                    "width": "fill",
+                    "width_mobile": "fill"
                   },
-                  "blocks": {}
+                  "blocks": {
+                    "title": {
+                      "type": "product-title",
+                      "settings": {
+                        "alignment": "left",
+                        "type_preset": "custom",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.8125rem",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "color": "var(--color-foreground)"
+                      },
+                      "blocks": {}
+                    },
+                    "variant-color": {
+                      "type": "custom-liquid",
+                      "settings": {
+                        "custom_liquid": "<span class=\"product-card__variant-color\">{{ closest.product.selected_or_first_available_variant.option1 }}</span>"
+                      }
+                    }
+                  },
+                  "block_order": ["title", "variant-color"]
                 },
                 "price": {
                   "type": "price",
                   "settings": {
                     "show_sale_price_first": true,
-                    "alignment": "left",
+                    "alignment": "right",
+                    "type_preset": "custom",
+                    "width": "fit-content",
                     "font": "var(--font-body--family)",
-                    "font_size": "0.8125rem"
+                    "font_size": "0.8125rem",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "color": "var(--color-foreground)"
                   },
                   "blocks": {}
                 }
               },
-              "block_order": ["title", "price"]
+              "block_order": ["title-group", "price"]
             }
           },
           "block_order": ["card-gallery", "group"]
@@ -113,7 +172,7 @@
       "block_order": [],
       "settings": {
         "layout_type": "grid",
-        "max_products": 8,
+        "max_products": 4,
         "columns": 4,
         "mobile_columns": "2",
         "columns_gap": 16,
@@ -140,6 +199,7 @@
   },
   "order": [
     "hero_video",
+    "shop_by_look",
     "editorial_split_1",
     "featured_collection",
     "editorial_split_2"

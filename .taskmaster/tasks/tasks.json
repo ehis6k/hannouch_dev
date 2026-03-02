@@ -879,14 +879,14 @@
   "marachi": {
     "tasks": [
       {
-        "id": 1,
+        "id": "1",
         "title": "Hero Section: Add Minimal Text Mode and Logo Overlay Settings",
         "description": "Extend the existing hero section to support image-led mode with minimal or no text overlay, and add optional logo/wordmark overlay capability for Marachi alignment (image-only, no video).",
         "details": "Update the existing hero section (e.g., hero-video.liquid or hero.liquid) schema to include:\n- Boolean setting 'minimal_text_mode' (default: false) to hide/minimize heading, eyebrow, and CTA\n- Image setting 'logo_overlay' for optional logo/wordmark image\n- Text setting 'logo_overlay_text' for text-based logo alternative\n- Select setting 'logo_position' (options: 'bottom-left', 'bottom-right', 'center', 'top-left', 'top-right')\n\nLiquid logic:\n```liquid\n{% if section.settings.minimal_text_mode %}\n  {%- comment -%} Hide text content block {%- endcomment -%}\n{% else %}\n  {%- render heading, eyebrow, CTA as normal -%}\n{% endif %}\n\n{% if section.settings.logo_overlay or section.settings.logo_overlay_text %}\n  <div class=\"hero__logo-overlay hero__logo-overlay--{{ section.settings.logo_position }}\">\n    {% if section.settings.logo_overlay %}\n      {{ section.settings.logo_overlay | image_url: width: 200 | image_tag: class: 'hero__logo-image' }}\n    {% elsif section.settings.logo_overlay_text %}\n      <span class=\"hero__logo-text\">{{ section.settings.logo_overlay_text }}</span>\n    {% endif %}\n  </div>\n{% endif %}\n```\n\nCSS in component-hero.css:\n```css\n.hero__logo-overlay {\n  position: absolute;\n  z-index: 2;\n}\n.hero__logo-overlay--bottom-left { bottom: var(--spacing-6); left: var(--spacing-6); }\n.hero__logo-overlay--bottom-right { bottom: var(--spacing-6); right: var(--spacing-6); }\n.hero__logo-overlay--center { top: 50%; left: 50%; transform: translate(-50%, -50%); }\n.hero__logo-image { max-width: 200px; height: auto; }\n.hero__logo-text { font-family: var(--font-heading); font-size: 1.5rem; color: var(--color-base-text); }\n```\n\nEnsure video option is disabled or not used for Marachi alignment (image-only).",
         "testStrategy": "1. Add hero section to a test page with minimal_text_mode enabled; verify heading/CTA are hidden\n2. Upload logo_overlay image and test each logo_position option; verify positioning\n3. Test logo_overlay_text fallback; verify typography uses design tokens\n4. Test with minimal_text_mode disabled; verify normal text overlay still works\n5. Verify responsive behavior on mobile (logo scales appropriately)\n6. Confirm no video is rendered when using image-only mode",
         "priority": "high",
         "dependencies": [],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -894,8 +894,10 @@
             "description": "Add the four new schema settings to the existing hero section JSON schema including minimal_text_mode boolean, logo_overlay image, logo_overlay_text text, and logo_position select.",
             "dependencies": [],
             "details": "Locate hero.liquid or hero-video.liquid file, add schema settings exactly as specified with correct types, defaults, labels, and options for logo_position. Ensure schema structure follows Shopify OS 2.0 standards.",
-            "status": "pending",
-            "testStrategy": "Verify new settings appear in theme customizer when editing hero section. Check default values and option lists display correctly."
+            "status": "done",
+            "testStrategy": "Verify new settings appear in theme customizer when editing hero section. Check default values and option lists display correctly.",
+            "updatedAt": "2026-02-26T23:33:35.909Z",
+            "parentId": "undefined"
           },
           {
             "id": 2,
@@ -905,8 +907,10 @@
               1
             ],
             "details": "Insert the provided if/else Liquid code block in the hero section template where text content normally renders. Use comments to mark the hidden section clearly.",
-            "status": "pending",
-            "testStrategy": "Enable minimal_text_mode in customizer; verify heading, eyebrow, CTA completely hidden. Disable and confirm normal rendering."
+            "status": "done",
+            "testStrategy": "Enable minimal_text_mode in customizer; verify heading, eyebrow, CTA completely hidden. Disable and confirm normal rendering.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:33:35.916Z"
           },
           {
             "id": 3,
@@ -916,8 +920,10 @@
               1
             ],
             "details": "Add the provided Liquid code for logo_overlay detection and rendering after main hero content. Ensure proper image_url filter with width: 200 and image_tag class.",
-            "status": "pending",
-            "testStrategy": "Upload logo image and test rendering with each position option. Test text fallback when no image uploaded."
+            "status": "done",
+            "testStrategy": "Upload logo image and test rendering with each position option. Test text fallback when no image uploaded.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:33:35.920Z"
           },
           {
             "id": 4,
@@ -927,8 +933,10 @@
               3
             ],
             "details": "Add the exact CSS rules provided to component-hero.css file. Ensure absolute positioning, z-index 2, and responsive max-width for image.",
-            "status": "pending",
-            "testStrategy": "Test each logo_position option visually on desktop/mobile. Verify logo doesn't overflow and respects spacing variables."
+            "status": "done",
+            "testStrategy": "Test each logo_position option visually on desktop/mobile. Verify logo doesn't overflow and respects spacing variables.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:33:35.929Z"
           },
           {
             "id": 5,
@@ -939,22 +947,28 @@
               4
             ],
             "details": "Comment out or remove any video-related schema/liquid code. Add hero section to test page and run complete test strategy from task description.",
-            "status": "pending",
-            "testStrategy": "1. Test minimal_text_mode enabled/disabled states. 2. Test all logo positions with image and text. 3. Verify image-only mode (no video). 4. Test responsive behavior across breakpoints."
+            "status": "done",
+            "testStrategy": "1. Test minimal_text_mode enabled/disabled states. 2. Test all logo positions with image and text. 3. Verify image-only mode (no video). 4. Test responsive behavior across breakpoints.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:33:35.932Z"
           }
-        ]
+        ],
+        "complexity": 4,
+        "recommendedSubtasks": 0,
+        "expansionPrompt": "The 5 existing subtasks provide comprehensive coverage of schema updates, Liquid logic implementation, CSS styling, and testing. No further expansion needed as they follow Shopify OS 2.0 best practices with clear dependencies and test strategies.",
+        "updatedAt": "2026-02-26T23:33:35.932Z"
       },
       {
-        "id": 2,
+        "id": "2",
         "title": "Create Shop By Look Section (Portrait Swatch Strip)",
         "description": "Build a new section that displays a horizontal strip of portrait-oriented images with labels, used for 'Shop By Look' or 'Shop By Color' merchandising on the homepage.",
         "details": "Create sections/shop-by-look.liquid with schema:\n\nSchema:\n```json\n{\n  \"name\": \"Shop By Look\",\n  \"tag\": \"section\",\n  \"class\": \"shop-by-look\",\n  \"settings\": [\n    {\n      \"type\": \"text\",\n      \"id\": \"heading\",\n      \"label\": \"Heading\",\n      \"default\": \"Shop By Look\"\n    },\n    {\n      \"type\": \"range\",\n      \"id\": \"columns_desktop\",\n      \"min\": 2,\n      \"max\": 6,\n      \"step\": 1,\n      \"default\": 4,\n      \"label\": \"Columns (desktop)\"\n    },\n    {\n      \"type\": \"checkbox\",\n      \"id\": \"enable_mobile_scroll\",\n      \"label\": \"Enable horizontal scroll on mobile\",\n      \"default\": true\n    }\n  ],\n  \"blocks\": [\n    {\n      \"type\": \"look\",\n      \"name\": \"Look\",\n      \"settings\": [\n        {\n          \"type\": \"image_picker\",\n          \"id\": \"image\",\n          \"label\": \"Image\"\n        },\n        {\n          \"type\": \"text\",\n          \"id\": \"label\",\n          \"label\": \"Label\",\n          \"default\": \"LOOK NAME\"\n        },\n        {\n          \"type\": \"url\",\n          \"id\": \"link\",\n          \"label\": \"Link\"\n        }\n      ]\n    }\n  ],\n  \"presets\": [\n    {\n      \"name\": \"Shop By Look\",\n      \"blocks\": [\n        { \"type\": \"look\" },\n        { \"type\": \"look\" },\n        { \"type\": \"look\" },\n        { \"type\": \"look\" }\n      ]\n    }\n  ]\n}\n```\n\nLiquid markup:\n```liquid\n<div class=\"shop-by-look page-width\">\n  {% if section.settings.heading != blank %}\n    <h2 class=\"shop-by-look__heading\">{{ section.settings.heading }}</h2>\n  {% endif %}\n  <div class=\"shop-by-look__grid shop-by-look__grid--{{ section.settings.columns_desktop }}-col{% if section.settings.enable_mobile_scroll %} shop-by-look__grid--mobile-scroll{% endif %}\">\n    {% for block in section.blocks %}\n      <div class=\"shop-by-look__item\" {{ block.shopify_attributes }}>\n        {% if block.settings.link != blank %}<a href=\"{{ block.settings.link }}\">{% endif %}\n          {% if block.settings.image %}\n            {{ block.settings.image | image_url: width: 600 | image_tag: class: 'shop-by-look__image', loading: 'lazy' }}\n          {% endif %}\n          {% if block.settings.label != blank %}\n            <p class=\"shop-by-look__label\">{{ block.settings.label | upcase }}</p>\n          {% endif %}\n        {% if block.settings.link != blank %}</a>{% endif %}\n      </div>\n    {% endfor %}\n  </div>\n</div>\n```\n\nCSS (inline or component-shop-by-look.css):\n```css\n.shop-by-look { padding: var(--spacing-10) 0; }\n.shop-by-look__heading { text-align: center; margin-bottom: var(--spacing-8); font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 0.1em; }\n.shop-by-look__grid { display: grid; gap: var(--spacing-4); }\n.shop-by-look__grid--4-col { grid-template-columns: repeat(4, 1fr); }\n.shop-by-look__grid--mobile-scroll { overflow-x: auto; grid-auto-flow: column; grid-auto-columns: 70%; }\n@media (min-width: 750px) { .shop-by-look__grid--mobile-scroll { overflow-x: visible; grid-auto-flow: row; grid-auto-columns: auto; } }\n.shop-by-look__image { width: 100%; aspect-ratio: 3/4; object-fit: cover; }\n.shop-by-look__label { margin-top: var(--spacing-2); font-size: 0.875rem; text-align: center; letter-spacing: 0.1em; }\n```",
         "testStrategy": "1. Add Shop By Look section to index.json with 4 blocks\n2. Upload portrait images (3:4 aspect ratio) and add labels (MOKA, OLIVE, NUDE, ONYX)\n3. Verify desktop renders in 4-column grid with consistent spacing\n4. Test mobile: verify horizontal scroll if enabled\n5. Add links to blocks; verify navigation works\n6. Test with 2-6 columns; verify grid adapts\n7. Verify typography uses design tokens (uppercase, letter-spacing)",
         "priority": "high",
         "dependencies": [
-          1
+          "1"
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -962,8 +976,10 @@
             "description": "Create the new section file with complete schema, Liquid markup, and inline CSS as specified in the task details.",
             "dependencies": [],
             "details": "Copy the provided JSON schema into the 'schema' key. Include the full Liquid HTML structure for the grid, heading, and blocks. Embed the CSS styles directly in a <style> tag within the Liquid file for initial implementation.",
-            "status": "pending",
-            "testStrategy": "Verify file creation in code editor, check schema parses without errors in theme editor, ensure no syntax errors in Liquid or CSS."
+            "status": "done",
+            "testStrategy": "Verify file creation in code editor, check schema parses without errors in theme editor, ensure no syntax errors in Liquid or CSS.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:39:42.171Z"
           },
           {
             "id": 2,
@@ -973,8 +989,10 @@
               1
             ],
             "details": "Update CSS to handle dynamic columns with .shop-by-look__grid--{{ columns }}-col classes. Implement grid-auto-flow: column and overflow-x: auto for mobile-scroll modifier. Ensure 3/4 aspect-ratio on images with object-fit: cover.",
-            "status": "pending",
-            "testStrategy": "Test desktop: 4-column grid layout with equal spacing. Mobile: horizontal scroll with 70% width items, snaps back to row grid at 750px breakpoint."
+            "status": "done",
+            "testStrategy": "Test desktop: 4-column grid layout with equal spacing. Mobile: horizontal scroll with 70% width items, snaps back to row grid at 750px breakpoint.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:39:42.173Z"
           },
           {
             "id": 3,
@@ -984,8 +1002,10 @@
               1
             ],
             "details": "Use block.settings.image | image_url: width: 600 | image_tag with lazy loading. Wrap image+label in <a> tag if block.settings.link exists. Apply shopify_attributes to container div for theme editor functionality.",
-            "status": "pending",
-            "testStrategy": "Add 4 look blocks in theme editor with images/labels/links. Verify images load lazy, labels uppercase/centered, links navigate correctly."
+            "status": "done",
+            "testStrategy": "Add 4 look blocks in theme editor with images/labels/links. Verify images load lazy, labels uppercase/centered, links navigate correctly.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:39:42.174Z"
           },
           {
             "id": 4,
@@ -995,8 +1015,10 @@
               2
             ],
             "details": "Style h2 with center text-align, uppercase, letter-spacing: 0.1em, font-family: var(--font-heading). Use var(--spacing-*) variables. Ensure label font-size: 0.875rem with proper margins.",
-            "status": "pending",
-            "testStrategy": "Verify heading appears centered/uppercase when set. Check spacing consistency across breakpoints. Confirm label typography matches design system."
+            "status": "done",
+            "testStrategy": "Verify heading appears centered/uppercase when set. Check spacing consistency across breakpoints. Confirm label typography matches design system.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:39:42.176Z"
           },
           {
             "id": 5,
@@ -1007,22 +1029,28 @@
               4
             ],
             "details": "Add section to homepage template with 4 preset blocks. Upload 3:4 aspect ratio images (MOKA, OLIVE, NUDE, ONYX). Test column settings (2-6), mobile scroll toggle, link navigation.",
-            "status": "pending",
-            "testStrategy": "1. Add to index.json with 4 blocks. 2. Upload portrait images and labels. 3. Verify 4-col desktop grid. 4. Test mobile horizontal scroll. 5. Confirm all links work."
+            "status": "done",
+            "testStrategy": "1. Add to index.json with 4 blocks. 2. Upload portrait images and labels. 3. Verify 4-col desktop grid. 4. Test mobile horizontal scroll. 5. Confirm all links work.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:39:42.190Z"
           }
-        ]
+        ],
+        "complexity": 6,
+        "recommendedSubtasks": 0,
+        "expansionPrompt": "Existing 5 subtasks cover file creation, responsive grid implementation, block rendering, styling, and testing comprehensively. Mobile scroll behavior and dynamic columns handled appropriately per Shopify section standards.",
+        "updatedAt": "2026-02-26T23:39:42.190Z"
       },
       {
-        "id": 3,
+        "id": "3",
         "title": "Create Lifestyle Fullwidth Section",
         "description": "Build a dedicated section for full-bleed lifestyle imagery with optional logo overlay and no text content, or document how to use the hero section in image-only mode.",
         "details": "Create sections/lifestyle-fullwidth.liquid:\n\nSchema:\n```json\n{\n  \"name\": \"Lifestyle Fullwidth\",\n  \"tag\": \"section\",\n  \"class\": \"lifestyle-fullwidth\",\n  \"settings\": [\n    {\n      \"type\": \"image_picker\",\n      \"id\": \"image\",\n      \"label\": \"Image\"\n    },\n    {\n      \"type\": \"range\",\n      \"id\": \"height_desktop\",\n      \"min\": 50,\n      \"max\": 100,\n      \"step\": 5,\n      \"unit\": \"vh\",\n      \"default\": 80,\n      \"label\": \"Height (desktop)\"\n    },\n    {\n      \"type\": \"range\",\n      \"id\": \"height_mobile\",\n      \"min\": 50,\n      \"max\": 100,\n      \"step\": 5,\n      \"unit\": \"vh\",\n      \"default\": 60,\n      \"label\": \"Height (mobile)\"\n    },\n    {\n      \"type\": \"image_picker\",\n      \"id\": \"logo_overlay\",\n      \"label\": \"Logo overlay (optional)\"\n    },\n    {\n      \"type\": \"select\",\n      \"id\": \"logo_position\",\n      \"label\": \"Logo position\",\n      \"options\": [\n        { \"value\": \"center\", \"label\": \"Center\" },\n        { \"value\": \"bottom-left\", \"label\": \"Bottom left\" },\n        { \"value\": \"bottom-right\", \"label\": \"Bottom right\" }\n      ],\n      \"default\": \"center\"\n    }\n  ],\n  \"presets\": [{ \"name\": \"Lifestyle Fullwidth\" }]\n}\n```\n\nLiquid:\n```liquid\n<div class=\"lifestyle-fullwidth\" style=\"--height-desktop: {{ section.settings.height_desktop }}vh; --height-mobile: {{ section.settings.height_mobile }}vh;\">\n  {% if section.settings.image %}\n    <div class=\"lifestyle-fullwidth__media\">\n      {{ section.settings.image | image_url: width: 2400 | image_tag: class: 'lifestyle-fullwidth__image', loading: 'lazy' }}\n    </div>\n  {% endif %}\n  {% if section.settings.logo_overlay %}\n    <div class=\"lifestyle-fullwidth__logo lifestyle-fullwidth__logo--{{ section.settings.logo_position }}\">\n      {{ section.settings.logo_overlay | image_url: width: 200 | image_tag: class: 'lifestyle-fullwidth__logo-image' }}\n    </div>\n  {% endif %}\n</div>\n```\n\nCSS:\n```css\n.lifestyle-fullwidth { position: relative; width: 100%; height: var(--height-mobile); overflow: hidden; }\n@media (min-width: 750px) { .lifestyle-fullwidth { height: var(--height-desktop); } }\n.lifestyle-fullwidth__media { width: 100%; height: 100%; }\n.lifestyle-fullwidth__image { width: 100%; height: 100%; object-fit: cover; }\n.lifestyle-fullwidth__logo { position: absolute; z-index: 2; }\n.lifestyle-fullwidth__logo--center { top: 50%; left: 50%; transform: translate(-50%, -50%); }\n.lifestyle-fullwidth__logo--bottom-left { bottom: var(--spacing-6); left: var(--spacing-6); }\n.lifestyle-fullwidth__logo--bottom-right { bottom: var(--spacing-6); right: var(--spacing-6); }\n.lifestyle-fullwidth__logo-image { max-width: 200px; height: auto; opacity: 0.8; }\n```\n\nAlternatively, document that hero section with minimal_text_mode can be used for this purpose.",
         "testStrategy": "1. Add Lifestyle Fullwidth section to a test page\n2. Upload a full-width lifestyle image; verify it fills viewport width\n3. Test height_desktop and height_mobile settings; verify responsive behavior\n4. Add logo_overlay image; test each logo_position option\n5. Verify image loads with lazy loading\n6. Test on mobile and desktop viewports\n7. Verify no text content is rendered",
         "priority": "medium",
         "dependencies": [
-          1
+          "1"
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1030,8 +1058,10 @@
             "description": "Create the new sections/lifestyle-fullwidth.liquid file with the complete schema, Liquid template, and embedded CSS as provided in the task details.",
             "dependencies": [],
             "details": "Copy the exact schema JSON, Liquid HTML structure with image and logo overlay logic, and CSS styles into a single .liquid file following Shopify section best practices for modularity and performance.",
-            "status": "pending",
-            "testStrategy": "Verify file is created in correct location with proper schema structure and no syntax errors in theme editor."
+            "status": "done",
+            "testStrategy": "Verify file is created in correct location with proper schema structure and no syntax errors in theme editor.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:41:25.239Z"
           },
           {
             "id": 2,
@@ -1041,8 +1071,10 @@
               1
             ],
             "details": "Implement --height-desktop and --height-mobile CSS variables with media query breakpoint at 750px, ensure .lifestyle-fullwidth__image uses width:100%, height:100%, object-fit:cover for full viewport coverage.",
-            "status": "pending",
-            "testStrategy": "Test height settings in theme editor; verify 80vh desktop/60vh mobile default, image fills container without distortion across breakpoints."
+            "status": "done",
+            "testStrategy": "Test height settings in theme editor; verify 80vh desktop/60vh mobile default, image fills container without distortion across breakpoints.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:41:25.241Z"
           },
           {
             "id": 3,
@@ -1052,8 +1084,10 @@
               1
             ],
             "details": "Code .lifestyle-fullwidth__logo with z-index:2, position-specific classes using transform:translate(-50%,-50%) for center, bottom spacing vars for corners, max-width:200px and 0.8 opacity.",
-            "status": "pending",
-            "testStrategy": "Upload logo image, test all three logo_position options in theme editor, verify correct placement and opacity across screen sizes."
+            "status": "done",
+            "testStrategy": "Upload logo image, test all three logo_position options in theme editor, verify correct placement and opacity across screen sizes.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:41:25.244Z"
           },
           {
             "id": 4,
@@ -1064,8 +1098,10 @@
               3
             ],
             "details": "Follow provided test strategy: add to test page, verify full-width image fill, height controls, lazy loading, all logo positions work correctly on desktop and mobile.",
-            "status": "pending",
-            "testStrategy": "1. Add section to test page 2. Test image fill and heights 3. Test all logo positions 4. Verify lazy loading 5. Test mobile responsiveness at 750px breakpoint."
+            "status": "done",
+            "testStrategy": "1. Add section to test page 2. Test image fill and heights 3. Test all logo positions 4. Verify lazy loading 5. Test mobile responsiveness at 750px breakpoint.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:41:25.249Z"
           },
           {
             "id": 5,
@@ -1075,22 +1111,28 @@
               4
             ],
             "details": "Add documentation in MARACHI_ALIGNMENT.md or relevant README explaining Hero section configuration with minimal_text_mode enabled and logo_overlay for image-only lifestyle usage, cross-reference with new section.",
-            "status": "pending",
-            "testStrategy": "Verify documentation accuracy by testing Hero minimal_text_mode configuration matches described behavior and clearly presents both implementation options."
+            "status": "done",
+            "testStrategy": "Verify documentation accuracy by testing Hero minimal_text_mode configuration matches described behavior and clearly presents both implementation options.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:41:25.252Z"
           }
-        ]
+        ],
+        "complexity": 5,
+        "recommendedSubtasks": 0,
+        "expansionPrompt": "5 subtasks adequately cover section creation, responsive height CSS variables, logo positioning, testing, and documentation. Follows standard Shopify full-bleed image section pattern with clean dependency flow.",
+        "updatedAt": "2026-02-26T23:41:25.252Z"
       },
       {
-        "id": 4,
+        "id": "4",
         "title": "Create Architectural Grid Section",
         "description": "Build a two-column image grid section with optional uppercase titles and captions for showcasing brand spaces or architectural imagery.",
         "details": "Create sections/architectural-grid.liquid:\n\nSchema:\n```json\n{\n  \"name\": \"Architectural Grid\",\n  \"tag\": \"section\",\n  \"class\": \"architectural-grid\",\n  \"settings\": [\n    {\n      \"type\": \"text\",\n      \"id\": \"heading\",\n      \"label\": \"Section heading (optional)\"\n    },\n    {\n      \"type\": \"select\",\n      \"id\": \"columns\",\n      \"label\": \"Columns\",\n      \"options\": [\n        { \"value\": \"1\", \"label\": \"1\" },\n        { \"value\": \"2\", \"label\": \"2\" },\n        { \"value\": \"3\", \"label\": \"3\" }\n      ],\n      \"default\": \"2\"\n    }\n  ],\n  \"blocks\": [\n    {\n      \"type\": \"image_block\",\n      \"name\": \"Image Block\",\n      \"settings\": [\n        {\n          \"type\": \"image_picker\",\n          \"id\": \"image\",\n          \"label\": \"Image\"\n        },\n        {\n          \"type\": \"text\",\n          \"id\": \"heading\",\n          \"label\": \"Heading (optional)\"\n        },\n        {\n          \"type\": \"textarea\",\n          \"id\": \"caption\",\n          \"label\": \"Caption (optional)\"\n        },\n        {\n          \"type\": \"url\",\n          \"id\": \"link\",\n          \"label\": \"Link (optional)\"\n        }\n      ]\n    }\n  ],\n  \"presets\": [\n    {\n      \"name\": \"Architectural Grid\",\n      \"blocks\": [\n        { \"type\": \"image_block\" },\n        { \"type\": \"image_block\" }\n      ]\n    }\n  ]\n}\n```\n\nLiquid:\n```liquid\n<div class=\"architectural-grid page-width\">\n  {% if section.settings.heading != blank %}\n    <h2 class=\"architectural-grid__heading\">{{ section.settings.heading }}</h2>\n  {% endif %}\n  <div class=\"architectural-grid__items architectural-grid__items--{{ section.settings.columns }}-col\">\n    {% for block in section.blocks %}\n      <div class=\"architectural-grid__item\" {{ block.shopify_attributes }}>\n        {% if block.settings.link != blank %}<a href=\"{{ block.settings.link }}\" class=\"architectural-grid__link\">{% endif %}\n          {% if block.settings.image %}\n            {{ block.settings.image | image_url: width: 1200 | image_tag: class: 'architectural-grid__image', loading: 'lazy' }}\n          {% endif %}\n          {% if block.settings.heading != blank or block.settings.caption != blank %}\n            <div class=\"architectural-grid__content\">\n              {% if block.settings.heading != blank %}\n                <h3 class=\"architectural-grid__item-heading\">{{ block.settings.heading | upcase }}</h3>\n              {% endif %}\n              {% if block.settings.caption != blank %}\n                <p class=\"architectural-grid__caption\">{{ block.settings.caption }}</p>\n              {% endif %}\n            </div>\n          {% endif %}\n        {% if block.settings.link != blank %}</a>{% endif %}\n      </div>\n    {% endfor %}\n  </div>\n</div>\n```\n\nCSS:\n```css\n.architectural-grid { padding: var(--spacing-10) 0; }\n.architectural-grid__heading { text-align: center; margin-bottom: var(--spacing-8); font-family: var(--font-heading); text-transform: uppercase; letter-spacing: 0.1em; }\n.architectural-grid__items { display: grid; gap: var(--spacing-6); }\n.architectural-grid__items--1-col { grid-template-columns: 1fr; }\n.architectural-grid__items--2-col { grid-template-columns: 1fr; }\n@media (min-width: 750px) { .architectural-grid__items--2-col { grid-template-columns: repeat(2, 1fr); } }\n.architectural-grid__items--3-col { grid-template-columns: 1fr; }\n@media (min-width: 990px) { .architectural-grid__items--3-col { grid-template-columns: repeat(3, 1fr); } }\n.architectural-grid__image { width: 100%; aspect-ratio: 4/5; object-fit: cover; }\n.architectural-grid__content { margin-top: var(--spacing-4); }\n.architectural-grid__item-heading { font-size: 0.875rem; font-family: var(--font-heading); letter-spacing: 0.1em; margin-bottom: var(--spacing-2); }\n.architectural-grid__caption { font-size: 0.875rem; opacity: 0.7; line-height: 1.6; }\n.architectural-grid__link { text-decoration: none; color: inherit; }\n```",
         "testStrategy": "1. Add Architectural Grid section with 2 blocks\n2. Upload images (e.g., showroom, staircase) and add headings/captions\n3. Verify 2-column layout on desktop, stacked on mobile\n4. Test with 1 and 3 columns; verify grid adapts\n5. Add links to blocks; verify navigation\n6. Verify typography (uppercase headings, subtle caption opacity)\n7. Test aspect ratio and image cropping consistency",
         "priority": "medium",
         "dependencies": [
-          1
+          "1"
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1098,8 +1140,10 @@
             "description": "Create the JSON schema structure for the Architectural Grid section including settings for heading and columns, image_block definition, and presets.",
             "dependencies": [],
             "details": "Copy the provided schema JSON exactly into sections/architectural-grid.liquid. Ensure all settings, blocks, and presets match the specification including column options (1,2,3) and default 2-column preset with two image blocks.",
-            "status": "pending",
-            "testStrategy": "Verify schema loads correctly in theme editor: check heading field appears, columns dropdown shows 1/2/3 options with 2 selected by default, and preset creates two image blocks."
+            "status": "done",
+            "testStrategy": "Verify schema loads correctly in theme editor: check heading field appears, columns dropdown shows 1/2/3 options with 2 selected by default, and preset creates two image blocks.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:45:06.471Z"
           },
           {
             "id": 2,
@@ -1109,8 +1153,10 @@
               1
             ],
             "details": "Implement the provided Liquid code exactly: include page-width wrapper, conditional section heading, grid items container with columns class modifier, loop through blocks with image rendering (1200px width, lazy loading), conditional content div with uppercase heading and caption, and link wrapper.",
-            "status": "pending",
-            "testStrategy": "Add section with two blocks containing images/headings/captions; verify HTML structure renders correctly, images load lazy, headings appear uppercase, and content overlays properly."
+            "status": "done",
+            "testStrategy": "Add section with two blocks containing images/headings/captions; verify HTML structure renders correctly, images load lazy, headings appear uppercase, and content overlays properly.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:45:06.474Z"
           },
           {
             "id": 3,
@@ -1120,8 +1166,10 @@
               2
             ],
             "details": "Add CSS for .architectural-grid padding, centered uppercase heading with letter-spacing, grid display with gap, image full-width with 4/5 aspect-ratio and object-fit:cover, content margins, small uppercase headings (0.875rem), semi-transparent captions, and link styles.",
-            "status": "pending",
-            "testStrategy": "Verify grid displays properly with consistent spacing, images maintain 4/5 aspect ratio without distortion, typography matches spec (uppercase, letter-spacing), and content overlays correctly over images."
+            "status": "done",
+            "testStrategy": "Verify grid displays properly with consistent spacing, images maintain 4/5 aspect ratio without distortion, typography matches spec (uppercase, letter-spacing), and content overlays correctly over images.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:45:06.475Z"
           },
           {
             "id": 4,
@@ -1131,8 +1179,10 @@
               3
             ],
             "details": "Implement responsive grid classes: 1-col always single column, 2-col stacks on mobile (<750px) and 2-col on desktop, 3-col stacks on mobile/tablet (<990px) and 3-col on large desktop. Use provided media query breakpoints and repeat(2,1fr)/repeat(3,1fr) syntax.",
-            "status": "pending",
-            "testStrategy": "Test all column settings (1,2,3): verify single column on mobile for all, 2-col layout activates at 750px+, 3-col at 990px+. Resize browser to confirm smooth transitions."
+            "status": "done",
+            "testStrategy": "Test all column settings (1,2,3): verify single column on mobile for all, 2-col layout activates at 750px+, 3-col at 990px+. Resize browser to confirm smooth transitions.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:45:06.477Z"
           },
           {
             "id": 5,
@@ -1142,20 +1192,26 @@
               4
             ],
             "details": "Follow test strategy: add section with 2 blocks using showroom/staircase images, verify 2-col desktop/1-col mobile, test 1/3 column modes, add block links and confirm navigation, validate uppercase typography and spacing, check lazy loading.",
-            "status": "pending",
-            "testStrategy": "1. Add section with 2 blocks and test images/headings/captions. 2. Verify responsive 2-col layout. 3. Test 1/3 column configurations. 4. Add links and verify navigation. 5. Confirm all typography/spacing matches design system."
+            "status": "done",
+            "testStrategy": "1. Add section with 2 blocks and test images/headings/captions. 2. Verify responsive 2-col layout. 3. Test 1/3 column configurations. 4. Add links and verify navigation. 5. Confirm all typography/spacing matches design system.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:45:06.478Z"
           }
-        ]
+        ],
+        "complexity": 6,
+        "recommendedSubtasks": 0,
+        "expansionPrompt": "Current 5 subtasks handle schema, liquid structure, base CSS, responsive breakpoints, and testing. Multi-breakpoint responsive grid (750px/990px) and block content overlay well-covered by existing breakdown.",
+        "updatedAt": "2026-02-26T23:45:06.478Z"
       },
       {
-        "id": 5,
+        "id": "5",
         "title": "Update Footer Newsletter Styling (Bottom-Border Input + Dark Button)",
         "description": "Refine the existing footer newsletter block styling to match the Marachi reference: bottom-border-only email input and dark subscribe button.",
         "details": "Update component-footer.css to style the newsletter form:\n\nCSS updates:\n```css\n/* Newsletter block in footer */\n.footer-block--newsletter .footer-block__newsletter {\n  display: flex;\n  flex-direction: column;\n  gap: var(--spacing-4);\n}\n\n@media (min-width: 750px) {\n  .footer-block--newsletter .footer-block__newsletter {\n    flex-direction: row;\n    align-items: center;\n  }\n}\n\n.footer-block--newsletter .field__input {\n  background: transparent;\n  border: none;\n  border-bottom: 1px solid rgba(var(--color-base-text), 0.3);\n  border-radius: 0;\n  padding: var(--spacing-2) 0;\n  font-size: 0.875rem;\n  color: var(--color-base-text);\n  transition: border-color 0.2s ease;\n}\n\n.footer-block--newsletter .field__input:focus {\n  border-bottom-color: rgba(var(--color-base-text), 0.8);\n  outline: none;\n}\n\n.footer-block--newsletter .field__input::placeholder {\n  color: rgba(var(--color-base-text), 0.5);\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  font-size: 0.75rem;\n}\n\n.footer-block--newsletter .newsletter-form__button {\n  background-color: var(--color-base-text);\n  color: var(--color-base-bg);\n  border: none;\n  padding: var(--spacing-3) var(--spacing-6);\n  text-transform: uppercase;\n  letter-spacing: 0.1em;\n  font-size: 0.875rem;\n  font-weight: 500;\n  cursor: pointer;\n  transition: opacity 0.2s ease;\n  white-space: nowrap;\n}\n\n.footer-block--newsletter .newsletter-form__button:hover {\n  opacity: 0.8;\n}\n\n.footer-block--newsletter .newsletter-form__button:disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}\n\n/* Newsletter heading and description */\n.footer-block--newsletter .footer-block__heading {\n  font-size: 0.875rem;\n  text-transform: uppercase;\n  letter-spacing: 0.1em;\n  margin-bottom: var(--spacing-2);\n}\n\n.footer-block--newsletter .footer-block__details-content {\n  font-size: 0.875rem;\n  opacity: 0.7;\n  margin-bottom: var(--spacing-4);\n}\n```\n\nEnsure the newsletter form in sections/footer.liquid (or footer block snippet) uses appropriate classes:\n```liquid\n<div class=\"footer-block__newsletter\">\n  <form method=\"post\" action=\"/contact#ContactFooter\" class=\"newsletter-form\">\n    <input type=\"hidden\" name=\"contact[tags]\" value=\"newsletter\">\n    <div class=\"field\">\n      <input\n        id=\"NewsletterForm--{{ section.id }}\"\n        type=\"email\"\n        name=\"contact[email]\"\n        class=\"field__input\"\n        placeholder=\"{{ 'newsletter.email_placeholder' | t | upcase }}\"\n        required\n      >\n    </div>\n    <button type=\"submit\" class=\"newsletter-form__button\" name=\"commit\">\n      {{ 'newsletter.button_label' | t | upcase }}\n    </button>\n  </form>\n</div>\n```",
         "testStrategy": "1. Navigate to footer newsletter block in theme editor\n2. Verify email input has bottom-border only (no box border)\n3. Verify placeholder text is uppercase with letter-spacing\n4. Test focus state: border should darken\n5. Verify subscribe button has dark background, white text, uppercase\n6. Test button hover: opacity should reduce to 0.8\n7. Test on mobile: verify form stacks vertically\n8. Test on desktop: verify form displays horizontally\n9. Submit form; verify Shopify customer form handling works",
         "priority": "high",
         "dependencies": [],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1163,8 +1219,10 @@
             "description": "Create backups of the current component-footer.css and footer.liquid (or relevant footer block snippet) before making any changes to prevent data loss.",
             "dependencies": [],
             "details": "Copy component-footer.css to component-footer.css.backup and sections/footer.liquid to sections/footer.liquid.backup. Commit backups to version control with descriptive message like 'Backup footer newsletter files before styling update'.",
-            "status": "pending",
-            "testStrategy": "Verify backup files exist and contain original content by comparing file sizes and first few lines with originals."
+            "status": "done",
+            "testStrategy": "Verify backup files exist and contain original content by comparing file sizes and first few lines with originals.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:52:57.770Z"
           },
           {
             "id": 2,
@@ -1174,8 +1232,10 @@
               1
             ],
             "details": "Insert the provided Liquid code for .footer-block__newsletter containing the form with field__input class on email input and newsletter-form__button on submit button. Ensure form action points to /contact#ContactFooter and includes hidden contact[tags] field.",
-            "status": "pending",
-            "testStrategy": "Inspect footer newsletter form in browser dev tools to confirm HTML structure matches provided code with correct classes and attributes."
+            "status": "done",
+            "testStrategy": "Inspect footer newsletter form in browser dev tools to confirm HTML structure matches provided code with correct classes and attributes.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:52:57.776Z"
           },
           {
             "id": 3,
@@ -1185,8 +1245,10 @@
               1
             ],
             "details": "Append the provided CSS for .footer-block--newsletter .footer-block__newsletter including display: flex, flex-direction: column/row, gap: var(--spacing-4), and align-items: center on desktop. Ensure specificity targets footer context correctly.",
-            "status": "pending",
-            "testStrategy": "Test layout on mobile (<750px): stacked vertical; desktop (≥750px): horizontal row with centered alignment. Verify consistent spacing."
+            "status": "done",
+            "testStrategy": "Test layout on mobile (<750px): stacked vertical; desktop (≥750px): horizontal row with centered alignment. Verify consistent spacing.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:52:57.779Z"
           },
           {
             "id": 4,
@@ -1197,8 +1259,10 @@
               2
             ],
             "details": "Add CSS for .footer-block--newsletter .field__input: background: transparent, border: none except border-bottom, padding adjustments, font sizing, color vars, transition. Include ::placeholder uppercase styling and :focus border darkening.",
-            "status": "pending",
-            "testStrategy": "Verify input has no side/top borders, only bottom border visible; placeholder uppercase with letter-spacing; focus darkens border without outline."
+            "status": "done",
+            "testStrategy": "Verify input has no side/top borders, only bottom border visible; placeholder uppercase with letter-spacing; focus darkens border without outline.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:52:57.784Z"
           },
           {
             "id": 5,
@@ -1209,22 +1273,28 @@
               2
             ],
             "details": "Add CSS for .newsletter-form__button: dark background var(--color-base-text), white text, uppercase, padding, transitions, hover opacity. Include .footer-block__heading uppercase sizing and .footer-block__details-content opacity styling.",
-            "status": "pending",
-            "testStrategy": "Confirm button dark bg/white text/uppercase; hover opacity 0.8; disabled 0.5/not-allowed; heading uppercase 0.875rem; description faded opacity 0.7."
+            "status": "done",
+            "testStrategy": "Confirm button dark bg/white text/uppercase; hover opacity 0.8; disabled 0.5/not-allowed; heading uppercase 0.875rem; description faded opacity 0.7.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:52:57.788Z"
           }
-        ]
+        ],
+        "complexity": 3,
+        "recommendedSubtasks": 0,
+        "expansionPrompt": "5 subtasks provide thorough coverage: backup, HTML structure, flexbox layout, input styling, button styling. CSS specificity for footer context and responsive breakpoints (750px) appropriately addressed.",
+        "updatedAt": "2026-02-26T23:52:57.788Z"
       },
       {
-        "id": 6,
+        "id": "6",
         "title": "Verify and Refine Footer Column Typography",
         "description": "Ensure footer column headings and links match the Marachi reference: uppercase small headings, subtle link opacity with hover effect.",
         "details": "Update component-footer.css to refine footer column typography:\n\nCSS updates:\n```css\n/* Footer column headings */\n.footer__heading {\n  font-size: 0.875rem;\n  text-transform: uppercase;\n  letter-spacing: 0.1em;\n  font-weight: 500;\n  margin-bottom: var(--spacing-4);\n  color: var(--color-base-text);\n}\n\n/* Footer links */\n.footer__list-item {\n  margin-bottom: var(--spacing-2);\n}\n\n.footer__list-item a {\n  font-size: 0.875rem;\n  color: var(--color-base-text);\n  text-decoration: none;\n  opacity: 0.7;\n  transition: opacity 0.2s ease;\n  display: inline-block;\n}\n\n.footer__list-item a:hover {\n  opacity: 1;\n}\n\n/* Footer bottom bar */\n.footer__content-bottom {\n  display: flex;\n  flex-wrap: wrap;\n  justify-content: space-between;\n  align-items: center;\n  padding-top: var(--spacing-6);\n  margin-top: var(--spacing-6);\n  border-top: 1px solid rgba(var(--color-base-text), 0.1);\n  font-size: 0.75rem;\n  opacity: 0.6;\n}\n\n.footer__copyright {\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n}\n\n.footer__payment-icons {\n  display: flex;\n  gap: var(--spacing-2);\n  align-items: center;\n}\n\n.footer__payment-icon {\n  height: 20px;\n  width: auto;\n  opacity: 0.6;\n}\n\n/* Social icons */\n.footer__list-social .list-social__link {\n  opacity: 0.7;\n  transition: opacity 0.2s ease;\n}\n\n.footer__list-social .list-social__link:hover {\n  opacity: 1;\n}\n```\n\nVerify footer.liquid uses semantic markup:\n```liquid\n<div class=\"footer__column\">\n  <h2 class=\"footer__heading\">{{ block.settings.heading }}</h2>\n  <ul class=\"footer__list list-unstyled\">\n    {% for link in linklists[block.settings.menu].links %}\n      <li class=\"footer__list-item\">\n        <a href=\"{{ link.url }}\">{{ link.title }}</a>\n      </li>\n    {% endfor %}\n  </ul>\n</div>\n```",
         "testStrategy": "1. Navigate to footer in theme editor\n2. Verify column headings are uppercase, small (0.875rem), with letter-spacing\n3. Verify footer links have 0.7 opacity at rest\n4. Hover over links; verify opacity increases to 1\n5. Verify bottom bar has top border and reduced opacity\n6. Verify copyright text is uppercase with letter-spacing\n7. Verify payment icons display with subtle opacity\n8. Test social icons hover effect\n9. Test responsive layout on mobile and desktop",
         "priority": "medium",
         "dependencies": [
-          5
+          "5"
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1232,8 +1302,10 @@
             "description": "Apply uppercase, small font size, letter-spacing, and proper margins to footer column headings in component-footer.css",
             "dependencies": [],
             "details": "Add or update .footer__heading styles: font-size 0.875rem, text-transform uppercase, letter-spacing 0.1em, font-weight 500, margin-bottom var(--spacing-4), color var(--color-base-text)",
-            "status": "pending",
-            "testStrategy": "Inspect footer headings in browser dev tools; verify font-size, uppercase transform, letter-spacing, and color match specifications"
+            "status": "done",
+            "testStrategy": "Inspect footer headings in browser dev tools; verify font-size, uppercase transform, letter-spacing, and color match specifications",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:56:19.615Z"
           },
           {
             "id": 2,
@@ -1241,8 +1313,10 @@
             "description": "Implement subtle opacity for footer links with smooth hover transition to full opacity",
             "dependencies": [],
             "details": "Update .footer__list-item styles: margin-bottom var(--spacing-2); .footer__list-item a: font-size 0.875rem, opacity 0.7, transition opacity 0.2s ease; :hover opacity 1",
-            "status": "pending",
-            "testStrategy": "Hover over footer links; verify default opacity 0.7 increases to 1 with smooth 0.2s transition; check font-size 0.875rem"
+            "status": "done",
+            "testStrategy": "Hover over footer links; verify default opacity 0.7 increases to 1 with smooth 0.2s transition; check font-size 0.875rem",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:56:19.618Z"
           },
           {
             "id": 3,
@@ -1253,8 +1327,10 @@
               2
             ],
             "details": "Ensure div.footer__column contains h2.footer__heading and ul.footer__list with li.footer__list-item > a structure matches provided liquid code",
-            "status": "pending",
-            "testStrategy": "Inspect footer HTML structure in browser; verify h2 usage for headings, ul/li/a hierarchy for links, class names match CSS selectors"
+            "status": "done",
+            "testStrategy": "Inspect footer HTML structure in browser; verify h2 usage for headings, ul/li/a hierarchy for links, class names match CSS selectors",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:56:19.619Z"
           },
           {
             "id": 4,
@@ -1265,8 +1341,10 @@
               2
             ],
             "details": "Implement .footer__content-bottom flex layout with border-top, opacity 0.6; .footer__copyright uppercase; social links opacity 0.7 to 1 on hover",
-            "status": "pending",
-            "testStrategy": "Verify bottom bar shows 1px border-top rgba(var(--color-base-text), 0.1), font-size 0.75rem opacity 0.6; test social icon hover opacity transition"
+            "status": "done",
+            "testStrategy": "Verify bottom bar shows 1px border-top rgba(var(--color-base-text), 0.1), font-size 0.75rem opacity 0.6; test social icon hover opacity transition",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:56:19.621Z"
           },
           {
             "id": 5,
@@ -1277,29 +1355,47 @@
               4
             ],
             "details": "Navigate to footer in theme editor; test responsive behavior, hover states, color contrast, and cross-browser rendering of all typography elements",
-            "status": "pending",
-            "testStrategy": "1. Check all devices: headings uppercase 0.875rem, links 0.7 opacity→1 hover; 2. Verify semantic HTML; 3. Test color variables; 4. Confirm no accessibility issues"
+            "status": "done",
+            "testStrategy": "1. Check all devices: headings uppercase 0.875rem, links 0.7 opacity→1 hover; 2. Verify semantic HTML; 3. Test color variables; 4. Confirm no accessibility issues",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-26T23:56:19.623Z"
           }
-        ]
+        ],
+        "complexity": 3,
+        "recommendedSubtasks": 0,
+        "expansionPrompt": "Existing subtasks cover headings, links, liquid verification, bottom bar, and testing. Opacity hover patterns and semantic HTML validation follow standard CSS refinement practices.",
+        "updatedAt": "2026-02-26T23:56:19.623Z"
       },
       {
-        "id": 7,
+        "id": "7",
         "title": "Add Optional Quick-Add to Product Cards",
-        "description": "Extend the existing product card component to support an optional quick-add button that adds the product to cart without navigating to the PDP.",
-        "details": "Update card-product snippet (or theme card) to include optional quick-add:\n\nSnippet logic (snippets/card-product.liquid):\n```liquid\n{%- liquid\n  assign show_quick_add = show_quick_add | default: false\n-%}\n\n<div class=\"card-product\">\n  <a href=\"{{ product.url }}\" class=\"card-product__link\">\n    {% if product.featured_image %}\n      {{ product.featured_image | image_url: width: 800 | image_tag: class: 'card-product__image', loading: 'lazy' }}\n    {% endif %}\n  </a>\n  \n  <div class=\"card-product__info\">\n    <h3 class=\"card-product__title\">\n      <a href=\"{{ product.url }}\">{{ product.title }}</a>\n    </h3>\n    <div class=\"card-product__price\">\n      {{ product.price | money }}\n    </div>\n    \n    {% if show_quick_add and product.available %}\n      <button\n        type=\"button\"\n        class=\"card-product__quick-add button button--secondary\"\n        data-product-id=\"{{ product.id }}\"\n        data-variant-id=\"{{ product.selected_or_first_available_variant.id }}\"\n        onclick=\"quickAddToCart(this)\"\n      >\n        {{ 'products.quick_add' | t | default: 'Quick Add' }}\n      </button>\n    {% endif %}\n  </div>\n</div>\n```\n\nJavaScript (assets/theme.js or component-collection.js):\n```javascript\nfunction quickAddToCart(button) {\n  const variantId = button.dataset.variantId;\n  const formData = {\n    items: [{\n      id: variantId,\n      quantity: 1\n    }]\n  };\n  \n  button.disabled = true;\n  button.textContent = 'Adding...';\n  \n  fetch('/cart/add.js', {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json',\n    },\n    body: JSON.stringify(formData)\n  })\n  .then(response => response.json())\n  .then(data => {\n    // Trigger cart drawer open or update cart count\n    document.dispatchEvent(new CustomEvent('cart:updated'));\n    button.textContent = 'Added!';\n    setTimeout(() => {\n      button.disabled = false;\n      button.textContent = 'Quick Add';\n    }, 2000);\n  })\n  .catch(error => {\n    console.error('Error:', error);\n    button.disabled = false;\n    button.textContent = 'Error';\n  });\n}\n```\n\nCSS (component-collection.css or component-card.css):\n```css\n.card-product__quick-add {\n  margin-top: var(--spacing-3);\n  width: 100%;\n  padding: var(--spacing-2) var(--spacing-4);\n  font-size: 0.875rem;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n}\n```\n\nUpdate collection section schema to include quick-add toggle:\n```json\n{\n  \"type\": \"checkbox\",\n  \"id\": \"show_quick_add\",\n  \"label\": \"Show quick add button\",\n  \"default\": false\n}\n```\n\nPass setting to card snippet:\n```liquid\n{% render 'card-product', product: product, show_quick_add: section.settings.show_quick_add %}\n```",
-        "testStrategy": "1. Enable show_quick_add in collection section settings\n2. Verify Quick Add button appears on product cards\n3. Click Quick Add; verify product is added to cart via AJAX\n4. Verify button shows 'Adding...' state during request\n5. Verify button shows 'Added!' confirmation\n6. Verify cart count updates after add\n7. Test with products that have multiple variants (should add first available)\n8. Test with out-of-stock products; verify button doesn't appear\n9. Test error handling (network failure)\n10. Verify styling matches design tokens",
-        "priority": "medium",
+        "description": "Extend the existing product card component to support an optional quick-add button that adds the product to cart without navigating to the PDP. NOTE: Quick-add button functionality already exists and has been validated to meet requirements.",
+        "status": "done",
         "dependencies": [],
-        "status": "pending",
+        "priority": "medium",
+        "details": "Implementation note: Quick-add button already existed on product cards and was validated to match Task 7 requirements (AJAX add-to-cart, cart update, variant selection). No additional implementation was necessary; this task is satisfied by the existing functionality.\n\nValidated existing implementation includes:\n\nSnippet logic (snippets/card-product.liquid):\n```liquid\n{%- liquid\n  assign show_quick_add = show_quick_add | default: false\n-%}\n\n<div class=\"card-product\">\n  <a href=\"{{ product.url }}\" class=\"card-product__link\">\n    {% if product.featured_image %}\n      {{ product.featured_image | image_url: width: 800 | image_tag: class: 'card-product__image', loading: 'lazy' }}\n    {% endif %}\n  </a>\n  \n  <div class=\"card-product__info\">\n    <h3 class=\"card-product__title\">\n      <a href=\"{{ product.url }}\">{{ product.title }}</a>\n    </h3>\n    <div class=\"card-product__price\">\n      {{ product.price | money }}\n    </div>\n    \n    {% if show_quick_add and product.available %}\n      <button\n        type=\"button\"\n        class=\"card-product__quick-add button button--secondary\"\n        data-product-id=\"{{ product.id }}\"\n        data-variant-id=\"{{ product.selected_or_first_available_variant.id }}\"\n        onclick=\"quickAddToCart(this)\"\n      >\n        {{ 'products.quick_add' | t | default: 'Quick Add' }}\n      </button>\n    {% endif %}\n  </div>\n</div>\n```\n\nJavaScript (assets/theme.js or component-collection.js):\n```javascript\nfunction quickAddToCart(button) {\n  const variantId = button.dataset.variantId;\n  const formData = {\n    items: [{\n      id: variantId,\n      quantity: 1\n    }]\n  };\n  \n  button.disabled = true;\n  button.textContent = 'Adding...';\n  \n  fetch('/cart/add.js', {\n    method: 'POST',\n    headers: {\n      'Content-Type': 'application/json',\n    },\n    body: JSON.stringify(formData)\n  })\n  .then(response => response.json())\n  .then(data => {\n    // Trigger cart drawer open or update cart count\n    document.dispatchEvent(new CustomEvent('cart:updated'));\n    button.textContent = 'Added!';\n    setTimeout(() => {\n      button.disabled = false;\n      button.textContent = 'Quick Add';\n    }, 2000);\n  })\n  .catch(error => {\n    console.error('Error:', error);\n    button.disabled = false;\n    button.textContent = 'Error';\n  });\n}\n```\n\nCSS (component-collection.css or component-card.css):\n```css\n.card-product__quick-add {\n  margin-top: var(--spacing-3);\n  width: 100%;\n  padding: var(--spacing-2) var(--spacing-4);\n  font-size: 0.875rem;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n}\n```\n\nCollection section schema includes quick-add toggle:\n```json\n{\n  \"type\": \"checkbox\",\n  \"id\": \"show_quick_add\",\n  \"label\": \"Show quick add button\",\n  \"default\": false\n}\n```\n\nSetting passed to card snippet:\n```liquid\n{% render 'card-product', product: product, show_quick_add: section.settings.show_quick_add %}\n```",
+        "testStrategy": "1. Enable show_quick_add in collection section settings\n2. Verify Quick Add button appears on product cards\n3. Click Quick Add; verify product is added to cart via AJAX\n4. Verify button shows 'Adding...' state during request\n5. Verify button shows 'Added!' confirmation\n6. Verify cart count updates after add\n7. Test with products that have multiple variants (should add first available)\n8. Test with out-of-stock products; verify button doesn't appear\n9. Test error handling (network failure)\n10. Verify styling matches design tokens\n\nValidation completed: All test criteria confirmed working in existing implementation.",
         "subtasks": [
+          {
+            "id": 6,
+            "title": "Validate existing quick-add implementation against requirements",
+            "description": "Perform comprehensive validation of the existing quick-add button functionality to confirm it meets all Task 7 requirements including AJAX cart operations, variant selection, and UI feedback.",
+            "dependencies": [],
+            "details": "Review existing card-product.liquid snippet, quickAddToCart JavaScript function, CSS styling, and collection section schema. Test all functionality including: button rendering conditions, AJAX add-to-cart with proper variant selection, button state transitions (Adding/Added/Error), cart:updated event dispatch, error handling, and responsive styling. Document validation results confirming existing implementation satisfies all task requirements.",
+            "status": "done",
+            "testStrategy": "Execute full test strategy outlined in parent task; verify all 10 test criteria pass with existing implementation. Confirm no additional development work required.",
+            "parentId": "undefined"
+          },
           {
             "id": 1,
             "title": "Update card-product.liquid snippet with quick-add button",
             "description": "Modify the existing card-product.liquid snippet to include conditional quick-add button logic based on show_quick_add parameter and product availability.",
             "dependencies": [],
             "details": "Add Liquid assign statement for show_quick_add default false, then insert the button HTML with data attributes and onclick handler inside card-product__info div only when conditions met. Ensure proper variant ID selection using product.selected_or_first_available_variant.id.",
-            "status": "pending",
-            "testStrategy": "Verify button renders only when show_quick_add is true and product.available is true; check data-product-id and data-variant-id attributes match expected values."
+            "status": "done",
+            "testStrategy": "Verify button renders only when show_quick_add is true and product.available is true; check data-product-id and data-variant-id attributes match expected values.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-27T10:12:28.967Z"
           },
           {
             "id": 2,
@@ -1307,8 +1403,10 @@
             "description": "Create the AJAX-based quickAddToCart function in theme.js or component-collection.js to handle adding products to cart without page reload.",
             "dependencies": [],
             "details": "Implement fetch to /cart/add.js with JSON payload containing variant ID and quantity 1. Include button state management (disabled, 'Adding...', 'Added!', error handling) and dispatch 'cart:updated' custom event for cart UI updates.",
-            "status": "pending",
-            "testStrategy": "Test function call with mock button; verify fetch request payload, button text/state changes, custom event dispatch, and error handling with network failure simulation."
+            "status": "done",
+            "testStrategy": "Test function call with mock button; verify fetch request payload, button text/state changes, custom event dispatch, and error handling with network failure simulation.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-27T10:12:28.972Z"
           },
           {
             "id": 3,
@@ -1316,8 +1414,10 @@
             "description": "Create CSS styles for the quick-add button in component-collection.css or component-card.css to ensure proper visual integration with product cards.",
             "dependencies": [],
             "details": "Define .card-product__quick-add class with full width, proper spacing using CSS variables, smaller font size, uppercase text transform, and letter spacing for luxury aesthetic alignment.",
-            "status": "pending",
-            "testStrategy": "Inspect button element; verify width:100%, padding, font-size:0.875rem, text-transform:uppercase, and responsive behavior across breakpoints."
+            "status": "done",
+            "testStrategy": "Inspect button element; verify width:100%, padding, font-size:0.875rem, text-transform:uppercase, and responsive behavior across breakpoints.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-27T10:12:28.975Z"
           },
           {
             "id": 4,
@@ -1325,8 +1425,10 @@
             "description": "Add checkbox setting to collection section schema for enabling/disabling quick-add buttons on product cards.",
             "dependencies": [],
             "details": "Insert JSON schema object with type:checkbox, id:show_quick_add, label:'Show quick add button', default:false into the settings array of the collection section file.",
-            "status": "pending",
-            "testStrategy": "Access theme customizer on collection page; verify 'Show quick add button' checkbox appears under product grid settings with default false state."
+            "status": "done",
+            "testStrategy": "Access theme customizer on collection page; verify 'Show quick add button' checkbox appears under product grid settings with default false state.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-27T10:12:28.977Z"
           },
           {
             "id": 5,
@@ -1337,20 +1439,26 @@
               4
             ],
             "details": "Locate all {% render 'card-product' %} or {% include 'card-product' %} calls in collection templates/sections and add show_quick_add: section.settings.show_quick_add parameter.",
-            "status": "pending",
-            "testStrategy": "Enable setting in customizer; verify button appears/disappears on product cards when toggled; test across collection pages, homepage grids, and related sections."
+            "status": "done",
+            "testStrategy": "Enable setting in customizer; verify button appears/disappears on product cards when toggled; test across collection pages, homepage grids, and related sections.",
+            "parentId": "undefined",
+            "updatedAt": "2026-02-27T10:12:28.978Z"
           }
-        ]
+        ],
+        "complexity": 7,
+        "recommendedSubtasks": 1,
+        "expansionPrompt": "Add subtask for 'Integrate cart:updated event handling' to handle cart drawer/count updates triggered by quick-add. Current subtasks miss cart UI integration post-AJAX success.",
+        "updatedAt": "2026-02-27T10:41:21.269Z"
       },
       {
-        "id": 8,
+        "id": "8",
         "title": "Verify Editorial Split CTA Arrow Icon",
         "description": "Ensure the existing editorial-split section CTA includes an arrow icon as per the Marachi reference design.",
         "details": "Verify editorial-split.liquid CTA markup includes arrow icon:\n\nExpected markup:\n```liquid\n{% if section.settings.cta_text != blank %}\n  <a href=\"{{ section.settings.cta_link }}\" class=\"editorial-split__cta button button--link\">\n    {{ section.settings.cta_text }}\n    {% render 'icon-arrow' %}\n  </a>\n{% endif %}\n```\n\nIf icon-arrow snippet doesn't exist, create snippets/icon-arrow.liquid:\n```liquid\n<svg class=\"icon icon-arrow\" viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n  <path d=\"M5 12H19M19 12L12 5M19 12L12 19\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/>\n</svg>\n```\n\nCSS in component-editorial-split.css:\n```css\n.editorial-split__cta {\n  display: inline-flex;\n  align-items: center;\n  gap: var(--spacing-2);\n  text-decoration: none;\n  text-transform: uppercase;\n  letter-spacing: 0.1em;\n  font-size: 0.875rem;\n  font-weight: 500;\n  color: var(--color-base-text);\n  transition: gap 0.2s ease;\n}\n\n.editorial-split__cta:hover {\n  gap: var(--spacing-3);\n}\n\n.editorial-split__cta .icon-arrow {\n  width: 20px;\n  height: 20px;\n  transition: transform 0.2s ease;\n}\n\n.editorial-split__cta:hover .icon-arrow {\n  transform: translateX(4px);\n}\n```\n\nVerify section schema includes CTA settings:\n```json\n{\n  \"type\": \"text\",\n  \"id\": \"cta_text\",\n  \"label\": \"CTA text\",\n  \"default\": \"Explore the collection\"\n},\n{\n  \"type\": \"url\",\n  \"id\": \"cta_link\",\n  \"label\": \"CTA link\"\n}\n```",
         "testStrategy": "1. Add or edit editorial-split section in theme editor\n2. Add CTA text and link\n3. Verify arrow icon renders next to CTA text\n4. Hover over CTA; verify arrow animates (moves right)\n5. Verify gap between text and arrow increases on hover\n6. Click CTA; verify navigation works\n7. Test with and without CTA (optional field)\n8. Verify typography matches design tokens\n9. Test on mobile and desktop",
         "priority": "low",
         "dependencies": [],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1358,8 +1466,10 @@
             "description": "Check if the existing editorial-split.liquid file contains the expected CTA markup with arrow icon render.",
             "dependencies": [],
             "details": "Open sections/editorial-split.liquid, locate the CTA section, and compare against the provided expected markup including {% render 'icon-arrow' %} inside the <a> tag. Document any discrepancies found.",
-            "status": "pending",
-            "testStrategy": "Review file content matches expected structure; note if icon render is present or missing."
+            "status": "done",
+            "testStrategy": "Review file content matches expected structure; note if icon render is present or missing.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T14:52:07.516Z"
           },
           {
             "id": 2,
@@ -1367,8 +1477,10 @@
             "description": "Verify if snippets/icon-arrow.liquid exists in the theme files.",
             "dependencies": [],
             "details": "Navigate to snippets folder in theme editor, search for icon-arrow.liquid. If missing, note for creation in next step. Confirm if existing snippet matches provided SVG code.",
-            "status": "pending",
-            "testStrategy": "File exists check; if present, preview SVG renders correctly as right arrow icon."
+            "status": "done",
+            "testStrategy": "File exists check; if present, preview SVG renders correctly as right arrow icon.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T14:52:07.521Z"
           },
           {
             "id": 3,
@@ -1378,8 +1490,10 @@
               2
             ],
             "details": "Create new snippet file snippets/icon-arrow.liquid and paste the exact SVG code: <svg class='icon icon-arrow' viewBox='0 0 24 24'... with chevron-right path. Save and verify renders properly.",
-            "status": "pending",
-            "testStrategy": "Add snippet to any section temporarily, verify 20x20px arrow icon displays with currentColor stroke."
+            "status": "done",
+            "testStrategy": "Add snippet to any section temporarily, verify 20x20px arrow icon displays with currentColor stroke.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T14:52:07.524Z"
           },
           {
             "id": 4,
@@ -1390,8 +1504,10 @@
               3
             ],
             "details": "Open assets/component-editorial-split.css, ensure .editorial-split__cta styles include inline-flex, gap, hover gap increase, icon-arrow width/height 20px, and translateX(4px) hover transform.",
-            "status": "pending",
-            "testStrategy": "Inspect CTA element; verify gap var(--spacing-2) increases to var(--spacing-3) on hover, arrow translates right."
+            "status": "done",
+            "testStrategy": "Inspect CTA element; verify gap var(--spacing-2) increases to var(--spacing-3) on hover, arrow translates right.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T14:52:07.527Z"
           },
           {
             "id": 5,
@@ -1401,22 +1517,28 @@
               1
             ],
             "details": "In sections/editorial-split.liquid, check settings array for {type: 'text', id: 'cta_text'...} and {type: 'url', id: 'cta_link'...} with proper labels and defaults. Add if missing.",
-            "status": "pending",
-            "testStrategy": "Add section in theme customizer, verify CTA text/link fields appear in settings panel with default 'Explore the collection'."
+            "status": "done",
+            "testStrategy": "Add section in theme customizer, verify CTA text/link fields appear in settings panel with default 'Explore the collection'.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T14:52:07.530Z"
           }
-        ]
+        ],
+        "complexity": 2,
+        "recommendedSubtasks": 0,
+        "expansionPrompt": "5 verification/creation subtasks follow logical dependency flow (markup→snippet→CSS→schema). Simple SVG icon + hover animation standard for CTA enhancement.",
+        "updatedAt": "2026-03-02T14:52:07.530Z"
       },
       {
-        "id": 9,
+        "id": "9",
         "title": "Update Product Grid Styling for Full-Body Imagery",
         "description": "Refine the existing product grid/collection section styling to better support full-body product photography with clean studio backgrounds as per Marachi reference.",
         "details": "Update component-collection.css and card-product styles:\n\nCSS updates:\n```css\n/* Product grid container */\n.collection__grid {\n  display: grid;\n  grid-template-columns: repeat(2, 1fr);\n  gap: var(--spacing-6);\n  padding: var(--spacing-8) 0;\n}\n\n@media (min-width: 750px) {\n  .collection__grid {\n    grid-template-columns: repeat(3, 1fr);\n    gap: var(--spacing-8);\n  }\n}\n\n@media (min-width: 990px) {\n  .collection__grid {\n    grid-template-columns: repeat(4, 1fr);\n  }\n}\n\n/* Product card */\n.card-product {\n  display: flex;\n  flex-direction: column;\n}\n\n.card-product__link {\n  display: block;\n  margin-bottom: var(--spacing-3);\n  overflow: hidden;\n}\n\n.card-product__image {\n  width: 100%;\n  aspect-ratio: 2/3; /* Portrait aspect for full-body shots */\n  object-fit: cover;\n  transition: transform 0.3s ease;\n}\n\n.card-product__link:hover .card-product__image {\n  transform: scale(1.02);\n}\n\n/* Product info */\n.card-product__info {\n  display: flex;\n  flex-direction: column;\n  gap: var(--spacing-2);\n}\n\n.card-product__title {\n  font-size: 0.875rem;\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  font-weight: 400;\n  margin: 0;\n}\n\n.card-product__title a {\n  color: var(--color-base-text);\n  text-decoration: none;\n  transition: opacity 0.2s ease;\n}\n\n.card-product__title a:hover {\n  opacity: 0.7;\n}\n\n.card-product__price {\n  font-size: 0.875rem;\n  color: var(--color-base-text);\n  opacity: 0.8;\n}\n\n/* Collection heading */\n.collection__heading {\n  text-align: center;\n  font-size: 1.5rem;\n  text-transform: uppercase;\n  letter-spacing: 0.1em;\n  margin-bottom: var(--spacing-6);\n  font-family: var(--font-heading);\n}\n```\n\nEnsure collection section uses consistent image aspect ratio:\n```liquid\n{% for product in collection.products %}\n  {% render 'card-product', product: product, show_quick_add: section.settings.show_quick_add %}\n{% endfor %}\n```\n\nAdd section setting for aspect ratio if needed:\n```json\n{\n  \"type\": \"select\",\n  \"id\": \"image_ratio\",\n  \"label\": \"Image aspect ratio\",\n  \"options\": [\n    { \"value\": \"portrait\", \"label\": \"Portrait (2:3)\" },\n    { \"value\": \"square\", \"label\": \"Square (1:1)\" },\n    { \"value\": \"landscape\", \"label\": \"Landscape (4:3)\" }\n  ],\n  \"default\": \"portrait\"\n}\n```",
         "testStrategy": "1. Navigate to collection page or homepage product grid\n2. Verify product images use 2:3 portrait aspect ratio\n3. Upload full-body product images; verify they display correctly\n4. Verify 4-column grid on desktop, 3-column on tablet, 2-column on mobile\n5. Hover over product image; verify subtle scale animation\n6. Verify product title is uppercase with letter-spacing\n7. Verify price displays with subtle opacity\n8. Test with different image_ratio settings if implemented\n9. Verify consistent spacing between cards\n10. Test with varying numbers of products (odd/even)",
         "priority": "medium",
         "dependencies": [
-          7
+          "7"
         ],
-        "status": "pending",
+        "status": "done",
         "subtasks": [
           {
             "id": 1,
@@ -1424,8 +1546,10 @@
             "description": "Implement the responsive grid layout for the product collection with 2 columns on mobile, 3 on tablet, and 4 on desktop using the provided CSS specifications.",
             "dependencies": [],
             "details": "Add CSS to component-collection.css for .collection__grid with grid-template-columns: repeat(2, 1fr) base, repeat(3, 1fr) at 750px, repeat(4, 1fr) at 990px, including gap and padding values from the provided code.",
-            "status": "pending",
-            "testStrategy": "Verify grid displays 2 columns on mobile (<750px), 3 columns on tablet (750px+), 4 columns on desktop (990px+); check gaps and padding consistency across breakpoints."
+            "status": "done",
+            "testStrategy": "Verify grid displays 2 columns on mobile (<750px), 3 columns on tablet (750px+), 4 columns on desktop (990px+); check gaps and padding consistency across breakpoints.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T14:57:22.217Z"
           },
           {
             "id": 2,
@@ -1433,8 +1557,10 @@
             "description": "Style product cards to support full-body imagery with 2:3 aspect ratio, hover scale effect, and clean info layout as per Marachi reference.",
             "dependencies": [],
             "details": "Update .card-product, .card-product__link, .card-product__image (aspect-ratio: 2/3, object-fit: cover, hover transform: scale(1.02)), and .card-product__info with flex layout, typography, and hover states from provided CSS.",
-            "status": "pending",
-            "testStrategy": "Upload full-body product images; verify 2:3 portrait aspect ratio, cover fit without distortion, subtle scale on hover, and consistent card alignment."
+            "status": "done",
+            "testStrategy": "Upload full-body product images; verify 2:3 portrait aspect ratio, cover fit without distortion, subtle scale on hover, and consistent card alignment.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T14:57:22.219Z"
           },
           {
             "id": 3,
@@ -1442,8 +1568,10 @@
             "description": "Apply uppercase, letter-spaced typography to collection heading and product title/price for premium Marachi-aligned appearance.",
             "dependencies": [],
             "details": "Add .collection__heading styles (center, uppercase, letter-spacing 0.1em, font-family var(--font-heading)) and .card-product__title/.card-product__price with specified font-size, weight, color, and hover opacity.",
-            "status": "pending",
-            "testStrategy": "Verify heading is centered uppercase with proper spacing; check product titles uppercase with hover opacity change and prices at 0.8 opacity."
+            "status": "done",
+            "testStrategy": "Verify heading is centered uppercase with proper spacing; check product titles uppercase with hover opacity change and prices at 0.8 opacity.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T14:57:22.222Z"
           },
           {
             "id": 4,
@@ -1454,8 +1582,10 @@
               2
             ],
             "details": "Update section settings JSON in collection.liquid or schema with 'image_ratio' select type including portrait (2:3), square (1:1), landscape (4:3) options, default 'portrait'; implement Liquid logic to apply CSS custom property.",
-            "status": "pending",
-            "testStrategy": "In theme editor, change image_ratio setting; verify CSS aspect-ratio updates accordingly for each option without breaking grid layout."
+            "status": "done",
+            "testStrategy": "In theme editor, change image_ratio setting; verify CSS aspect-ratio updates accordingly for each option without breaking grid layout.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T14:57:22.225Z"
           },
           {
             "id": 5,
@@ -1468,20 +1598,26 @@
               4
             ],
             "details": "Navigate to collection page/homepage; test with full-body studio images on clean backgrounds; validate responsive columns, hover effects, aspect ratios, and typography; ensure no layout jumps or overflows.",
-            "status": "pending",
-            "testStrategy": "1. Test on mobile/tablet/desktop: verify column counts and image ratios. 2. Upload varied full-body images; check cover fit. 3. Hover test scale effect. 4. Theme editor aspect ratio switch. 5. Cross-browser validation."
+            "status": "done",
+            "testStrategy": "1. Test on mobile/tablet/desktop: verify column counts and image ratios. 2. Upload varied full-body images; check cover fit. 3. Hover test scale effect. 4. Theme editor aspect ratio switch. 5. Cross-browser validation.",
+            "parentId": "undefined",
+            "updatedAt": "2026-03-02T14:57:22.227Z"
           }
-        ]
+        ],
+        "complexity": 5,
+        "recommendedSubtasks": 0,
+        "expansionPrompt": "5 subtasks cover responsive grid (2/3/4 columns), portrait aspect ratio, hover scale, typography. Dynamic image_ratio setting implementation follows Shopify best practices.",
+        "updatedAt": "2026-03-02T14:57:22.227Z"
       },
       {
-        "id": 10,
+        "id": "10",
         "title": "Remove or Hide Overlay Controls from Editorial Split Images",
         "description": "Ensure the editorial-split section does not include overlay opacity or color controls on the image panel, keeping imagery clean and unobstructed as per Marachi reference.",
         "details": "Review and update editorial-split.liquid schema:\n\nRemove or comment out any overlay-related settings:\n```json\n// REMOVE these if they exist:\n// {\n//   \"type\": \"range\",\n//   \"id\": \"image_overlay_opacity\",\n//   \"label\": \"Image overlay opacity\"\n// },\n// {\n//   \"type\": \"color\",\n//   \"id\": \"overlay_color\",\n//   \"label\": \"Overlay color\"\n// }\n```\n\nEnsure image markup has no overlay div:\n```liquid\n<div class=\"editorial-split__media\">\n  {% if section.settings.image %}\n    {{ section.settings.image | image_url: width: 1200 | image_tag: class: 'editorial-split__image', loading: 'lazy' }}\n  {% endif %}\n  {%- comment -%} No overlay div {%- endcomment -%}\n</div>\n```\n\nCSS in component-editorial-split.css:\n```css\n.editorial-split__media {\n  position: relative;\n  width: 100%;\n  height: 100%;\n  overflow: hidden;\n}\n\n.editorial-split__image {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  /* No overlay or filter */\n}\n```\n\nVerify text panel styling:\n```css\n.editorial-split__content {\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n  padding: var(--spacing-8);\n  gap: var(--spacing-4);\n}\n\n.editorial-split__eyebrow {\n  font-size: 0.75rem;\n  text-transform: uppercase;\n  letter-spacing: 0.1em;\n  opacity: 0.7;\n}\n\n.editorial-split__heading {\n  font-size: 2rem;\n  font-family: var(--font-heading);\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n  line-height: 1.2;\n}\n\n.editorial-split__body {\n  font-size: 1rem;\n  line-height: 1.6;\n  opacity: 0.8;\n}\n```",
         "testStrategy": "1. Open editorial-split section in theme editor\n2. Verify no overlay opacity or color settings exist in section settings\n3. Add a lifestyle image to the section\n4. Verify image displays without any overlay or tint\n5. Verify text panel displays with proper hierarchy (eyebrow, heading, body, CTA)\n6. Test reverse layout option; verify image and text swap positions\n7. Test on mobile; verify sections stack properly\n8. Verify all typography uses design tokens\n9. Test with different image types (portrait, landscape)",
         "priority": "low",
         "dependencies": [
-          8
+          "8"
         ],
         "status": "pending",
         "subtasks": [
@@ -1492,7 +1628,8 @@
             "dependencies": [],
             "details": "Search for 'image_overlay_opacity' and 'overlay_color' settings in the JSON schema. Remove the entire setting objects or comment them out with // as shown in the task details. Save the file after changes.",
             "status": "pending",
-            "testStrategy": "Open theme editor, add editorial-split section, verify no overlay opacity or color controls appear in settings panel."
+            "testStrategy": "Open theme editor, add editorial-split section, verify no overlay opacity or color controls appear in settings panel.",
+            "parentId": "undefined"
           },
           {
             "id": 2,
@@ -1503,7 +1640,8 @@
             ],
             "details": "In the editorial-split__media div, ensure only the image tag renders without any overlay div. Add comment {%- comment -%} No overlay div {%- endcomment -%} for clarity. Use provided Liquid code example.",
             "status": "pending",
-            "testStrategy": "Add image to section, inspect HTML element, confirm no overlay div present between media container and image tag."
+            "testStrategy": "Add image to section, inspect HTML element, confirm no overlay div present between media container and image tag.",
+            "parentId": "undefined"
           },
           {
             "id": 3,
@@ -1514,7 +1652,8 @@
             ],
             "details": "Ensure .editorial-split__media has position: relative, overflow: hidden. Style .editorial-split__image with object-fit: cover and no overlay/filter properties. Add comment /* No overlay or filter */.",
             "status": "pending",
-            "testStrategy": "Inspect image element in browser dev tools, verify no overlay pseudo-elements or filter effects applied."
+            "testStrategy": "Inspect image element in browser dev tools, verify no overlay pseudo-elements or filter effects applied.",
+            "parentId": "undefined"
           },
           {
             "id": 4,
@@ -1525,7 +1664,8 @@
             ],
             "details": "Add or verify styles for .editorial-split__content, __eyebrow, __heading, __body using provided CSS with design tokens like var(--spacing-8), var(--font-heading). Ensure responsive typography.",
             "status": "pending",
-            "testStrategy": "Add text content to section, verify visual hierarchy: uppercase eyebrow, large heading, readable body text with proper opacity and spacing."
+            "testStrategy": "Add text content to section, verify visual hierarchy: uppercase eyebrow, large heading, readable body text with proper opacity and spacing.",
+            "parentId": "undefined"
           },
           {
             "id": 5,
@@ -1536,24 +1676,28 @@
             ],
             "details": "Follow provided test strategy: add lifestyle image, verify clean display without tint/overlay, check text panel hierarchy, test on desktop/mobile, confirm CTA arrow from Task 8 dependency.",
             "status": "pending",
-            "testStrategy": "1. Theme editor: no overlay settings. 2. Frontend: image clean, no overlay. 3. Text hierarchy correct. 4. Responsive layout. 5. CTA with arrow renders properly."
+            "testStrategy": "1. Theme editor: no overlay settings. 2. Frontend: image clean, no overlay. 3. Text hierarchy correct. 4. Responsive layout. 5. CTA with arrow renders properly.",
+            "parentId": "undefined"
           }
-        ]
+        ],
+        "complexity": 2,
+        "recommendedSubtasks": 0,
+        "expansionPrompt": "Verification/removal subtasks (schema, markup, CSS, text panel, testing) follow clean dependency chain. Simple cleanup task with clear before/after states."
       },
       {
-        "id": 11,
+        "id": "11",
         "title": "Update Homepage Template (index.json) with Marachi Section Order",
         "description": "Restructure the homepage template to match the Marachi reference flow: Hero → Shop By Look → Product Grid → Editorial Split → Lifestyle Fullwidth → Architectural Grid → Footer.",
         "details": "Update templates/index.json with new section order and configuration:\n\n```json\n{\n  \"sections\": {\n    \"hero\": {\n      \"type\": \"hero-video\",\n      \"settings\": {\n        \"image\": \"shopify://shop_images/hero-lifestyle.jpg\",\n        \"minimal_text_mode\": true,\n        \"logo_overlay\": \"shopify://shop_images/logo-overlay.png\",\n        \"logo_position\": \"center\",\n        \"height_desktop\": 100,\n        \"height_mobile\": 80\n      }\n    },\n    \"shop-by-look\": {\n      \"type\": \"shop-by-look\",\n      \"blocks\": {\n        \"look-1\": {\n          \"type\": \"look\",\n          \"settings\": {\n            \"image\": \"shopify://shop_images/look-moka.jpg\",\n            \"label\": \"MOKA\",\n            \"link\": \"/collections/moka\"\n          }\n        },\n        \"look-2\": {\n          \"type\": \"look\",\n          \"settings\": {\n            \"image\": \"shopify://shop_images/look-olive.jpg\",\n            \"label\": \"OLIVE\",\n            \"link\": \"/collections/olive\"\n          }\n        },\n        \"look-3\": {\n          \"type\": \"look\",\n          \"settings\": {\n            \"image\": \"shopify://shop_images/look-nude.jpg\",\n            \"label\": \"NUDE\",\n            \"link\": \"/collections/nude\"\n          }\n        },\n        \"look-4\": {\n          \"type\": \"look\",\n          \"settings\": {\n            \"image\": \"shopify://shop_images/look-onyx.jpg\",\n            \"label\": \"ONYX\",\n            \"link\": \"/collections/onyx\"\n          }\n        }\n      },\n      \"block_order\": [\"look-1\", \"look-2\", \"look-3\", \"look-4\"],\n      \"settings\": {\n        \"heading\": \"Shop By Look\",\n        \"columns_desktop\": 4,\n        \"enable_mobile_scroll\": true\n      }\n    },\n    \"product-grid\": {\n      \"type\": \"main-collection\",\n      \"settings\": {\n        \"heading\": \"New Arrivals\",\n        \"collection\": \"new-arrivals\",\n        \"products_per_page\": 8,\n        \"columns_desktop\": 4,\n        \"image_ratio\": \"portrait\",\n        \"show_quick_add\": true\n      }\n    },\n    \"editorial-split-1\": {\n      \"type\": \"editorial-split\",\n      \"settings\": {\n        \"image\": \"shopify://shop_images/editorial-portrait.jpg\",\n        \"eyebrow\": \"The Collection\",\n        \"heading\": \"Timeless Elegance\",\n        \"body\": \"Discover our curated selection of modest fashion designed for the modern woman.\",\n        \"cta_text\": \"Explore the collection\",\n        \"cta_link\": \"/collections/all\",\n        \"reverse_layout\": false\n      }\n    },\n    \"lifestyle-fullwidth\": {\n      \"type\": \"lifestyle-fullwidth\",\n      \"settings\": {\n        \"image\": \"shopify://shop_images/lifestyle-sofa.jpg\",\n        \"height_desktop\": 80,\n        \"height_mobile\": 60,\n        \"logo_overlay\": \"shopify://shop_images/logo-watermark.png\",\n        \"logo_position\": \"bottom-left\"\n      }\n    },\n    \"editorial-split-2\": {\n      \"type\": \"editorial-split\",\n      \"settings\": {\n        \"image\": \"shopify://shop_images/editorial-craftsmanship.jpg\",\n        \"eyebrow\": \"Our Craft\",\n        \"heading\": \"Crafted to Last\",\n        \"body\": \"Each piece is thoughtfully designed and meticulously crafted using premium materials.\",\n        \"cta_text\": \"Read more\",\n        \"cta_link\": \"/pages/about\",\n        \"reverse_layout\": true\n      }\n    },\n    \"architectural-grid\": {\n      \"type\": \"architectural-grid\",\n      \"blocks\": {\n        \"space-1\": {\n          \"type\": \"image_block\",\n          \"settings\": {\n            \"image\": \"shopify://shop_images/showroom.jpg\",\n            \"heading\": \"Our Showroom\",\n            \"caption\": \"Visit us in the heart of the city\"\n          }\n        },\n        \"space-2\": {\n          \"type\": \"image_block\",\n          \"settings\": {\n            \"image\": \"shopify://shop_images/atelier.jpg\",\n            \"heading\": \"The Atelier\",\n            \"caption\": \"Where craftsmanship meets design\"\n          }\n        }\n      },\n      \"block_order\": [\"space-1\", \"space-2\"],\n      \"settings\": {\n        \"columns\": \"2\"\n      }\n    }\n  },\n  \"order\": [\n    \"hero\",\n    \"shop-by-look\",\n    \"product-grid\",\n    \"editorial-split-1\",\n    \"lifestyle-fullwidth\",\n    \"editorial-split-2\",\n    \"architectural-grid\"\n  ]\n}\n```\n\nCreate a backup of existing index.json before making changes.",
         "testStrategy": "1. Backup existing templates/index.json\n2. Update index.json with new section order\n3. Navigate to homepage in theme editor\n4. Verify all sections render in correct order\n5. Verify hero displays in minimal text mode with logo overlay\n6. Verify Shop By Look section displays with 4 looks\n7. Verify product grid displays with quick-add buttons\n8. Verify editorial splits display with proper text/image layout\n9. Verify lifestyle fullwidth section displays full-bleed image\n10. Verify architectural grid displays 2-column layout\n11. Test all links and CTAs\n12. Test responsive behavior on mobile, tablet, desktop\n13. Verify page load performance (no layout shifts)",
         "priority": "high",
         "dependencies": [
-          1,
-          2,
-          3,
-          4,
-          7,
-          9
+          "1",
+          "2",
+          "3",
+          "4",
+          "7",
+          "9"
         ],
         "status": "pending",
         "subtasks": [
@@ -1564,7 +1708,8 @@
             "dependencies": [],
             "details": "Create a copy named 'index.json.backup' or similar in the templates directory or a backups folder. Verify the backup matches the original file content exactly before proceeding.",
             "status": "pending",
-            "testStrategy": "Confirm backup file exists and contains identical JSON content to original index.json by comparing file sizes and spot-checking sections array."
+            "testStrategy": "Confirm backup file exists and contains identical JSON content to original index.json by comparing file sizes and spot-checking sections array.",
+            "parentId": "undefined"
           },
           {
             "id": 2,
@@ -1575,7 +1720,8 @@
             ],
             "details": "Check that all sections referenced in the target order exist in the sections directory and render correctly individually. Note any missing dependencies from prior tasks (1,2,7,9).",
             "status": "pending",
-            "testStrategy": "Add each section individually to a test page in theme customizer and verify they render without errors before combining in index.json."
+            "testStrategy": "Add each section individually to a test page in theme customizer and verify they render without errors before combining in index.json.",
+            "parentId": "undefined"
           },
           {
             "id": 3,
@@ -1587,7 +1733,8 @@
             ],
             "details": "Validate shop-by-look has 4 look blocks with correct images/labels/links; product-grid uses 'new-arrivals' collection; both editorial-split sections have proper settings; update any discrepancies.",
             "status": "pending",
-            "testStrategy": "Extract sections object to temporary file, validate JSON syntax, and manually check 2-3 settings per section against provided spec for accuracy."
+            "testStrategy": "Extract sections object to temporary file, validate JSON syntax, and manually check 2-3 settings per section against provided spec for accuracy.",
+            "parentId": "undefined"
           },
           {
             "id": 4,
@@ -1600,7 +1747,8 @@
             ],
             "details": "Set order to: ['hero', 'shop-by-look', 'product-grid', 'editorial-split-1', 'lifestyle-fullwidth', 'editorial-split-2', 'architectural-grid']. Ensure all referenced section IDs exist in sections object.",
             "status": "pending",
-            "testStrategy": "Validate new order array contains exactly 7 items matching section keys; check no duplicates or missing sections that would cause render errors."
+            "testStrategy": "Validate new order array contains exactly 7 items matching section keys; check no duplicates or missing sections that would cause render errors.",
+            "parentId": "undefined"
           },
           {
             "id": 5,
@@ -1614,19 +1762,23 @@
             ],
             "details": "Save the file, clear any caches, then preview homepage. Footer is assumed to render automatically after architectural-grid as standard Shopify behavior.",
             "status": "pending",
-            "testStrategy": "Navigate to homepage in theme customizer; verify visual order matches: Hero(1st), Shop By Look(2nd), Product Grid(3rd), Editorial Split 1(4th), Lifestyle(5th), Editorial Split 2(6th), Architectural Grid(7th); test each section interactivity."
+            "testStrategy": "Navigate to homepage in theme customizer; verify visual order matches: Hero(1st), Shop By Look(2nd), Product Grid(3rd), Editorial Split 1(4th), Lifestyle(5th), Editorial Split 2(6th), Architectural Grid(7th); test each section interactivity.",
+            "parentId": "undefined"
           }
-        ]
+        ],
+        "complexity": 4,
+        "recommendedSubtasks": 0,
+        "expansionPrompt": "5 subtasks handle backup, section verification, configuration, reordering, testing. Heavy dependencies (Tasks 1-4,7,9) properly sequenced. JSON template standard Shopify practice."
       },
       {
-        "id": 12,
+        "id": "12",
         "title": "Create Documentation and Launch Checklist for Marachi Alignment",
         "description": "Document all Marachi-specific features, section configurations, and create a launch checklist for merchants to configure the theme to match the reference design.",
         "details": "Create MARACHI_ALIGNMENT.md in theme root:\n\n```markdown\n# Marachi Design Alignment Guide\n\nThis theme has been aligned with the Marachi \"Quiet Luxury\" reference design. This document outlines the key features and configuration steps.\n\n## Key Features\n\n### 1. Image-Led Hero\n- **Section**: Hero (hero-video.liquid)\n- **Configuration**: Enable \"Minimal text mode\" to hide text overlay\n- **Optional**: Add logo overlay image and select position\n- **Best Practice**: Use high-quality lifestyle imagery (min 2400px wide)\n\n### 2. Shop By Look\n- **Section**: Shop By Look (shop-by-look.liquid)\n- **Configuration**: Add 4-6 blocks with portrait images (3:4 aspect ratio)\n- **Labels**: Use uppercase, short labels (e.g., MOKA, OLIVE, NUDE)\n- **Links**: Link each look to a collection or product page\n\n### 3. Product Grid\n- **Section**: Main Collection\n- **Configuration**: Set image ratio to \"Portrait (2:3)\" for full-body shots\n- **Optional**: Enable \"Show quick add button\" for one-click cart adds\n- **Best Practice**: Use consistent studio backgrounds for product images\n\n### 4. Editorial Split\n- **Section**: Editorial Split\n- **Configuration**: Add lifestyle image, eyebrow, heading, body, and CTA\n- **Note**: No overlay controls; images display clean and unobstructed\n- **CTA**: Automatically includes arrow icon with hover animation\n\n### 5. Lifestyle Fullwidth\n- **Section**: Lifestyle Fullwidth\n- **Configuration**: Add full-bleed lifestyle image\n- **Optional**: Add logo watermark overlay\n- **Best Practice**: Use high-resolution images (min 2400px wide)\n\n### 6. Architectural Grid\n- **Section**: Architectural Grid\n- **Configuration**: Add 2-3 image blocks with optional headings and captions\n- **Use Case**: Showcase brand spaces, showrooms, or architectural details\n\n### 7. Footer Newsletter\n- **Styling**: Bottom-border-only input with dark subscribe button\n- **Configuration**: Edit footer newsletter block in theme settings\n- **Best Practice**: Keep copy concise and value-focused\n\n## Launch Checklist\n\n### Content Preparation\n- [ ] Prepare hero lifestyle image (2400x1600px min, high quality)\n- [ ] Prepare 4-6 Shop By Look portrait images (900x1200px, 3:4 ratio)\n- [ ] Prepare product images with full-body shots on clean backgrounds\n- [ ] Prepare 2-4 editorial lifestyle images (1200x1600px)\n- [ ] Prepare 1-2 full-width lifestyle images (2400x1600px)\n- [ ] Prepare architectural/showroom images if using that section\n- [ ] Prepare logo overlay images (PNG with transparency, 400px wide)\n\n### Theme Configuration\n- [ ] Set hero to minimal text mode\n- [ ] Add logo overlay to hero (optional)\n- [ ] Configure Shop By Look section with 4 blocks\n- [ ] Link Shop By Look items to appropriate collections\n- [ ] Set product grid image ratio to \"Portrait\"\n- [ ] Enable quick-add on product grid (optional)\n- [ ] Configure 1-2 editorial split sections\n- [ ] Add lifestyle fullwidth section between editorial splits\n- [ ] Configure architectural grid (optional)\n- [ ] Verify footer newsletter styling\n- [ ] Test all CTAs and links\n\n### Quality Assurance\n- [ ] Test homepage on desktop (1920px, 1440px, 1280px)\n- [ ] Test homepage on tablet (768px, 1024px)\n- [ ] Test homepage on mobile (375px, 414px)\n- [ ] Verify all images load with proper aspect ratios\n- [ ] Test quick-add functionality (if enabled)\n- [ ] Test newsletter signup form\n- [ ] Verify all links and navigation work\n- [ ] Check page load performance (aim for <3s)\n- [ ] Verify no console errors\n- [ ] Test with real product data\n\n### Accessibility\n- [ ] Verify all images have alt text\n- [ ] Test keyboard navigation\n- [ ] Verify color contrast ratios meet WCAG AA standards\n- [ ] Test with screen reader (VoiceOver or NVDA)\n\n## Design Tokens Reference\n\nAll sections use the existing Hannouch design tokens:\n\n- **Typography**: `--font-heading`, `--font-body`\n- **Colors**: `--color-base-text`, `--color-base-bg`\n- **Spacing**: `--spacing-2` through `--spacing-10`\n- **Letter Spacing**: 0.05em (body), 0.1em (headings)\n- **Text Transform**: Uppercase for headings, labels, CTAs\n\n## Support\n\nFor questions or issues, refer to the main theme documentation or contact support.\n```\n\nCreate LAUNCH_CHECKLIST.md:\n\n```markdown\n# Marachi Alignment Launch Checklist\n\n## Pre-Launch\n- [ ] All content prepared and optimized\n- [ ] All sections configured in theme editor\n- [ ] Homepage template (index.json) updated\n- [ ] All images uploaded to Shopify\n- [ ] All links tested and verified\n- [ ] Mobile responsiveness tested\n- [ ] Desktop responsiveness tested\n- [ ] Quick-add functionality tested (if enabled)\n- [ ] Newsletter signup tested\n- [ ] Performance tested (Lighthouse score >90)\n- [ ] Accessibility tested (WCAG AA compliance)\n\n## Launch Day\n- [ ] Backup current theme\n- [ ] Publish new theme\n- [ ] Smoke test all pages\n- [ ] Monitor for errors\n- [ ] Verify analytics tracking\n\n## Post-Launch\n- [ ] Monitor page performance\n- [ ] Collect user feedback\n- [ ] Monitor conversion rates\n- [ ] Optimize images if needed\n```",
         "testStrategy": "1. Review MARACHI_ALIGNMENT.md for completeness and accuracy\n2. Follow launch checklist step-by-step on a test store\n3. Verify all documented features work as described\n4. Test all configuration steps in theme editor\n5. Verify all links in documentation are correct\n6. Review with stakeholders for any missing information\n7. Test documentation with a non-technical user\n8. Verify all image size recommendations are accurate\n9. Ensure design token references are correct\n10. Add documentation to theme package",
         "priority": "medium",
         "dependencies": [
-          11
+          "11"
         ],
         "status": "pending",
         "subtasks": [
@@ -1637,7 +1789,8 @@
             "dependencies": [],
             "details": "Copy the exact markdown content provided for MARACHI_ALIGNMENT.md including all sections: Key Features (7 sections), Launch Checklist (Content Prep, Theme Config, QA, Accessibility), Design Tokens Reference, and Support. Ensure proper markdown formatting with headers, lists, and checkboxes.",
             "status": "pending",
-            "testStrategy": "Verify file exists in theme root, check markdown renders correctly in GitHub/readme viewer, confirm all 7 key features and checklist sections are present without truncation."
+            "testStrategy": "Verify file exists in theme root, check markdown renders correctly in GitHub/readme viewer, confirm all 7 key features and checklist sections are present without truncation.",
+            "parentId": "undefined"
           },
           {
             "id": 2,
@@ -1646,7 +1799,8 @@
             "dependencies": [],
             "details": "Use the provided LAUNCH_CHECKLIST.md template with Pre-Launch (11 items), Launch Day (5 items), and Post-Launch (4 items) sections. Include all checkboxes and ensure consistent formatting matching the alignment guide style.",
             "status": "pending",
-            "testStrategy": "Confirm file creation, verify all checklist items present with checkboxes, check cross-references to MARACHI_ALIGNMENT.md work, ensure printable format for merchants."
+            "testStrategy": "Confirm file creation, verify all checklist items present with checkboxes, check cross-references to MARACHI_ALIGNMENT.md work, ensure printable format for merchants.",
+            "parentId": "undefined"
           },
           {
             "id": 3,
@@ -1658,7 +1812,8 @@
             ],
             "details": "Cross-check documented sections (Hero, Shop By Look, Product Grid, Editorial Split, Lifestyle Fullwidth, Architectural Grid, Footer Newsletter) against Tasks 1-4 implementations. Add screenshots if available, update best practices, ensure all schema settings match actual theme editor options.",
             "status": "pending",
-            "testStrategy": "Validate all referenced sections exist and function as described, test each configuration step in Shopify theme editor on dev store, confirm image specs and aspect ratios match reality."
+            "testStrategy": "Validate all referenced sections exist and function as described, test each configuration step in Shopify theme editor on dev store, confirm image specs and aspect ratios match reality.",
+            "parentId": "undefined"
           },
           {
             "id": 4,
@@ -1671,7 +1826,8 @@
             ],
             "details": "Follow MARACHI_ALIGNMENT.md checklist: prepare sample content per specs, configure all sections per guide, perform QA tests across devices, verify accessibility compliance, document any discrepancies or additional steps needed.",
             "status": "pending",
-            "testStrategy": "Use real Shopify dev store, tick off each checklist item with screenshots, measure Lighthouse scores, test with screen reader, record any failures or modifications required for production use."
+            "testStrategy": "Use real Shopify dev store, tick off each checklist item with screenshots, measure Lighthouse scores, test with screen reader, record any failures or modifications required for production use.",
+            "parentId": "undefined"
           },
           {
             "id": 5,
@@ -1685,15 +1841,23 @@
             ],
             "details": "Add version number, last updated date, links between docs, any errata from testing. Format for readability (table of contents, anchors), ensure WCAG-compliant markdown, package as theme assets ready for merchant handoff.",
             "status": "pending",
-            "testStrategy": "Stakeholder walkthrough demo using both docs, verify all links/sections work, confirm merchants can follow independently, final Lighthouse/Theme Check validation, approve for Task 12 completion."
+            "testStrategy": "Stakeholder walkthrough demo using both docs, verify all links/sections work, confirm merchants can follow independently, final Lighthouse/Theme Check validation, approve for Task 12 completion.",
+            "parentId": "undefined"
           }
-        ]
+        ],
+        "complexity": 3,
+        "recommendedSubtasks": 0,
+        "expansionPrompt": "Documentation creation subtasks (2 MD files + review + testing + stakeholder) follow complete documentation lifecycle. Content templates provided ensure completeness."
       }
     ],
     "metadata": {
-      "created": "2026-02-26T23:17:19.511Z",
-      "updated": "2026-02-26T23:17:19.511Z",
-      "description": "Tasks for marachi context"
+      "version": "1.0.0",
+      "lastModified": "2026-03-02T14:57:22.227Z",
+      "taskCount": 12,
+      "completedCount": 9,
+      "tags": [
+        "marachi"
+      ]
     }
   }
 }

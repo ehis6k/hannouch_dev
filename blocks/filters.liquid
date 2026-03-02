@@ -235,6 +235,9 @@
               %}
             {% endif %}
             {% if block_settings.filter_style == 'horizontal' %}
+              <h1 class="collection-title-inline">{{ collection.title }}</h1>
+            {% endif %}
+            {% if block_settings.filter_style == 'horizontal' %}
               <div
                 class="products-count-wrapper"
                 data-testid="products-count"

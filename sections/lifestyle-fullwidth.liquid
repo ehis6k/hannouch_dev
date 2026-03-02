@@ -1,0 +1,88 @@
+{%- comment -%}
+  Hannouch – Lifestyle Fullwidth (Marachi Task 3)
+  Full-bleed lifestyle image with optional logo overlay. No text content.
+{%- endcomment -%}
+
+{{- 'component-lifestyle-fullwidth.css' | asset_url | stylesheet_tag -}}
+
+<div
+  class="lifestyle-fullwidth"
+  style="--height-desktop: {{ section.settings.height_desktop }}vh; --height-mobile: {{ section.settings.height_mobile }}vh;"
+  {{ section.shopify_attributes }}
+>
+  {%- if section.settings.image != blank -%}
+    <div class="lifestyle-fullwidth__media">
+      {{
+        section.settings.image
+        | image_url: width: 2400
+        | image_tag: class: 'lifestyle-fullwidth__image', loading: 'lazy'
+      }}
+    </div>
+  {%- endif -%}
+
+  {%- if section.settings.logo_overlay != blank -%}
+    <div class="lifestyle-fullwidth__logo lifestyle-fullwidth__logo--{{ section.settings.logo_position }}">
+      {{
+        section.settings.logo_overlay
+        | image_url: width: 200
+        | image_tag: class: 'lifestyle-fullwidth__logo-image', alt: ''
+      }}
+    </div>
+  {%- endif -%}
+</div>
+
+{% schema %}
+{
+  "name": "Lifestyle Fullwidth",
+  "tag": "section",
+  "class": "lifestyle-fullwidth-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 80,
+      "label": "Height (desktop)"
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "vh",
+      "default": 60,
+      "label": "Height (mobile)"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_overlay",
+      "label": "Logo overlay (optional)"
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "label": "Logo position",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "bottom-left", "label": "Bottom left" },
+        { "value": "bottom-right", "label": "Bottom right" }
+      ],
+      "default": "center"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Lifestyle Fullwidth"
+    }
+  ]
+}
+{% endschema %}

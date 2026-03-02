@@ -337,6 +337,8 @@
     }
   },
   "footer": {
+    "social": "Social",
+    "shipping_to": "Verzenden naar:",
     "newsletter": "NIEUWSBRIEF",
     "subscribe_for_updates": "Schrijf je in voor updates",
     "headings": {

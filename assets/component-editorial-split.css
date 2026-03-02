@@ -4,6 +4,16 @@
    ============================================================================== */
 
 /* ── Section wrapper ─────────────────────────────────────────────────────────── */
+.editorial-split-section {
+  padding-block: var(--spacing-10, 40px);
+}
+
+@media screen and (min-width: 990px) {
+  .editorial-split-section {
+    padding-block: var(--spacing-12, 80px);
+  }
+}
+
 .editorial-split {
   display: grid;
   grid-template-columns: 1fr;

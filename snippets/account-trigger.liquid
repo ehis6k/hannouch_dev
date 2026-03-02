@@ -1,0 +1,16 @@
+{%- doc -%}
+  Renders the account trigger (icon + label). Same structure as cart trigger for alignment.
+  @param {string} [attributes] - Extra attributes, e.g. on:click="/showDialog" or popovertarget="account-popover" popovertargetaction="toggle"
+{%- enddoc -%}
+<button
+  type="button"
+  class="button button-unstyled header-actions__action header-actions__account-trigger"
+  aria-label="{{ 'accessibility.account' | t }}"
+  aria-haspopup="dialog"
+  {{ attributes }}
+>
+  <span class="svg-wrapper" aria-hidden="true">
+    {{- 'icon-account.svg' | inline_asset_content -}}
+  </span>
+  <span class="header-actions__account-label">{{ 'accessibility.account' | t }}</span>
+</button>

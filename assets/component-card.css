@@ -19,22 +19,20 @@
   outline-offset: 3px;
 }
 
-/* ── Media container  (3:4 portrait ratio) ───────────────────────────────────── */
+/* ── Media container  (2:3 portrait for full-body imagery) ────────────────────── */
 .card-product__media {
   position: relative;
   width: 100%;
-  /* aspect-ratio as primary method; padding-bottom as fallback */
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 2 / 3;
   overflow: hidden;
   background-color: var(--color-border, #f2f2f0);
 }
 
-/* Padding-bottom fallback for browsers without aspect-ratio support */
-@supports not (aspect-ratio: 3 / 4) {
+@supports not (aspect-ratio: 2 / 3) {
   .card-product__media::before {
     content: '';
     display: block;
-    padding-bottom: 133.33%;
+    padding-bottom: 150%; /* 2:3 */
   }
 }
 
@@ -46,6 +44,14 @@
   height: 100%;
   object-fit: cover;
   object-position: center top;
+  transition: transform 0.35s ease;
+}
+
+@media (hover: hover) {
+  .card-product__link:hover .card-product__image,
+  .card-product__link:focus-visible .card-product__image {
+    transform: scale(1.02);
+  }
 }
 
 /* Placeholder SVG when no product image exists */

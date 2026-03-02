@@ -344,6 +344,8 @@
     }
   },
   "footer": {
+    "social": "Réseaux sociaux",
+    "shipping_to": "Livraison vers :",
     "newsletter": "NEWSLETTER",
     "subscribe_for_updates": "Inscrivez-vous pour recevoir nos actualités",
     "headings": {

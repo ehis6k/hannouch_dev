@@ -37,6 +37,7 @@
             role="list"
           >
             {% for link in block_settings.menu.links %}
+              {%- unless link.url == routes.root_url -%}
               <li>
                 <a
                   href="{{ link.url }}"
@@ -49,6 +50,7 @@
                   {{- link.title -}}
                 </a>
               </li>
+              {%- endunless -%}
             {% endfor %}
           </ul>
         </div>

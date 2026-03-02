@@ -364,6 +364,8 @@
     }
   },
   "footer": {
+    "social": "Social",
+    "shipping_to": "Shipping To:",
     "newsletter": "NEWSLETTER",
     "subscribe_for_updates": "Subscribe for updates",
     "headings": {

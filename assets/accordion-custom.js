@@ -60,9 +60,14 @@ class AccordionCustom extends HTMLElement {
     const isMobile = isMobileBreakpoint();
     const isDesktop = !isMobile;
 
-    // Stop default behaviour from the browser
+    // When accordion is disabled for this breakpoint, only prevent the native
+    // <details> toggle if the element is NOT inside a header-drawer.
+    // header-drawer manages its own open/close via on:click="/toggle" — if we
+    // call preventDefault() here the drawer summary click is swallowed entirely.
     if ((isMobile && this.#disableOnMobile) || (isDesktop && this.#disableOnDesktop)) {
-      event.preventDefault();
+      if (!this.closest('header-drawer')) {
+        event.preventDefault();
+      }
       return;
     }
   };

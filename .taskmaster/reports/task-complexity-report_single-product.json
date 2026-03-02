@@ -1,0 +1,24 @@
+{
+  "meta": {
+    "generatedAt": "2026-03-02T15:30:00.000Z",
+    "tasksAnalyzed": 12,
+    "totalTasks": 12,
+    "thresholdScore": 5,
+    "projectName": "Hannouch",
+    "usedResearch": false
+  },
+  "complexityAnalysis": [
+    { "taskId": 1, "taskTitle": "Configure Product Template Block Order and Layout", "complexityScore": 4, "recommendedSubtasks": 4 },
+    { "taskId": 2, "taskTitle": "Configure Media Gallery for Vertical Portrait Layout", "complexityScore": 5, "recommendedSubtasks": 4 },
+    { "taskId": 3, "taskTitle": "Implement Dynamic Title with Variant Name", "complexityScore": 5, "recommendedSubtasks": 4 },
+    { "taskId": 4, "taskTitle": "Style Product Details Typography and Layout", "complexityScore": 4, "recommendedSubtasks": 4 },
+    { "taskId": 5, "taskTitle": "Style Variant Picker Components", "complexityScore": 5, "recommendedSubtasks": 4 },
+    { "taskId": 6, "taskTitle": "Style Add to Cart Button and Gallery Navigation", "complexityScore": 4, "recommendedSubtasks": 4 },
+    { "taskId": 7, "taskTitle": "Implement Accordion Styling with Plus Icons", "complexityScore": 4, "recommendedSubtasks": 3 },
+    { "taskId": 8, "taskTitle": "Add Optional Breadcrumb Navigation", "complexityScore": 3, "recommendedSubtasks": 3 },
+    { "taskId": 9, "taskTitle": "Add Size Guide Link Integration", "complexityScore": 3, "recommendedSubtasks": 3 },
+    { "taskId": 10, "taskTitle": "Configure Product Recommendations Section", "complexityScore": 4, "recommendedSubtasks": 4 },
+    { "taskId": 11, "taskTitle": "Implement Mobile Responsive Optimizations", "complexityScore": 5, "recommendedSubtasks": 4 },
+    { "taskId": 12, "taskTitle": "Perform Cross-Browser Testing and Performance Optimization", "complexityScore": 4, "recommendedSubtasks": 4 }
+  ]
+}

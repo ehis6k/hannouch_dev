@@ -23,49 +23,58 @@
   endif
 %}
 
+{% assign visible_index = 0 %}
 {% capture children %}
   {% for link in block_settings.menu.links %}
-    <li
-      role="presentation"
-      class="menu-list__list-item"
-      on:focus="/activate"
-      on:blur="/deactivate"
-      on:pointerenter="/activate"
-      on:pointerleave="/deactivate"
-    >
-      <a
-        href="{{ link.url }}"
-        data-skip-node-update="true"
-        class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
-        {%- if link.links != blank -%}
-          aria-controls="submenu-{{ forloop.index }}"
-          aria-haspopup="true"
-          aria-expanded="false"
-        {%- endif -%}
-        ref="menuitem"
+    {%- comment -%} Skip homepage link; logo already goes to homepage {%- endcomment -%}
+    {%- unless link.url == routes.root_url -%}
+      {% assign visible_index = visible_index | plus: 1 %}
+      {% assign li_slot = '' %}
+      {% if visible_index > 3 %}
+        {% assign li_slot = ' slot="overflow"' %}
+      {% endif %}
+      <li{{ li_slot }}
+        role="presentation"
+        class="menu-list__list-item"
+        on:focus="/activate"
+        on:blur="/deactivate"
+        on:pointerenter="/activate"
+        on:pointerleave="/deactivate"
       >
-        <span class="menu-list__link-title">{{- link.title -}}</span>
-      </a>
-      {%- if link.links != blank -%}
-        <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
-          <div
-            id="submenu-{{ forloop.index }}"
-            class="menu-list__submenu-inner"
-            style="{% render 'submenu-font-styles', settings: block_settings %}"
-          >
-            {% assign list_id = 'MegaMenuList-' | append: forloop.index %}
-            {% render 'mega-menu',
-              section: section,
-              parent_link: link,
-              id: list_id,
-              menu_content_type: menu_content_type,
-              content_aspect_ratio: ratio,
-              image_border_radius: image_border_radius
-            %}
+        <a
+          href="{{ link.url }}"
+          data-skip-node-update="true"
+          class="menu-list__link{% if link.active %} menu-list__link--active{% endif %}"
+          {%- if link.links != blank -%}
+            aria-controls="submenu-{{ forloop.index }}"
+            aria-haspopup="true"
+            aria-expanded="false"
+          {%- endif -%}
+          ref="menuitem"
+        >
+          <span class="menu-list__link-title">{{- link.title -}}</span>
+        </a>
+        {%- if link.links != blank -%}
+          <div class="menu-list__submenu{{ color_scheme_classes }}" ref="submenu[]">
+            <div
+              id="submenu-{{ forloop.index }}"
+              class="menu-list__submenu-inner"
+              style="{% render 'submenu-font-styles', settings: block_settings %}"
+            >
+              {% assign list_id = 'MegaMenuList-' | append: forloop.index %}
+              {% render 'mega-menu',
+                section: section,
+                parent_link: link,
+                id: list_id,
+                menu_content_type: menu_content_type,
+                content_aspect_ratio: ratio,
+                image_border_radius: image_border_radius
+              %}
+            </div>
           </div>
-        </div>
-      {%- endif -%}
-    </li>
+        {%- endif -%}
+      </li>
+    {%- endunless -%}
   {% endfor %}
   <li
     class="menu-list__list-item"
@@ -93,7 +102,7 @@
       ref: 'overflowMenu',
       children: children,
       minimum-items: 2,
-      maximum-items: 4,
+      maximum-items: 3,
       data-testid: 'header-menu-overflow-list',
       attributes: 'data-skip-node-update'
     %}

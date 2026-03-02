@@ -1,0 +1,65 @@
+/**
+ * Hannouch – Lifestyle Fullwidth (Marachi Task 3)
+ * Full-bleed image section with optional logo overlay.
+ */
+
+.lifestyle-fullwidth {
+  position: relative;
+  width: 100%;
+  height: var(--height-mobile, 60vh);
+  overflow: hidden;
+}
+
+@media (min-width: 750px) {
+  .lifestyle-fullwidth {
+    height: var(--height-desktop, 80vh);
+  }
+}
+
+.lifestyle-fullwidth__media {
+  position: absolute;
+  inset: 0;
+}
+
+.lifestyle-fullwidth__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.lifestyle-fullwidth__logo {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.lifestyle-fullwidth__logo--center {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.lifestyle-fullwidth__logo--bottom-left {
+  bottom: var(--spacing-6, 1.5rem);
+  left: var(--spacing-6, 1.5rem);
+}
+
+.lifestyle-fullwidth__logo--bottom-right {
+  bottom: var(--spacing-6, 1.5rem);
+  right: var(--spacing-6, 1.5rem);
+}
+
+.lifestyle-fullwidth__logo-image {
+  max-width: 200px;
+  width: 100%;
+  height: auto;
+  opacity: 0.8;
+  display: block;
+}
+
+@media (max-width: 749px) {
+  .lifestyle-fullwidth__logo-image {
+    max-width: 140px;
+  }
+}

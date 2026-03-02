@@ -1,9 +1,9 @@
 {
 	"meta": {
 		"generatedAt": "2026-02-26T23:20:19.034Z",
-		"tasksAnalyzed": 12,
-		"totalTasks": 12,
-		"analysisCount": 12,
+		"tasksAnalyzed": 11,
+		"totalTasks": 11,
+		"analysisCount": 11,
 		"thresholdScore": 5,
 		"projectName": "Task Master",
 		"usedResearch": true
@@ -96,14 +96,6 @@
 			"recommendedSubtasks": 0,
 			"expansionPrompt": "5 subtasks handle backup, section verification, configuration, reordering, testing. Heavy dependencies (Tasks 1-4,7,9) properly sequenced. JSON template standard Shopify practice.",
 			"reasoning": "Moderate complexity: JSON template orchestration with multiple section dependencies. Risk of missing sections/block IDs. Complete config provided reduces errors. High priority integration task."
-		},
-		{
-			"taskId": 12,
-			"taskTitle": "Create Documentation and Launch Checklist for Marachi Alignment",
-			"complexityScore": 3,
-			"recommendedSubtasks": 0,
-			"expansionPrompt": "Documentation creation subtasks (2 MD files + review + testing + stakeholder) follow complete documentation lifecycle. Content templates provided ensure completeness.",
-			"reasoning": "Low complexity: markdown documentation with provided templates. Merchant-facing QA checklist valuable. Depends on Task 11 completion. Non-technical implementation."
 		}
 	]
 }

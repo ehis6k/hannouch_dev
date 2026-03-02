@@ -1,0 +1,80 @@
+/**
+ * Hannouch – Architectural Grid (Marachi Task 4)
+ * Image grid with optional uppercase titles and captions.
+ */
+
+.architectural-grid {
+  padding: var(--spacing-10, 2.5rem) 0;
+}
+
+.architectural-grid__heading {
+  text-align: center;
+  margin-bottom: var(--spacing-8, 2rem);
+  font-family: var(--font-heading--family, var(--font-heading));
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.architectural-grid__items {
+  display: grid;
+  gap: var(--spacing-6, 1.5rem);
+}
+
+.architectural-grid__items--1-col {
+  grid-template-columns: 1fr;
+}
+
+.architectural-grid__items--2-col {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 750px) {
+  .architectural-grid__items--2-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.architectural-grid__items--3-col {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 990px) {
+  .architectural-grid__items--3-col {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.architectural-grid__item {
+  /* block wrapper for grid items */
+}
+
+.architectural-grid__link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.architectural-grid__image {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  display: block;
+}
+
+.architectural-grid__content {
+  margin-top: var(--spacing-4, 1rem);
+}
+
+.architectural-grid__item-heading {
+  font-size: 0.875rem;
+  font-family: var(--font-heading--family, var(--font-heading));
+  letter-spacing: 0.1em;
+  margin-bottom: var(--spacing-2, 0.5rem);
+}
+
+.architectural-grid__caption {
+  font-size: 0.875rem;
+  opacity: 0.7;
+  line-height: 1.6;
+  margin: 0;
+}

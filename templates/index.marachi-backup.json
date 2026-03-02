@@ -41,6 +41,19 @@
         "padding_bottom": 48
       }
     },
+    "editorial_split_1": {
+      "type": "editorial-split",
+      "settings": {
+        "heading": "THE CITY EDIT",
+        "body": "<p>Designed for the woman in motion. Pieces that move through your day with the same quiet confidence you carry.<\/p>",
+        "cta_text": "Explore the Collection",
+        "cta_link": "shopify:\/\/collections\/all",
+        "reverse": false,
+        "content_alignment": "left",
+        "min_height": "medium",
+        "color_scheme": "scheme-1"
+      }
+    },
     "featured_collection": {
       "type": "product-list",
       "blocks": {
@@ -170,29 +183,6 @@
         "padding-block-end": 64
       }
     },
-    "editorial_split_1": {
-      "type": "editorial-split",
-      "settings": {
-        "heading": "THE CITY EDIT",
-        "body": "<p>Designed for the woman in motion. Pieces that move through your day with the same quiet confidence you carry.<\/p>",
-        "cta_text": "Explore the Collection",
-        "cta_link": "shopify:\/\/collections\/all",
-        "reverse": false,
-        "content_alignment": "left",
-        "min_height": "medium",
-        "color_scheme": "scheme-1"
-      }
-    },
-    "lifestyle_fullwidth": {
-      "type": "lifestyle-fullwidth",
-      "settings": {
-        "image": null,
-        "height_desktop": 80,
-        "height_mobile": 60,
-        "logo_overlay": null,
-        "logo_position": "bottom-left"
-      }
-    },
     "editorial_split_2": {
       "type": "editorial-split",
       "settings": {
@@ -205,31 +195,13 @@
         "min_height": "medium",
         "color_scheme": "scheme-1"
       }
-    },
-    "our_story": {
-      "type": "our-story",
-      "settings": {
-        "color_scheme": "scheme-1",
-        "padding_block_start": 64,
-        "padding_block_end": 64
-      }
-    },
-    "architectural_grid": {
-      "type": "architectural-grid",
-      "settings": {
-        "heading": "",
-        "columns": "2"
-      }
     }
   },
   "order": [
     "hero_video",
     "shop_by_look",
-    "featured_collection",
     "editorial_split_1",
-    "lifestyle_fullwidth",
-    "editorial_split_2",
-    "our_story",
-    "architectural_grid"
+    "featured_collection",
+    "editorial_split_2"
   ]
 }

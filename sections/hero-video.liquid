@@ -118,37 +118,60 @@
       aria-hidden="true"
     ></div>
 
-  </div>
-
-  {%- comment -%} ── Content ── {%- endcomment -%}
-  <div class="hero-video__content">
-
-    {%- if section.settings.eyebrow != blank -%}
-      <p class="hero-video__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-    {%- endif -%}
-
-    {%- assign hero_heading = section.settings.heading | default: '' -%}
-    {%- if hero_heading != blank -%}
-      <h2 class="hero-video__heading">{{ hero_heading | escape }}</h2>
-    {%- else -%}
-      <h2 class="hero-video__heading">{{ 'home.hero_title' | t }}</h2>
-    {%- endif -%}
-
-    {%- if section.settings.subheading != blank -%}
-      <p class="hero-video__subheading">{{ section.settings.subheading | escape }}</p>
-    {%- endif -%}
-
-    {%- if section.settings.cta_link != blank -%}
-      {%- assign cta_label = section.settings.cta_text | default: '' -%}
-      <a
-        href="{{ section.settings.cta_link }}"
-        class="hero-video__cta button button--primary"
+    {%- comment -%} Logo overlay (Marachi) — image or text {%- endcomment -%}
+    {%- if section.settings.logo_overlay != blank or section.settings.logo_overlay_text != blank -%}
+      <div
+        class="hero-video__logo-overlay hero-video__logo-overlay--{{ section.settings.logo_position | default: 'bottom-left' }}"
+        aria-hidden="true"
       >
-        {%- if cta_label != blank -%}{{ cta_label | escape }}{%- else -%}{{ 'home.hero_cta' | t }}{%- endif -%}
-      </a>
+        {%- if section.settings.logo_overlay != blank -%}
+          <img
+            src="{{ section.settings.logo_overlay | image_url: width: 400 }}"
+            alt=""
+            width="{{ section.settings.logo_overlay.width }}"
+            height="{{ section.settings.logo_overlay.height }}"
+            class="hero-video__logo-image"
+            loading="eager"
+          >
+        {%- elsif section.settings.logo_overlay_text != blank -%}
+          <span class="hero-video__logo-text">{{ section.settings.logo_overlay_text | escape }}</span>
+        {%- endif -%}
+      </div>
     {%- endif -%}
 
   </div>
+
+  {%- comment -%} Content (hidden when minimal text mode for image-led hero) {%- endcomment -%}
+  {%- unless section.settings.minimal_text_mode -%}
+    <div class="hero-video__content">
+
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="hero-video__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+
+      {%- assign hero_heading = section.settings.heading | default: '' -%}
+      {%- if hero_heading != blank -%}
+        <h2 class="hero-video__heading">{{ hero_heading | escape }}</h2>
+      {%- else -%}
+        <h2 class="hero-video__heading">{{ 'home.hero_title' | t }}</h2>
+      {%- endif -%}
+
+      {%- if section.settings.subheading != blank -%}
+        <p class="hero-video__subheading">{{ section.settings.subheading | escape }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.cta_link != blank -%}
+        {%- assign cta_label = section.settings.cta_text | default: '' -%}
+        <a
+          href="{{ section.settings.cta_link }}"
+          class="hero-video__cta button button--primary"
+        >
+          {%- if cta_label != blank -%}{{ cta_label | escape }}{%- else -%}{{ 'home.hero_cta' | t }}{%- endif -%}
+        </a>
+      {%- endif -%}
+
+    </div>
+  {%- endunless -%}
 
 </section>
 
@@ -264,6 +287,43 @@
         { "value": "medium", "label": "Medium (60vh)"          }
       ],
       "default": "full"
+    },
+    {
+      "type": "header",
+      "content": "Image-only (Marachi)"
+    },
+    {
+      "type": "checkbox",
+      "id": "minimal_text_mode",
+      "label": "Minimal text mode",
+      "info": "Hide heading, eyebrow, and CTA for an image-led hero.",
+      "default": false
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_overlay",
+      "label": "Logo overlay (image)",
+      "info": "Optional logo or wordmark on top of the hero image."
+    },
+    {
+      "type": "text",
+      "id": "logo_overlay_text",
+      "label": "Logo overlay (text)",
+      "info": "Used if no logo image is set. E.g. brand name.",
+      "placeholder": "BRAND"
+    },
+    {
+      "type": "select",
+      "id": "logo_position",
+      "label": "Logo position",
+      "options": [
+        { "value": "top-left",     "label": "Top left"     },
+        { "value": "top-right",    "label": "Top right"    },
+        { "value": "center",      "label": "Center"       },
+        { "value": "bottom-left", "label": "Bottom left"  },
+        { "value": "bottom-right","label": "Bottom right" }
+      ],
+      "default": "bottom-left"
     }
   ],
   "presets": [

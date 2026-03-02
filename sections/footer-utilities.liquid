@@ -17,24 +17,16 @@
 </div>
 
 {% stylesheet %}
+  /* Marachi-style: horizontal bar, left to right: Copyright | Social | Language | Shipping */
   .utilities {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     gap: var(--gap);
-    text-wrap: nowrap;
+    flex-wrap: wrap;
     border-top: var(--border-width) solid var(--color-border);
     color: var(--color-foreground-muted);
-
-    @media screen and (min-width: 750px) {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      justify-content: center;
-      gap: var(--gap);
-      align-items: center;
-      text-align: left;
-    }
   }
 
   .utilities a {
@@ -42,50 +34,24 @@
   }
 
   .utilities > * {
-    text-align: center;
-
-    @media screen and (min-width: 750px) {
-      text-align: left;
-      justify-self: start;
-    }
+    text-align: left;
   }
 
-  /* Dynamic positioning based on number of blocks */
   @media screen and (min-width: 750px) {
-    /* 1 block: Single column, left aligned */
-    .utilities--blocks-1 {
-      grid-template-columns: 1fr;
-      justify-content: start;
+    .utilities {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--gap);
     }
 
-    .utilities--blocks-1 > * {
-      justify-self: start;
-      text-align: left;
-    }
-
-    /* 2 blocks: Two equal columns, start and end aligned */
-    .utilities--blocks-2 {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .utilities--blocks-2 > *:nth-child(2) {
-      justify-self: end;
-      text-align: right;
-    }
-
-    /* 3 blocks: Three columns (1fr auto 1fr), start/center/end aligned */
-    .utilities--blocks-3 {
-      grid-template-columns: 1fr auto 1fr;
-    }
-
-    .utilities--blocks-3 > *:nth-child(2) {
-      justify-self: center;
-      text-align: center;
-    }
-
-    .utilities--blocks-3 > *:nth-child(3) {
-      justify-self: end;
-      text-align: right;
+    /* Give each utilities block its own horizontal space so content doesn't collide */
+    .utilities--blocks-1 > * ,
+    .utilities--blocks-2 > * ,
+    .utilities--blocks-3 > * ,
+    .utilities--blocks-4 > * {
+      flex: 1 1 0;
+      min-width: 0;
     }
   }
 {% endstylesheet %}
@@ -95,7 +61,7 @@
   "name": "t:names.policies_and_links",
   "tag": "div",
   "class": "footer-utilities",
-  "max_blocks": 3,
+  "max_blocks": 4,
   "enabled_on": {
     "groups": ["footer"]
   },
@@ -179,6 +145,9 @@
     },
     {
       "type": "social-links"
+    },
+    {
+      "type": "footer-country"
     }
   ],
   "presets": [
@@ -189,14 +158,17 @@
         "copyright": {
           "type": "footer-copyright"
         },
-        "policy_list": {
-          "type": "footer-policy-list"
-        },
         "social_icons": {
           "type": "social-links"
+        },
+        "localization": {
+          "type": "footer-localization"
+        },
+        "country": {
+          "type": "footer-country"
         }
       },
-      "block_order": ["copyright", "policy_list", "social_icons"]
+      "block_order": ["copyright", "social_icons", "localization", "country"]
     }
   ]
 }

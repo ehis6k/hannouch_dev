@@ -1,0 +1,24 @@
+{%- comment -%}
+  Footer bottom bar: "Shipping To: [country name]". Marachi-style alignment.
+{%- endcomment -%}
+<div
+  class="footer-utilities__country footer-utilities__text"
+  {{ block.shopify_attributes }}
+>
+  <span class="footer-utilities__country-label">{{ 'footer.shipping_to' | t | default: 'Shipping To:' }}</span>
+  <span class="footer-utilities__country-value">{{ localization.country.name }}</span>
+</div>
+
+{% schema %}
+{
+  "name": "Shipping / Country",
+  "tag": null,
+  "settings": [],
+  "presets": [
+    {
+      "name": "Shipping To",
+      "category": "t:categories.footer"
+    }
+  ]
+}
+{% endschema %}

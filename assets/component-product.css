@@ -200,6 +200,15 @@ accordion-custom + accordion-custom,
   }
 }
 
+/* ── Product card variant color label (collection grid / homepage) ──────────── */
+.product-card__variant-color {
+  font-family: var(--font-body, sans-serif);
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  color: rgb(var(--color-foreground-rgb, 26 26 26) / 0.55);
+  line-height: 1.4;
+}
+
 /* ── Mobile refinements ──────────────────────────────────────────────────────── */
 @media screen and (max-width: 749px) {
   .product-details h1,

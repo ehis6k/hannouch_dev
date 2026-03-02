@@ -1,26 +1,35 @@
 {%- comment -%}
-  Minimal language + currency for footer bar. Language selector and current currency (e.g. EN / FR / NL | EUR).
+  Footer language selector (inline links, no dropdown, no currency).
+  Renders: Language  English  Français  Nederlands
+  Clicking a language posts the localization form with that language_code.
 {%- endcomment -%}
+<span class="footer-utilities__label">{{ 'content.language' | t | default: 'Language' }}</span>
 {%- form 'localization', id: 'FooterLocalizationForm', class: 'footer-localization-form', return_to: request.path, aria-label: 'Language and region' -%}
   <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}">
-  <label class="visually-hidden" for="FooterLanguageSelect">{{ 'content.language' | t }}</label>
-  <select
-    id="FooterLanguageSelect"
-    class="footer-localization-form__select"
-    name="language_code"
-    aria-label="{{ 'content.language' | t }}"
-    onchange="this.form.submit()"
-  >
+  <div class="footer-localization-form__languages" role="list">
     {%- for language in localization.available_languages -%}
-      <option
+      {%- assign language_label = language.endonym_name -%}
+      {%- if language.iso_code == 'en' -%}
+        {%- assign language_label = 'English' -%}
+      {%- elsif language.iso_code == 'fr' -%}
+        {%- assign language_label = 'Français' -%}
+      {%- elsif language.iso_code == 'nl' -%}
+        {%- assign language_label = 'Nederlands' -%}
+      {%- endif -%}
+      {%- assign is_active = false -%}
+      {%- if language.iso_code == localization.language.iso_code -%}
+        {%- assign is_active = true -%}
+      {%- endif -%}
+      <button
+        type="submit"
+        name="language_code"
         value="{{ language.iso_code }}"
-        lang="{{ language.iso_code }}"
-        {% if language.iso_code == localization.language.iso_code %}selected{% endif %}
+        class="footer-localization-form__language{% if is_active %} footer-localization-form__language--active{% endif %}"
+        role="listitem"
+        {% if is_active %}aria-current="true"{% endif %}
       >
-        {{ language.endonym_name | capitalize }}
-      </option>
+        {{ language_label }}
+      </button>
     {%- endfor -%}
-  </select>
+  </div>
 {%- endform -%}
-<span class="footer-localization-form__sep" aria-hidden="true">|</span>
-<span class="footer-localization-form__currency">{{ localization.country.currency.iso_code }}</span>

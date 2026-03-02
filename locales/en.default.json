@@ -220,6 +220,7 @@
     "price_regular": "Regular price",
     "price_sale": "Sale price",
     "price_filter_html": "The highest price is {{ price }}",
+    "availability": "Availability",
     "product_image": "Product image",
     "product_information": "Product information",
     "product_subtotal": "Product subtotal",
@@ -313,6 +314,11 @@
     // Separates min and max values in price range filter
     "separator": "to"
   },
+  "general": {
+    "breadcrumb": {
+      "home": "Home"
+    }
+  },
   "gift_cards": {
     "issued": {
       "how_to_use_gift_card": "Use the gift card code online or QR code in-store",
@@ -387,12 +393,23 @@
   "header": {
     "home": "Home"
   },
+  "pages": {
+    "not_found": "Page not found",
+    "not_found_description": "The link may be incorrect, or the page has been removed."
+  },
   "home": {
     "hero_title": "Ramadan 2026",
-    "hero_cta": "Shop collection"
+    "hero_cta": "Shop collection",
+    "you_may_also_like": "You may also like",
+    "editorial_1_heading": "THE CITY EDIT",
+    "editorial_1_body": "Designed for the woman in motion. Pieces that move through your day with the same quiet confidence you carry.",
+    "editorial_1_cta": "Explore the Collection",
+    "editorial_2_heading": "CRAFTED TO LAST",
+    "editorial_2_body": "Each piece is sourced from artisan studios across Europe. Quality without compromise, designed to become the quiet anchor of your wardrobe.",
+    "editorial_2_cta": "Our Story"
   },
   "our_story": {
     "title": "OUR story",
-    "content": "<p>HANNOUCH did not begin as a business.</p><p>It began as a quiet frustration.</p><p>Growing up, modest fashion often felt like a compromise. Either it lacked refinement, or it lacked intention. Pieces were available  but they did not always reflect the elegance, discipline, and quiet strength that modest women carry within them.</p><p>There was always something missing.</p><p>The fabrics were too thin.</p><p>The cuts were uninspired.</p><p>The designs followed trends but not values.</p><p>HANNOUCH was born from the decision to change that.</p><p>Not loudly.</p><p>Not dramatically.</p><p>But intentionally.</p><h3>A Name, A Standard</h3><p>The name HANNOUCH represents heritage, identity, and strength.</p><p>It carries roots. It carries culture. It carries story.</p><p>From the beginning, the vision was clear:</p><p>To create <strong>luxury hijabs and elegant abayas</strong> that feel powerful the moment they are worn.</p><p>Not overdesigned.</p><p>Not excessive.</p><p>But structured, refined, and timeless.</p><p>Each piece is developed with precision from the weight of the fabric to the way it falls when walking. We test movement. We test comfort. We refine silhouettes until they speak without needing embellishment.</p><p>Because true modest fashion should feel intentional not improvised.</p><h3>Built on Discipline, Not Trends</h3><p>HANNOUCH was never meant to be fast fashion.</p><p>It was built for longevity.</p><p>In a market saturated with temporary designs, we chose timeless construction. Neutral palettes. Clean lines. Elevated tailoring. Premium materials that hold their shape and dignity.</p><p>Our abayas are designed to command presence.</p><p>Our hijabs are crafted to frame confidence.</p><p>This is <strong>modern modest fashion</strong> created for women who build, who lead, who grow without ever abandoning their values.</p><h3>The Woman Behind It</h3><p>HANNOUCH was created by someone who understood both ambition and identity.</p><p>Someone who believed that modesty is not restriction but refinement.</p><p>Someone who saw that luxury does not have to contradict faith, culture, or discipline.</p><p>HANNOUCH is a reflection of that belief.</p><p>It is for the woman who studies late, works hard, carries responsibility and still walks with grace.</p><p>It is for the woman who does not seek attention, yet naturally commands it.</p><h3>More Than Clothing</h3><p>HANNOUCH stands for:</p><ul><li>Premium modest wear</li><li>Elegant abayas designed with structure</li><li>High-quality hijabs with refined flow</li><li>Strength expressed through simplicity</li></ul><p>This is not just fabric.</p><p>It is intention stitched into form.</p><h3>Welcome to HANNOUCH.</h3><p>Where modesty is elevated.</p><p>Where elegance is disciplined.</p><p>Where presence speaks before words do.</p>"
+    "content": "<p>HANNOUCH did not begin as a business. It began as a quiet frustration.</p><p>Growing up, modest fashion often felt like a compromise. Either it lacked refinement, or it lacked intention. HANNOUCH was born from the decision to change that&mdash;not loudly, but intentionally.</p><h3>A Name, A Standard</h3><p>The name HANNOUCH represents heritage, identity, and strength. From the beginning, the vision was clear: to create <strong>luxury hijabs and elegant abayas</strong> that feel powerful the moment they are worn. Structured, refined, and timeless.</p><h3>Welcome to HANNOUCH.</h3><p>Where modesty is elevated. Where elegance is disciplined. Where presence speaks before words do.</p>"
   }
 }

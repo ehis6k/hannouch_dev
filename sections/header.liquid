@@ -31,7 +31,7 @@
     assign sticky = 'scroll-up'
   endif
 
-  if transparent and sticky
+  if transparent and sticky and template.name != 'product'
     assign transparent = 'not-sticky'
   endif
 
@@ -406,6 +406,20 @@
 
     /* will default to bg from its color scheme unless --header-bg-color is transparent */
     background-color: var(--header-bg-color, var(--color-background));
+  }
+
+  /* Keep header fully transparent on product pages, even when sticky */
+  body:has(#MainContent[data-template='product']) .header[transparent][data-sticky-state='active'] {
+    --header-bg-color: transparent;
+    background-color: transparent;
+    box-shadow: none;
+    border-color: transparent;
+  }
+
+  /* Force transparent header rows on product pages (no bar background) */
+  body:has(#MainContent[data-template='product']) #header-group .header__row {
+    background-color: transparent !important;
+    border-bottom-color: transparent;
   }
 
   .header__row--top:not(.divider--page-width),

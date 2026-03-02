@@ -1,0 +1,60 @@
+{%- comment -%}
+  Breadcrumb navigation for product page.
+  Renders: Home / Products (or collection) / Product title
+  Includes JSON-LD BreadcrumbList for SEO.
+  @param {product} product - The product (required on product template)
+{%- endcomment -%}
+
+{% if product %}
+  {% liquid
+    assign breadcrumb_collection = product.collections | first
+    assign products_url = routes.collections_url | append: '/all'
+    assign products_label = 'Products'
+    if breadcrumb_collection
+      assign products_url = breadcrumb_collection.url
+      assign products_label = breadcrumb_collection.title
+    endif
+  %}
+
+  <nav class="breadcrumb" aria-label="{{ 'accessibility.breadcrumb' | t | default: 'Breadcrumb' }}">
+    <ol class="breadcrumb__list">
+      <li class="breadcrumb__item">
+        <a href="{{ routes.root_url }}" class="breadcrumb__link">{{ 'general.breadcrumb.home' | t | default: 'Home' }}</a>
+      </li>
+      <li class="breadcrumb__item" aria-hidden="true">/</li>
+      <li class="breadcrumb__item">
+        <a href="{{ products_url }}" class="breadcrumb__link">{{ products_label }}</a>
+      </li>
+      <li class="breadcrumb__item" aria-hidden="true">/</li>
+      <li class="breadcrumb__item breadcrumb__item--current" aria-current="page">
+        <span class="breadcrumb__text">{{ product.title | escape }}</span>
+      </li>
+    </ol>
+  </nav>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": {{ 'general.breadcrumb.home' | t | default: 'Home' | json }},
+          "item": {{ shop.url | append: routes.root_url | json }}
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": {{ products_label | json }},
+          "item": {{ shop.url | append: products_url | json }}
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": {{ product.title | json }}
+        }
+      ]
+    }
+  </script>
+{% endif %}

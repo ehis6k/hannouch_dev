@@ -14,8 +14,21 @@
 {%- if section.settings.image != blank -%}
   {%- assign has_image = true -%}
 {%- endif -%}
+
+{%- comment -%} Locale-aware heading/body/cta: when translation_namespace is set, read from locale keys {%- endcomment -%}
+{%- assign _ns = section.settings.translation_namespace -%}
+{%- if _ns != blank -%}
+  {%- assign heading  = _ns | append: '_heading' | t -%}
+  {%- assign body     = _ns | append: '_body'    | t -%}
+  {%- assign cta_text = _ns | append: '_cta'     | t -%}
+{%- else -%}
+  {%- assign heading  = section.settings.heading -%}
+  {%- assign body     = section.settings.body -%}
+  {%- assign cta_text = section.settings.cta_text -%}
+{%- endif -%}
+
 {%- assign has_cta = false -%}
-{%- if section.settings.cta_text != blank and section.settings.cta_link != blank -%}
+{%- if cta_text != blank and section.settings.cta_link != blank -%}
   {%- assign has_cta = true -%}
 {%- endif -%}
 
@@ -53,12 +66,12 @@
       <p class="editorial-split__eyebrow">{{ section.settings.eyebrow | escape }}</p>
     {%- endif -%}
 
-    {%- if section.settings.heading != blank -%}
-      <h2 class="editorial-split__heading">{{ section.settings.heading }}</h2>
+    {%- if heading != blank -%}
+      <h2 class="editorial-split__heading">{{ heading }}</h2>
     {%- endif -%}
 
-    {%- if section.settings.body != blank -%}
-      <div class="editorial-split__body rte">{{ section.settings.body }}</div>
+    {%- if body != blank -%}
+      <div class="editorial-split__body rte"><p>{{ body }}</p></div>
     {%- endif -%}
 
     {%- if section.settings.caption != blank -%}
@@ -70,7 +83,7 @@
         href="{{ section.settings.cta_link }}"
         class="editorial-split__cta"
       >
-        {{- section.settings.cta_text | escape -}}
+        {{- cta_text | escape -}}
         {%- render 'icon-arrow' -%}
       </a>
     {%- endif -%}
@@ -204,6 +217,12 @@
       "id": "color_scheme",
       "label": "Color scheme",
       "default": "scheme-1"
+    },
+    {
+      "type": "text",
+      "id": "translation_namespace",
+      "label": "Locale namespace (optional)",
+      "info": "e.g. 'home.editorial_1' uses home.editorial_1_heading, _body, _cta from locale files. Leave blank to use the text fields above."
     }
   ],
   "presets": [

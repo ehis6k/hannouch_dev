@@ -155,7 +155,7 @@
   text-transform: uppercase;
 }
 
-/* Card price — opacity 0.8 */
+/* Card price — opacity 0.8 (smaller when in title+price row below) */
 :is(.product-card, .product-grid__card) .price {
   font-size: 0.875rem;
   letter-spacing: 0.02em;
@@ -166,6 +166,59 @@
   font-size: 0.6875rem;
   opacity: 0.4;
   text-decoration: line-through;
+}
+
+/* Product card info row: title+variant left, price top-right */
+.product-grid__card > .group-block > .group-block-content {
+  width: 100%;
+  align-items: flex-start;
+}
+
+/* Title group (left column) fills remaining space */
+.product-grid__card > .group-block > .group-block-content > .group-block {
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+/* Title: small, black (base title only; color is in gray line below) */
+.product-grid__card .group-block a[ref="productTitleLink"],
+.product-grid__card .group-block a[ref="productTitleLink"] *,
+.product-grid__card .group-block .card-title-link,
+.product-grid__card .group-block .card-title-link * {
+  font-size: 0.75rem !important;
+  line-height: 1.4;
+  color: #1a1a1a;
+  font-weight: 400;
+}
+
+/* Variant label: smaller, gray */
+.product-grid__card .card-variant-label {
+  font-size: 0.6875rem;
+  line-height: 1.3;
+  color: #999;
+  margin: 1px 0 0;
+  font-weight: 400;
+}
+
+/* Price pinned top-right: small, black */
+.product-grid__card > .group-block > .group-block-content > product-price {
+  flex: 0 0 auto;
+  text-align: right;
+  white-space: nowrap;
+  align-self: flex-start;
+}
+
+.product-grid__card .group-block product-price,
+.product-grid__card .group-block product-price .price,
+.product-grid__card .group-block product-price .price * {
+  font-size: 0.75rem !important;
+  color: #1a1a1a;
+  font-weight: 400;
+}
+
+.product-grid__card .group-block product-price .compare-at-price {
+  font-size: 0.6875rem;
+  color: #999;
 }
 
 /* Quick-add button — keep minimal */

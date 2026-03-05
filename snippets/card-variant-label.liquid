@@ -1,0 +1,34 @@
+{%- comment -%}
+  Renders the variant/color label for collection product cards.
+  Shows the first meaningful option (option1, option2, option3) or the part after " - " in the product title.
+  Skips "Default Title" so actual color names (Moka profond, Chocolat noir, etc.) display.
+{%- endcomment -%}
+{%- liquid
+  assign product = product | default: closest.product
+  if product == blank
+    break
+  endif
+  assign v = product.selected_or_first_available_variant
+  assign label = nil
+
+  if v.option1 != blank and v.option1 != 'Default Title'
+    assign label = v.option1
+  elsif v.option2 != blank and v.option2 != 'Default Title'
+    assign label = v.option2
+  elsif v.option3 != blank and v.option3 != 'Default Title'
+    assign label = v.option3
+  elsif v.title != blank and v.title != 'Default Title'
+    assign label = v.title
+  endif
+
+  if label == nil
+    assign t = product.title | replace: ' - ', ' | ' | replace: ' -', ' | ' | replace: ' – ', ' | ' | replace: ' –', ' | ' | replace: ' — ', ' | ' | replace: ' —', ' | '
+    assign title_parts = t | split: ' | '
+    if title_parts.size > 1
+      assign label = title_parts[1] | strip
+    endif
+  endif
+-%}
+{%- if label != blank -%}
+  <p class="card-variant-label">{{ label }}</p>
+{%- endif -%}

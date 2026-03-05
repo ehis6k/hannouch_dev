@@ -1,0 +1,26 @@
+{%- comment -%}
+  Renders the product title without the color/variant suffix for collection cards.
+  Redacts everything after the dash: " - " (space-dash-space), " -" (no space after), and en-dash/em-dash variants.
+  e.g. "Jersey pearl -Violet royal" → "Jersey pearl", "Jersey pearl -Blanc" → "Jersey pearl"
+{%- endcomment -%}
+{%- liquid
+  assign product = product | default: closest.product
+  if product == blank
+    break
+  endif
+  assign t = product.title
+  assign t = t | replace: ' - ', ' | '
+  assign t = t | replace: ' -', ' | '
+  assign t = t | replace: ' – ', ' | '
+  assign t = t | replace: ' –', ' | '
+  assign t = t | replace: ' — ', ' | '
+  assign t = t | replace: ' —', ' | '
+  assign base_title = t | split: ' | ' | first | strip
+  if base_title == blank
+    assign base_title = product.title
+  endif
+  assign url = product.selected_or_first_available_variant.url
+-%}
+<a href="{{ url }}" class="card-title-link contents user-select-text">
+  <p>{{ base_title }}</p>
+</a>

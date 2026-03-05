@@ -79,7 +79,8 @@
         class: 'button quick-add__button quick-add__button--add add-to-cart-button',
         can_add_to_cart: can_add_to_cart,
         icon_only_on_mobile: true,
-        product: product
+        product: product,
+        icon_asset: 'icon-plus.svg'
       %}
 
       <button
@@ -97,7 +98,7 @@
             aria-hidden="true"
             class="svg-wrapper add-to-cart-icon quick-add__button-icon"
           >
-            {{- 'icon-add-to-cart.svg' | inline_asset_content -}}
+            {{- 'icon-plus.svg' | inline_asset_content -}}
           </span>
           <span class="add-to-cart-text__content is-visually-hidden-mobile quick-add__button-text">
             <span>
@@ -117,6 +118,7 @@
   /* Quick Add */
   .quick-add {
     --quick-add-offset: var(--padding-sm);
+    --quick-add-left: calc(var(--quick-add-offset) + var(--padding-inline-start, var(--padding-sm)));
     --quick-add-right: calc(var(--quick-add-offset) + var(--padding-inline-end));
     --quick-add-bottom: calc(var(--quick-add-offset) + var(--padding-block-end));
 
@@ -142,37 +144,44 @@
     opacity: 1;
   }
 
+  /* Ultra minimal plus-only: no circle, no border, black icon */
   .quick-add__button {
     display: var(--quick-add-mobile-display, none);
     align-items: center;
-    background: linear-gradient(var(--color-background) 0 100%) padding-box;
+    justify-content: center;
+    background: transparent;
     padding: 0;
-    border-radius: 50px;
-    border: 2px solid hsl(0 0% 0% / 0.15);
-    height: var(--button-size-md);
+    border-radius: 0;
+    border: none;
+    min-width: 44px;
+    height: 44px;
     cursor: pointer;
     opacity: var(--quick-add-mobile-opacity, 0);
-    overflow: hidden;
-    color: var(--color-foreground);
+    overflow: visible;
+    color: #000;
     pointer-events: all;
     position: absolute;
-    right: max(var(--quick-add-right), calc((var(--border-radius) + var(--quick-add-right)) * (1 - cos(45deg))));
-    bottom: max(var(--quick-add-bottom), calc((var(--border-radius) + var(--quick-add-bottom)) * (1 - cos(45deg))));
-    backdrop-filter: blur(20px) saturate(180%);
+    left: max(var(--quick-add-left), calc((var(--border-radius, 0) + var(--quick-add-left)) * (1 - cos(45deg))));
+    bottom: max(var(--quick-add-bottom), calc((var(--border-radius, 0) + var(--quick-add-bottom)) * (1 - cos(45deg))));
+    right: auto;
+    translate: -8px 8px; /* nudge further left and down */
+    text-shadow: none;
+    filter: none;
+    box-shadow: none;
+    outline: none;
 
     &:active {
-      scale: 0.99;
-      translate: 0 1px;
+      scale: 0.96;
     }
 
     .quick-add[stay-visible] & {
-      display: grid;
+      display: flex;
     }
 
     &:is(:hover, :focus-visible) {
+      color: #000;
       .add-to-cart-text__content {
         grid-template-columns: 1fr;
-
         span span {
           opacity: 1;
           translate: 0 0;
@@ -188,11 +197,13 @@
   }
 
   .quick-add__button .add-to-cart-text {
-    background: var(--color-background);
-    overflow: hidden;
-    border-radius: 50px;
+    background: transparent;
+    overflow: visible;
+    border-radius: 0;
     height: 100%;
     gap: 0;
+    justify-content: center;
+    align-items: center;
   }
 
   .quick-add__button .svg-wrapper .checkmark-burst {
@@ -200,27 +211,16 @@
     height: 22px;
   }
 
-  .quick-add__button .add-to-cart-icon {
-    /* account for border width */
-    height: 100%;
-    width: calc(var(--button-size-md) - 4px);
+  .quick-add__button .add-to-cart-icon,
+  .quick-add__button .quick-add__button-icon {
+    height: 22px;
+    width: 22px;
+    color: inherit;
   }
 
+  /* Icon only on collection cards – no "Add" / "Choose options" text */
   .quick-add__button .add-to-cart-text__content {
-    display: grid;
-    grid-template-columns: 0fr;
-
-    & > span {
-      min-width: 0;
-
-      span {
-        padding-right: var(--padding-sm);
-        opacity: 0;
-        display: inline-block;
-        filter: blur(2px);
-        translate: 0.5ch 0;
-      }
-    }
+    display: none;
   }
 
   .quick-add__button[data-added='true'] .add-to-cart-text {
@@ -238,7 +238,7 @@
 
   .quick-add__product-form-component .shopify-product-form {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: flex-end;
     container-type: inline-size;
     height: 100%;

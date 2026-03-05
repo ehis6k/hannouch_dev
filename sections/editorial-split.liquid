@@ -27,8 +27,20 @@
   {%- assign cta_text = section.settings.cta_text -%}
 {%- endif -%}
 
+{%- comment -%} Resolve CTA URL: use store's about page when link points to about {%- endcomment -%}
+{%- assign cta_url = section.settings.cta_link -%}
+{%- if section.settings.cta_link != blank and section.settings.cta_link contains 'about' -%}
+  {%- if pages['about'] != blank -%}
+    {%- assign cta_url = pages['about'].url -%}
+  {%- else -%}
+    {%- assign cta_url = '/pages/about' -%}
+  {%- endif -%}
+{%- elsif cta_url == blank -%}
+  {%- assign cta_url = '/pages/about' -%}
+{%- endif -%}
+
 {%- assign has_cta = false -%}
-{%- if cta_text != blank and section.settings.cta_link != blank -%}
+{%- if cta_text != blank and cta_url != blank -%}
   {%- assign has_cta = true -%}
 {%- endif -%}
 
@@ -80,7 +92,7 @@
 
     {%- if has_cta -%}
       <a
-        href="{{ section.settings.cta_link }}"
+        href="{{ cta_url }}"
         class="editorial-split__cta"
       >
         {{- cta_text | escape -}}

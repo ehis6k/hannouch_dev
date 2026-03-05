@@ -29,18 +29,12 @@
       {%- endif -%}
       {%- if content != blank -%}
         <div class="our-story__body rte" id="our-story-content-{{ section.id }}"></div>
-        <script type="application/json" id="our-story-json-{{ section.id }}">{{ content | json }}</script>
         <script>
           (function() {
             var sectionId = '{{ section.id }}';
             var el = document.getElementById('our-story-content-' + sectionId);
-            var jsonEl = document.getElementById('our-story-json-' + sectionId);
-            if (el && jsonEl) {
-              try {
-                var html = JSON.parse(jsonEl.textContent);
-                if (typeof html === 'string') el.innerHTML = html;
-              } catch (e) {}
-            }
+            var html = {{ content | json }};
+            if (el && typeof html === 'string') el.innerHTML = html;
           })();
         </script>
       {%- endif -%}

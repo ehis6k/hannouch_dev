@@ -59,6 +59,22 @@ footer .menu__heading__default {
   color: var(--color-base-text, #1a1a1a);
 }
 
+/* Newsletter column (infolettre): minimalistic; title a bit larger than subtext */
+footer .group-block:has(.email-signup-block) h3,
+footer .group-block:has(.email-signup-block) .h3 {
+  font-size: 0.6875rem;
+  margin-bottom: var(--spacing-2, 0.5rem);
+}
+
+footer .group-block:has(.email-signup-block) .rte,
+footer .group-block:has(.email-signup-block) .rte p {
+  font-size: 0.625rem;
+  line-height: 1.4;
+  margin: 0 0 var(--spacing-3, 0.75rem);
+  color: var(--color-base-text, #1a1a1a);
+  opacity: 0.85;
+}
+
 /* ── Footer nav links (Marachi: subtle opacity, hover to full) ────────────────── */
 footer .menu-list {
   list-style: none;

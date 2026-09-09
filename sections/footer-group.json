@@ -1,136 +1,284 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-"type":"footer",
-"name":"Footer",
-"sections":{
-"footer_main":{
-"type":"footer",
-"blocks":{
-"newsletter_group":{
-"type":"group",
-"settings":{
-"content_direction":"column",
-"vertical_on_mobile":true,
-"horizontal_alignment":"flex-start",
-"vertical_alignment":"center",
-"gap":6,
-"width":"fill",
-"inherit_color_scheme":true
-},
-"blocks":{
-"signup":{
-"type":"email-signup",
-"settings":{
-"width":"fill"
-}
-},
-"newsletter_heading":{
-"type":"footer-newsletter-heading",
-"settings":{}
-},
-"newsletter_subtext":{
-"type":"footer-newsletter-subtext",
-"settings":{}
-}
-},
-"block_order":[
-"newsletter_heading",
-"newsletter_subtext",
-"signup"
-]
-},
-"right_column":{
-"type":"group",
-"settings":{
-"content_direction":"row",
-"vertical_on_mobile":true,
-"horizontal_alignment":"flex-start",
-"vertical_alignment":"flex-start",
-"gap":24,
-"width":"fill",
-"inherit_color_scheme":true
-},
-"blocks":{
-"shop_links":{
-"type":"footer-static-links",
-"settings":{
-"preset":"shop",
-"heading":"SHOP"
-}
-},
-"help_links":{
-"type":"footer-static-links",
-"settings":{
-"preset":"help",
-"heading":"HELP"
-}
-},
-"legal_policies":{
-"type":"footer-policy-links",
-"settings":{
-"heading":"LEGAL"
-}
-}
-},
-"block_order":[
-"shop_links",
-"help_links",
-"legal_policies"
-]
-}
-},
-"block_order":[
-"newsletter_group",
-"right_column"
-],
-"settings":{
-"section_width":"page-width",
-"gap":16,
-"color_scheme":"scheme-1",
-"padding-block-start":36,
-"padding-block-end":36
-}
-},
-"utilities":{
-"type":"footer-utilities",
-"blocks":{
-"copyright":{
-"type":"footer-copyright",
-"settings":{
-"show_powered_by":false,
-"font_size":"0.75rem",
-"case":"none"
-}
-},
-"social_icons":{
-"type":"social-links",
-"settings":{
-"facebook_url":"https://www.facebook.com/hannouch",
-"instagram_url":"https://www.instagram.com/itshannouch/",
-"tiktok_url":"https://www.tiktok.com/"
-}
-},
-"localization":{
-"type":"footer-localization",
-"settings":{}
-}
-},
-"block_order":[
-"copyright",
-"social_icons",
-"localization"
-],
-"settings":{
-"section_width":"page-width",
-"gap":24,
-"divider_thickness":1,
-"color_scheme":"scheme-1",
-"padding-block-start":20,
-"padding-block-end":20
-}
-}
-},
-"order":[
-"footer_main",
-"utilities"
-]
+  "type": "footer",
+  "name": "Footer",
+  "sections": {
+    "footer_main": {
+      "type": "footer",
+      "blocks": {
+        "newsletter_group": {
+          "type": "group",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 6,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "text_cV7aUT": {
+              "type": "text",
+              "name": "t:names.text",
+              "settings": {
+                "text": "<h2><strong>À propos de HANNOUCH</strong></h2><p>HANNOUCH est une marque née de la passion d’une jeune femme musulmane aux racines marocaines, avec l’envie de proposer des hijabs qui associent élégance, pudeur et personnalité.</p><p>Chaque modèle est choisi avec soin afin de permettre à chaque femme de se sentir belle, confiante et unique au quotidien. Des hijabs simples aux modèles ornés de perles et de cristaux, nos collections sont pensées pour sublimer chaque style tout en respectant l’identité de chacune.</p><p>Plus qu’une boutique, HANNOUCH représente une histoire, une passion et un rêve créé avec intention.</p>",
+                "width": "fit-content",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "newsletter_heading": {
+              "type": "footer-newsletter-heading",
+              "settings": {},
+              "blocks": {}
+            },
+            "newsletter_subtext": {
+              "type": "footer-newsletter-subtext",
+              "settings": {},
+              "blocks": {}
+            },
+            "signup": {
+              "type": "email-signup",
+              "settings": {
+                "width": "fill",
+                "custom_width": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "heading": "",
+                "heading_preset": "h3",
+                "border_style": "all",
+                "border_width": 1,
+                "border_radius": 100,
+                "input_type_preset": "paragraph",
+                "style_class": "button",
+                "display_type": "text",
+                "label": "S'inscrire",
+                "integrated_button": false,
+                "button_type_preset": "paragraph",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_cV7aUT",
+            "newsletter_heading",
+            "newsletter_subtext",
+            "signup"
+          ]
+        },
+        "right_column": {
+          "type": "group",
+          "settings": {
+            "content_direction": "row",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 24,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "shop_links": {
+              "type": "footer-static-links",
+              "settings": {
+                "preset": "shop",
+                "heading": "SHOP",
+                "menu_spacing": 12,
+                "show_as_accordion": false,
+                "accordion_icon": "caret",
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "heading_preset": "h5",
+                "link_preset": "paragraph"
+              },
+              "blocks": {}
+            },
+            "help_links": {
+              "type": "footer-static-links",
+              "settings": {
+                "preset": "help",
+                "heading": "HELP",
+                "menu_spacing": 12,
+                "show_as_accordion": false,
+                "accordion_icon": "caret",
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "heading_preset": "h5",
+                "link_preset": "paragraph"
+              },
+              "blocks": {}
+            },
+            "legal_policies": {
+              "type": "footer-policy-links",
+              "settings": {
+                "heading": "LEGAL",
+                "menu_spacing": 12,
+                "show_as_accordion": false,
+                "accordion_icon": "caret",
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "heading_preset": "h5",
+                "link_preset": "paragraph"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "shop_links",
+            "help_links",
+            "legal_policies"
+          ]
+        }
+      },
+      "block_order": [
+        "newsletter_group",
+        "right_column"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "gap": 16,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 36,
+        "padding-block-end": 36
+      }
+    },
+    "utilities": {
+      "type": "footer-utilities",
+      "blocks": {
+        "copyright": {
+          "type": "footer-copyright",
+          "settings": {
+            "show_powered_by": false,
+            "font_size": "0.75rem",
+            "case": "none"
+          },
+          "blocks": {}
+        },
+        "social_icons": {
+          "type": "social-links",
+          "settings": {
+            "facebook_url": "https://www.facebook.com/hannouch",
+            "instagram_url": "https://www.instagram.com/itshannouch/",
+            "youtube_url": "",
+            "tiktok_url": "https://www.tiktok.com/",
+            "twitter_url": "",
+            "threads_url": "",
+            "linkedin_url": "",
+            "bluesky_url": "",
+            "snapchat_url": "",
+            "pinterest_url": "",
+            "tumblr_url": "",
+            "vimeo_url": "",
+            "custom_url": ""
+          },
+          "blocks": {}
+        },
+        "localization": {
+          "type": "footer-localization",
+          "settings": {},
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "copyright",
+        "social_icons",
+        "localization"
+      ],
+      "settings": {
+        "section_width": "page-width",
+        "gap": 24,
+        "divider_thickness": 1,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 20,
+        "padding-block-end": 20
+      }
+    }
+  },
+  "order": [
+    "footer_main",
+    "utilities"
+  ]
 }

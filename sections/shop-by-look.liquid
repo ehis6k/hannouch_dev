@@ -22,10 +22,10 @@
 
         {%- if block.settings.image != blank -%}
           <img
-            src="{{ block.settings.image | image_url: width: 600, format: 'avif' }}"
+            src="{{ block.settings.image | image_url: width: 600 }}"
             srcset="
-              {{ block.settings.image | image_url: width: 300, format: 'avif' }} 300w,
-              {{ block.settings.image | image_url: width: 600, format: 'avif' }} 600w
+              {{ block.settings.image | image_url: width: 300 }} 300w,
+             {{ block.settings.image | image_url: width: 600 }} 600w
             "
             sizes="(min-width: 750px) {{ 100 | divided_by: section.settings.columns_desktop }}vw, 70vw"
             alt="{{ block.settings.image.alt | default: block.settings.label | escape }}"

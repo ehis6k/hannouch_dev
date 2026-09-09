@@ -13,6 +13,7 @@
       "type": "hero-video",
       "settings": {
         "video": "",
+        "image": "shopify://shop_images/494C2FC7-BA73-4BF4-8E21-CB1CBABF9E50.jpg",
         "mobile_image": "shopify://shop_images/494C2FC7-BA73-4BF4-8E21-CB1CBABF9E50.jpg",
         "overlay_opacity": 35,
         "eyebrow": "",

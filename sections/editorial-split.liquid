@@ -50,12 +50,12 @@
   <div class="editorial-split__media">
     {%- if has_image -%}
       <img
-        src="{{ section.settings.image | image_url: width: 1000, format: 'avif' }}"
+        src="{{ section.settings.image | image_url: width: 1000 }}"
         srcset="
-          {{ section.settings.image | image_url: width: 500,  format: 'avif' }}  500w,
-          {{ section.settings.image | image_url: width: 800,  format: 'avif' }}  800w,
-          {{ section.settings.image | image_url: width: 1000, format: 'avif' }} 1000w,
-          {{ section.settings.image | image_url: width: 1400, format: 'avif' }} 1400w
+         {{ section.settings.image | image_url: width: 500 }} 500w,
+         {{ section.settings.image | image_url: width: 800 }} 800w,
+          {{ section.settings.image | image_url: width: 1000 }} 1000w,
+          {{ section.settings.image | image_url: width: 1400 }} 1400w
         "
         sizes="(min-width: 750px) 50vw, 100vw"
         alt="{{ section.settings.image.alt | default: section.settings.heading | escape }}"

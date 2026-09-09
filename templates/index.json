@@ -1,15 +1,31 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_video": {
       "type": "hero-video",
       "settings": {
-        "section_height": "full",
+        "video": "",
+        "mobile_image": "shopify://shop_images/494C2FC7-BA73-4BF4-8E21-CB1CBABF9E50.jpg",
         "overlay_opacity": 35,
+        "eyebrow": "",
         "heading": "",
+        "subheading": "",
         "text_position": "center",
         "text_color": "light",
         "cta_text": "",
-        "cta_link": "shopify:\/\/collections\/all"
+        "cta_link": "shopify://collections/all",
+        "section_height": "full",
+        "minimal_text_mode": false,
+        "logo_overlay_text": "",
+        "logo_position": "bottom-left"
       }
     },
     "shop_by_look": {
@@ -17,22 +33,43 @@
       "blocks": {
         "look_1": {
           "type": "look",
-          "settings": { "label": "MOKA" }
+          "settings": {
+            "image": "shopify://shop_images/3C6D6FE3-0F84-48D8-AEA2-A2B489681F99.png",
+            "label": "STRACE",
+            "link": "shopify://collections/hijab-strass"
+          }
         },
         "look_2": {
           "type": "look",
-          "settings": { "label": "OLIVE" }
+          "settings": {
+            "image": "shopify://shop_images/267CB808-B4EC-40E1-AF53-CBF73CEA957A.jpg",
+            "label": "CRYSTAL",
+            "link": "shopify://collections/hijab-gem"
+          }
         },
         "look_3": {
           "type": "look",
-          "settings": { "label": "NUDE" }
+          "settings": {
+            "image": "shopify://shop_images/IMG-1239.png",
+            "label": "EPINGLE",
+            "link": "shopify://collections/epingle"
+          }
         },
         "look_4": {
           "type": "look",
-          "settings": { "label": "ONYX" }
+          "settings": {
+            "image": "shopify://shop_images/20B7BA74-4D86-407B-BB61-F85EBDA26DB9.jpg",
+            "label": "OUTLET",
+            "link": "shopify://collections/cagoules"
+          }
         }
       },
-      "block_order": ["look_1", "look_2", "look_3", "look_4"],
+      "block_order": [
+        "look_1",
+        "look_2",
+        "look_3",
+        "look_4"
+      ],
       "settings": {
         "heading": "Shop By Look",
         "columns_desktop": 4,
@@ -47,22 +84,65 @@
         "static-header": {
           "type": "_product-list-content",
           "static": true,
-          "settings": {},
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "center",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "center",
+            "gap": 12,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
           "blocks": {
             "heading": {
               "type": "text",
               "settings": {
-                "text": "<h2>New Arrivals<\/h2>",
+                "text": "<h2>New Arrivals</h2>",
+                "width": "fit-content",
+                "max_width": "normal",
                 "alignment": "center",
                 "type_preset": "h3",
                 "font": "var(--font-heading--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
                 "letter_spacing": "0.1em",
-                "case": "uppercase"
+                "case": "uppercase",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             }
           },
-          "block_order": ["heading"]
+          "block_order": [
+            "heading"
+          ]
         },
         "static-product-card": {
           "type": "_product-card",
@@ -86,7 +166,13 @@
               "settings": {
                 "image_ratio": "portrait",
                 "border": "none",
-                "border_radius": 0
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {}
             },
@@ -97,31 +183,96 @@
                 "vertical_on_mobile": false,
                 "horizontal_alignment": "space-between",
                 "vertical_alignment": "flex-start",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
                 "gap": 8,
                 "width": "fill",
+                "custom_width": 100,
                 "width_mobile": "fill",
-                "padding-block-start": 8
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "padding-block-start": 8,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
               },
               "blocks": {
                 "title-group": {
                   "type": "_product-card-group",
                   "settings": {
                     "content_direction": "column",
+                    "vertical_on_mobile": true,
+                    "horizontal_alignment": "flex-start",
+                    "vertical_alignment": "center",
+                    "align_baseline": false,
+                    "horizontal_alignment_flex_direction_column": "flex-start",
+                    "vertical_alignment_flex_direction_column": "center",
                     "gap": 2,
                     "width": "fill",
-                    "width_mobile": "fill"
+                    "custom_width": 100,
+                    "width_mobile": "fill",
+                    "custom_width_mobile": 100,
+                    "height": "fit",
+                    "custom_height": 100,
+                    "inherit_color_scheme": true,
+                    "color_scheme": "",
+                    "background_media": "none",
+                    "video_position": "cover",
+                    "background_image_position": "cover",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_radius": 0,
+                    "toggle_overlay": false,
+                    "overlay_color": "#00000026",
+                    "overlay_style": "solid",
+                    "gradient_direction": "to top",
+                    "link": "",
+                    "open_in_new_tab": false,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
                   },
                   "blocks": {
                     "title": {
                       "type": "product-title",
                       "settings": {
+                        "width": "fit-content",
+                        "max_width": "normal",
                         "alignment": "left",
                         "type_preset": "custom",
                         "font": "var(--font-body--family)",
                         "font_size": "0.8125rem",
+                        "line_height": "normal",
                         "letter_spacing": "normal",
                         "case": "none",
-                        "color": "var(--color-foreground)"
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
                       },
                       "blocks": {}
                     },
@@ -129,42 +280,65 @@
                       "type": "custom-liquid",
                       "settings": {
                         "custom_liquid": "<span class=\"product-card__variant-color\">{{ closest.product.selected_or_first_available_variant.option1 }}</span>"
-                      }
+                      },
+                      "blocks": {}
                     }
                   },
-                  "block_order": ["title", "variant-color"]
+                  "block_order": [
+                    "title",
+                    "variant-color"
+                  ]
                 },
                 "price": {
                   "type": "price",
                   "settings": {
                     "show_sale_price_first": true,
-                    "alignment": "right",
+                    "show_installments": false,
+                    "show_tax_info": false,
                     "type_preset": "custom",
                     "width": "fit-content",
+                    "alignment": "right",
                     "font": "var(--font-body--family)",
                     "font_size": "0.8125rem",
+                    "line_height": "normal",
                     "letter_spacing": "normal",
                     "case": "none",
-                    "color": "var(--color-foreground)"
+                    "color": "var(--color-foreground)",
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
                   },
                   "blocks": {}
                 }
               },
-              "block_order": ["title-group", "price"]
+              "block_order": [
+                "title-group",
+                "price"
+              ]
             }
           },
-          "block_order": ["card-gallery", "group"]
+          "block_order": [
+            "card-gallery",
+            "group"
+          ]
         }
       },
-      "block_order": [],
       "settings": {
+        "collection": "hijab-strass",
         "layout_type": "grid",
+        "carousel_on_mobile": false,
         "max_products": 4,
         "columns": 4,
         "mobile_columns": "2",
+        "mobile_card_size": "60cqw",
         "columns_gap": 16,
         "rows_gap": 24,
+        "icons_style": "arrow",
+        "icons_shape": "none",
         "section_width": "page-width",
+        "horizontal_alignment": "flex-start",
+        "gap": 12,
         "color_scheme": "scheme-1",
         "padding-block-start": 64,
         "padding-block-end": 64
@@ -173,39 +347,45 @@
     "editorial_split_1": {
       "type": "editorial-split",
       "settings": {
-        "translation_namespace": "home.editorial_1",
-        "heading": "THE CITY EDIT",
-        "body": "<p>Designed for the woman in motion. Pieces that move through your day with the same quiet confidence you carry.<\/p>",
+        "image": "shopify://shop_images/6290E711-B1C6-4F14-B5E4-0D20DFDCE3B3.jpg",
+        "image_ratio": "fill",
+        "eyebrow": "",
+        "heading": "L’élégance signée HANNOUCH ",
+        "body": "<p>Découvrez les hijabs HANNOUCH, conçus pour sublimer chaque femme avec élégance et confiance. Des modèles uniques, choisis avec soin pour vous accompagner au quotidien. </p>",
+        "caption": "",
         "cta_text": "Explore the Collection",
-        "cta_link": "shopify:\/\/collections\/all",
+        "cta_link": "shopify://collections/hijab-strass",
         "reverse": false,
         "content_alignment": "left",
         "min_height": "medium",
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "translation_namespace": "home.editorial_1"
       }
     },
     "lifestyle_fullwidth": {
       "type": "lifestyle-fullwidth",
       "settings": {
-        "image": null,
         "height_desktop": 80,
         "height_mobile": 60,
-        "logo_overlay": null,
         "logo_position": "bottom-left"
       }
     },
     "editorial_split_2": {
       "type": "editorial-split",
       "settings": {
-        "translation_namespace": "home.editorial_2",
-        "heading": "CRAFTED TO LAST",
-        "body": "<p>Each piece is sourced from artisan studios across Europe. Quality without compromise, designed to become the quiet anchor of your wardrobe.<\/p>",
+        "image": "shopify://shop_images/IMG-1239.png",
+        "image_ratio": "fill",
+        "eyebrow": "",
+        "heading": "Élégance et maintien parfait",
+        "body": "<p>Sublimez votre hijab avec nos élégantes épingles.<br/>Pratiques et raffinées, elles maintiennent parfaitement votre hijab tout au long de la journée tout en apportant une jolie touche à votre tenue. L’accessoire indispensable pour un look chic et soigné ! </p>",
+        "caption": "",
         "cta_text": "Our Story",
-        "cta_link": "shopify:\/\/pages\/about",
+        "cta_link": "shopify://pages/about",
         "reverse": true,
         "content_alignment": "left",
         "min_height": "medium",
-        "color_scheme": "scheme-1"
+        "color_scheme": "scheme-1",
+        "translation_namespace": "home.editorial_2"
       }
     },
     "architectural_grid": {

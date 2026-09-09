@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "header",
   "name": "Header",
@@ -22,7 +31,7 @@
           "static": true,
           "settings": {
             "menu": "main-menu",
-            "color_scheme": "",
+            "color_scheme": "scheme-e0d1e207-cb6a-4096-add4-f7d3c984ecf2",
             "type_font_primary_size": "var(--font-size--body-sm)",
             "menu_font_style": "regular",
             "type_font_primary_link": "body",
@@ -47,9 +56,9 @@
         "show_search": true,
         "search_position": "right",
         "search_row": "top",
-"show_country": false,
-    "country_selector_style": false,
-    "show_language": false,
+        "show_country": false,
+        "country_selector_style": false,
+        "show_language": false,
         "localization_font": "body",
         "localization_font_size": "1.125rem",
         "localization_position": "right",

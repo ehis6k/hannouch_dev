@@ -1,15 +1,24 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero_video": {
       "type": "hero-video",
       "settings": {
-        "section_height": "full",
         "overlay_opacity": 35,
         "heading": "",
         "text_position": "center",
         "text_color": "light",
         "cta_text": "",
-        "cta_link": "shopify:\/\/collections\/all"
+        "cta_link": "shopify://collections/all",
+        "section_height": "full"
       }
     },
     "shop_by_look": {
@@ -17,22 +26,35 @@
       "blocks": {
         "look_1": {
           "type": "look",
-          "settings": { "label": "MOKA" }
+          "settings": {
+            "label": "MOKA"
+          }
         },
         "look_2": {
           "type": "look",
-          "settings": { "label": "OLIVE" }
+          "settings": {
+            "label": "OLIVE"
+          }
         },
         "look_3": {
           "type": "look",
-          "settings": { "label": "NUDE" }
+          "settings": {
+            "label": "NUDE"
+          }
         },
         "look_4": {
           "type": "look",
-          "settings": { "label": "ONYX" }
+          "settings": {
+            "label": "ONYX"
+          }
         }
       },
-      "block_order": ["look_1", "look_2", "look_3", "look_4"],
+      "block_order": [
+        "look_1",
+        "look_2",
+        "look_3",
+        "look_4"
+      ],
       "settings": {
         "heading": "Shop By Look",
         "columns_desktop": 4,
@@ -45,9 +67,9 @@
       "type": "editorial-split",
       "settings": {
         "heading": "THE CITY EDIT",
-        "body": "<p>Designed for the woman in motion. Pieces that move through your day with the same quiet confidence you carry.<\/p>",
+        "body": "<p>Designed for the woman in motion. Pieces that move through your day with the same quiet confidence you carry.</p>",
         "cta_text": "Explore the Collection",
-        "cta_link": "shopify:\/\/collections\/all",
+        "cta_link": "shopify://collections/all",
         "reverse": false,
         "content_alignment": "left",
         "min_height": "medium",
@@ -65,7 +87,7 @@
             "heading": {
               "type": "text",
               "settings": {
-                "text": "<h2>New Arrivals<\/h2>",
+                "text": "<h2>New Arrivals</h2>",
                 "alignment": "center",
                 "type_preset": "h3",
                 "font": "var(--font-heading--family)",
@@ -75,7 +97,9 @@
               "blocks": {}
             }
           },
-          "block_order": ["heading"]
+          "block_order": [
+            "heading"
+          ]
         },
         "static-product-card": {
           "type": "_product-card",
@@ -145,15 +169,18 @@
                       }
                     }
                   },
-                  "block_order": ["title", "variant-color"]
+                  "block_order": [
+                    "title",
+                    "variant-color"
+                  ]
                 },
                 "price": {
                   "type": "price",
                   "settings": {
                     "show_sale_price_first": true,
-                    "alignment": "right",
                     "type_preset": "custom",
                     "width": "fit-content",
+                    "alignment": "right",
                     "font": "var(--font-body--family)",
                     "font_size": "0.8125rem",
                     "letter_spacing": "normal",
@@ -163,13 +190,18 @@
                   "blocks": {}
                 }
               },
-              "block_order": ["title-group", "price"]
+              "block_order": [
+                "title-group",
+                "price"
+              ]
             }
           },
-          "block_order": ["card-gallery", "group"]
+          "block_order": [
+            "card-gallery",
+            "group"
+          ]
         }
       },
-      "block_order": [],
       "settings": {
         "layout_type": "grid",
         "max_products": 4,
@@ -187,9 +219,9 @@
       "type": "editorial-split",
       "settings": {
         "heading": "CRAFTED TO LAST",
-        "body": "<p>Each piece is sourced from artisan studios across Europe. Quality without compromise, designed to become the quiet anchor of your wardrobe.<\/p>",
+        "body": "<p>Each piece is sourced from artisan studios across Europe. Quality without compromise, designed to become the quiet anchor of your wardrobe.</p>",
         "cta_text": "Our Story",
-        "cta_link": "shopify:\/\/pages\/about",
+        "cta_link": "shopify://pages/a-propos",
         "reverse": true,
         "content_alignment": "left",
         "min_height": "medium",
